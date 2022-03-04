@@ -1,0 +1,608 @@
+<div class="page-wrapper">
+  <div class="page-content">
+    <dds-sidenav>
+      <dds-sidenav-item
+        *ngFor="let item of menuItems; index as i;"
+        selected="{{showPage===i}}"
+        icon="{{item.icon}}"
+      >
+        <span (click)="sidenavItemClick(i)">{{item.text}}</span>
+      </dds-sidenav-item>
+      <dds-sidenav-menu icon="game-controller" open="true" name="Fun Stuff">
+        <dds-sidenav-item link="https://gather.town/">
+          Gather Town
+        </dds-sidenav-item>
+        <dds-sidenav-item link="https://gettoby.com">
+          Toby Bookmark Start Page
+        </dds-sidenav-item>
+      </dds-sidenav-menu>
+    </dds-sidenav>
+    <div class="mainy">
+      <div class="dds__container">
+        <h1>DDS2 Ng Wrappers</h1>
+        <span *ngIf="showPage===0">
+          <p>
+            This sandbox is very much a work-in-progress;
+            <b>treat this as an example or experiment only</b>. If it is broken
+            in any way, it is likely that it is actively being edited. Please
+            <a
+              href="https://forms.office.com/Pages/ResponsePage.aspx?id=mhlclKKDgE6fjFqRvldS3Tu72-e1EktEmC896wPSUmFUOUcwSE9NMVBLQkVONzk1SUVZNllWMUtMWiQlQCN0PWcu"
+              >contact</a
+            >
+            the DDS2 Support and Automation team for further information.
+          </p>
+          <p>
+            Also note that the inhertance implemented in the
+            <b>helpers/dds-component-shell</b> file is unfinished.
+          </p>
+        </span>
+
+        <span *ngIf="showPage===1">
+          <h2>Sidenav</h2>
+          <div class="dds__row">
+            <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+              <button class="dds__button" (click)="collapseSidenav($event)">
+                Collapse Sidenav
+              </button>
+            </div>
+            <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+              <button class="dds__button" (click)="expandSidenav($event)">
+                Expand Sidenav
+              </button>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===2">
+          <h2>Non-Initializing Components</h2>
+          <div class="dds__row">
+            <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+              <fieldset required="true" class="dds__fieldset dds__fieldset--lg">
+                <legend>Select service</legend>
+                <div class="dds__radio-button">
+                  <input
+                    class="dds__radio-button__input"
+                    type="radio"
+                    name="services"
+                    id="radio-button-input-1"
+                    value="Apex"
+                  />
+                  <label
+                    class="dds__radio-button__label"
+                    for="radio-button-input-1"
+                    >Apex</label
+                  >
+                </div>
+                <div class="dds__radio-button">
+                  <input
+                    class="dds__radio-button__input"
+                    type="radio"
+                    name="services"
+                    id="radio-button-input-2"
+                    value="Multi Cloud"
+                  />
+                  <label
+                    class="dds__radio-button__label"
+                    for="radio-button-input-2"
+                    >Multi Cloud</label
+                  >
+                </div>
+                <div class="dds__radio-button">
+                  <input
+                    class="dds__radio-button__input"
+                    type="radio"
+                    name="services"
+                    id="radio-button-input-3"
+                    value="Cloud Solutions"
+                  />
+                  <label
+                    class="dds__radio-button__label"
+                    for="radio-button-input-3"
+                    >Cloud Solutions</label
+                  >
+                </div>
+                <div class="dds__radio-button">
+                  <input
+                    class="dds__radio-button__input"
+                    type="radio"
+                    name="services"
+                    id="radio-button-input-4"
+                    value="Energy"
+                  />
+                  <label
+                    class="dds__radio-button__label"
+                    for="radio-button-input-4"
+                    >Energy</label
+                  >
+                </div>
+              </fieldset>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===3">
+          <h2>TextArea</h2>
+          <div class="dds__row">
+            <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+              <dds-form class="bumble">
+                <dds-textarea isRequired="true" maxLength="51">
+                  <div label-text>
+                    Extra mocha froth aromatic macchiato irish coffee
+                  </div>
+                  <div default-text>{{textareaText}}</div>
+                  <div helper-text>
+                    DIY whatever synth tbh disrupt
+                  </div>
+                  <div error-text>
+                    Dummy text? More like dummy thicc text, amirite?
+                  </div>
+                  <div screen-reader-text>
+                    I'm your older brother, Mike, and I was stepped over! Never
+                    let anyone know what you are thinking. You talk about
+                    vengeance. Is vengeance going to bring your son back to you?
+                    Or my boy to me? I am sorry. What happened to your father
+                    was business. I have much respect for your father. But your
+                    father, his thinking is old-fashioned. You must understand
+                    why I had to do that. Now let's work through where we go
+                    from here.
+                  </div>
+                </dds-textarea>
+              </dds-form>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===4">
+          <h2>Modal</h2>
+
+          <div class="dds__row">
+            <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+              <button
+                role="button"
+                class="dds__button dds__button--primary"
+                (click)="openModal($event)"
+              >
+                External Open
+              </button>
+            </div>
+            <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+              <dds-modal elementId="fromageId" backdrop="true">
+                <div modal-title>Saveur de fromage</div>
+                <div modal-body>
+                  Queso when the cheese comes out everybody's happy jarlsberg.
+                  Roquefort cheesecake cheddar cheese and wine cheeseburger
+                  caerphilly queso cheesy feet. Lancashire taleggio melted
+                  cheese who moved my cheese blue castello pecorino.
+                </div>
+                <div modal-footer>
+                  <button
+                    class="dds__button dds__button--secondary"
+                    data-dismiss="dds__modal"
+                  >
+                    Non
+                  </button>
+                  <button class="dds__button dds__button--primary">
+                    Oui
+                  </button>
+                </div>
+                <span modal-trigger>
+                  <button
+                    role="button"
+                    class="dds__button dds__button--primary"
+                  >
+                    Internal Open
+                  </button>
+                  &nbsp;
+                </span>
+              </dds-modal>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===5">
+          <h2>Select</h2>
+          <div class="dds__row">
+            <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+              <dds-select
+                label="Select Movie"
+                [(selectOptions)]="selectValue1"
+                [defaultValue]="selectValue1[1]"
+                (optionSelected)="optionSelected($event)"
+              >
+              </dds-select>
+            </div>
+            <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+              <dds-select
+                label="Select Book"
+                [(selectOptions)]="selectValue2"
+                [defaultValue]="selectValue2[2]"
+                (optionSelected)="optionSelected($event)"
+              >
+              </dds-select>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===6">
+          <h2>Tooltip</h2>
+          <div class="dds__row">
+            <div class="dds__col--1 dds__col--sm-6 dds__col--md-12 dds__mb-3">
+              Show me the tooltip
+              <dds-tooltip icon="alert-error" placement="bottom">
+                I had a dream that I was a muffler last night. I woke up
+                exhausted!
+              </dds-tooltip>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===7">
+          <h2>Accordion</h2>
+          <div class="dds__row">
+            <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+              <p>
+                <b>Disclaimer</b>: This unfinished Angular wrapper is not
+                properly constructed (it is technically generating three
+                separate accordions, here, not one accordion with three items),
+                but shows a proper method of initializing a DDS2 vanilla
+                component within Angular.
+              </p>
+              <h2>Component</h2>
+              <dds-accordion
+                *ngFor="let item of [1,2,3]; index as i; first as isFirst"
+                openState="{{i % 2}}"
+              >
+                <div accordion-title>
+                  Accordion #{{i}} -- first:{{isFirst}} -- defaultOpen:{{i % 2}}
+                </div>
+                <div accordion-body>
+                  Queso when the cheese comes out everybody's happy jarlsberg.
+                  Roquefort cheesecake cheddar cheese and wine cheeseburger
+                  caerphilly queso cheesy feet. Lancashire taleggio melted
+                  cheese who moved my cheese blue castello pecorino cheese
+                  strings babybel. Taleggio squirty cheese cheesy feet cow
+                  cheese and biscuits queso melted cheese stinking bishop. Cow
+                  goat.
+                </div>
+              </dds-accordion>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===8">
+          <h2>Drawer</h2>
+          <div class="dds__row">
+            <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+              This Angular wrapper has had an option for icon added that is as
+              of 2.5.1 not a default option on the native DDS2 component.
+            </div>
+          </div>
+          <div class="dds__row">
+            <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+              <button
+                role="button"
+                class="dds__button dds__button--primary"
+                (click)="openDrawer($event)"
+              >
+                External Open
+              </button>
+            </div>
+            <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+              <dds-drawer icon="close-x">
+                <div drawer-trigger>
+                  <button class="dds__button dds__button--primary">
+                    Internal Open
+                  </button>
+                </div>
+                <h3>Default Drawer</h3>
+                <p>
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Vivamus quis tempor enim, ut tincidunt turpis. Nulla libero
+                  eros, sollicitudin ac enim a, rhoncus tempus nunc. Donec
+                  suscipit lectus in mattis pretium. Aliquam massa nulla, porta
+                  id ante non, vestibulum scelerisque nibh. Nullam aliquam diam
+                  sed volutpat laoreet. Sed faucibus velit sed interdum cursus.
+                  Curabitur turpis lorem, sodales ultricies massa vitae,
+                  accumsan semper sapien. Maecenas sollicitudin ipsum placerat
+                  leo egestas mattis. Pellentesque volutpat in ante eget
+                  gravida. Vestibulum ante ipsum primis in faucibus orci luctus
+                  et ultrices posuere cubilia curae; Pellentesque ac imperdiet
+                  elit. Nunc facilisis orci non volutpat semper. Vestibulum ante
+                  ipsum primis in faucibus orci luctus et ultrices posuere
+                  cubilia curae; Etiam eu sagittis diam, at aliquet urna.
+                  Vestibulum euismod id nisl ac consectetur. Sed turpis nulla,
+                  pellentesque nec sem at, dignissim iaculis urna.
+                </p>
+                <p>
+                  Morbi ut varius nibh. Donec finibus purus id nunc fermentum,
+                  ac convallis massa lobortis. Mauris sed purus mattis, rutrum
+                  dolor et, tincidunt est. Aenean pharetra ac elit in accumsan.
+                  Morbi a tempus turpis. Nullam vel nibh nulla. Mauris maximus a
+                  nulla sit amet tristique. Vestibulum placerat justo non cursus
+                  porta. Phasellus at iaculis nulla, ut vulputate orci. Quisque
+                  ut diam eget lectus malesuada commodo in a velit. Nam ac risus
+                  mi. Aenean nec placerat enim. Fusce vel orci nunc. Nullam
+                  rhoncus dapibus lacinia. Phasellus egestas ut turpis eu
+                  aliquam. Vestibulum ut libero in lacus aliquet mollis vel
+                  ullamcorper neque.
+                </p>
+                <p>
+                  Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Aliquam purus elit,
+                  faucibus mattis suscipit vitae, fermentum posuere nisl. Nam
+                  rhoncus nulla eget malesuada feugiat. Pellentesque ultrices,
+                  diam non hendrerit convallis, augue risus posuere tortor, a
+                  tincidunt arcu eros ac elit. Morbi eget leo non dui cursus
+                  consectetur. Aenean vel felis orci. Morbi sodales diam sit
+                  amet neque egestas, nec sodales enim pellentesque. Vestibulum
+                  eu odio porttitor, ornare est et, facilisis justo. Integer
+                  ultricies nec tortor sed volutpat. Cras eu sapien a purus
+                  mollis auctor eu id neque. Morbi blandit sem at arcu ornare
+                  ultrices imperdiet ac augue. Mauris rhoncus malesuada urna
+                  quis vestibulum.
+                </p>
+                <p>
+                  Vestibulum ultricies risus id justo rhoncus lacinia. Phasellus
+                  lacinia justo hendrerit ultricies ornare. Morbi vel porttitor
+                  libero. In gravida enim sed dictum molestie. Quisque porttitor
+                  arcu nec rhoncus varius. Mauris ex dolor, tincidunt sed lorem
+                  sed, dictum lobortis neque. Vestibulum quis varius augue.
+                  Phasellus consectetur imperdiet dictum. Donec et ex quis
+                  turpis venenatis pellentesque sed eu nisl. Maecenas non
+                  egestas augue. Mauris tempor ornare vehicula. Aenean posuere
+                  ipsum vulputate ultrices mollis. Vestibulum arcu mauris,
+                  congue sed fermentum eu, placerat non sem. Maecenas enim nibh,
+                  aliquet convallis venenatis nec, venenatis ac est. Fusce
+                  feugiat cursus eleifend. Etiam tempus maximus mauris, nec
+                  lobortis velit elementum eu.
+                </p>
+                <p>
+                  Mauris dignissim porta felis, sit amet molestie nisi sodales
+                  aliquam. Duis sem quam, porttitor in leo non, maximus sodales
+                  justo. Mauris id condimentum purus. Duis a velit porttitor,
+                  volutpat nulla in, blandit ante. Etiam tincidunt vulputate
+                  facilisis. Aliquam lorem quam, aliquet et eros eu, luctus
+                  placerat nibh. Suspendisse a auctor tortor, et elementum nunc.
+                  Pellentesque habitant morbi tristique senectus et netus et
+                  malesuada fames ac turpis egestas. Fusce eu est rutrum,
+                  molestie urna nec, feugiat nibh. Donec vulputate turpis eu
+                  elit rutrum, eget suscipit diam imperdiet. Vestibulum pulvinar
+                  ac dolor sit amet tempor. Quisque ante nulla, dictum at libero
+                  a, volutpat ornare eros.
+                </p>
+                <p>
+                  Sed commodo dapibus urna. Curabitur consequat, diam luctus
+                  egestas egestas, metus dui ultrices metus, eu suscipit sapien
+                  quam et tellus. Proin ut ipsum non nunc venenatis maximus id
+                  non dolor. Morbi volutpat metus lacus. Donec euismod eros
+                  libero. Aenean consequat metus et orci mattis, fringilla
+                  posuere velit accumsan. Praesent interdum congue libero, sit
+                  amet vehicula ipsum congue sed. Pellentesque viverra velit
+                  lacus, eu lacinia tortor faucibus id. Praesent commodo ex a
+                  neque laoreet, convallis condimentum ligula feugiat.
+                </p>
+                <p>
+                  Proin eget mauris non enim fermentum porttitor quis et metus.
+                  Donec sagittis nulla dolor, eu posuere velit commodo vel. Nam
+                  quis mi ac ligula aliquet pharetra hendrerit lacinia elit.
+                  Quisque ullamcorper lorem lectus, vel tincidunt magna ornare
+                  eget. Quisque in ullamcorper risus, quis elementum odio.
+                  Vivamus lobortis ex quam, consectetur tincidunt lectus cursus
+                  eget. Maecenas vitae leo cursus, consequat nisl sit amet,
+                  accumsan justo. Etiam ut ex auctor, vestibulum urna id,
+                  rhoncus urna. Vestibulum a augue aliquam, tempor libero nec,
+                  viverra tortor.
+                </p>
+                <p>
+                  Morbi sit amet scelerisque elit. In semper sem at rutrum
+                  laoreet. Aenean non felis pretium, sollicitudin ligula nec,
+                  dapibus ante. In ut scelerisque ante. Interdum et malesuada
+                  fames ac ante ipsum primis in faucibus. Duis ultrices placerat
+                  sem, nec varius justo imperdiet ac. Ut fringilla ligula eget
+                  odio pulvinar eleifend. Vivamus quis enim vitae urna eleifend
+                  dignissim. Curabitur vulputate condimentum facilisis.
+                </p>
+                <p>
+                  Etiam tempor mi at erat eleifend, a finibus magna pretium.
+                  Etiam nec molestie neque. Suspendisse in risus augue. Nam
+                  congue est quis semper pulvinar. Curabitur feugiat mattis
+                  ultrices. Fusce eu nibh pulvinar, semper augue non, sodales
+                  magna. Aliquam consequat aliquet eleifend.
+                </p>
+                <p>
+                  Fusce ullamcorper sapien ut dignissim lobortis. Nunc ut
+                  placerat nulla. Nullam dapibus nunc quis metus rutrum pretium.
+                  Praesent non faucibus nunc. Donec in nunc ac mi sodales
+                  convallis. Donec tempus, risus rutrum pharetra dapibus, elit
+                  felis ultricies neque, non tempus arcu eros a lorem. In ut
+                  convallis lacus. Suspendisse potenti. Nunc maximus maximus
+                  viverra. Fusce mollis ut mi nec ultricies. Class aptent taciti
+                  sociosqu ad litora torquent per conubia nostra, per inceptos
+                  himenaeos. Ut elementum nisl et neque mollis, id auctor ipsum
+                  efficitur. Curabitur tincidunt, nisl non laoreet fringilla,
+                  nisi ex finibus ipsum, sit amet condimentum nulla leo
+                  consectetur massa. Morbi leo nulla, tincidunt id urna ut,
+                  hendrerit varius risus. In a maximus tortor. Donec eget lorem
+                  at nulla semper convallis.
+                </p>
+                <button class="dds__button dds__button--primary">
+                  Primary
+                </button>
+                <button class="dds__button dds__button--secondary">
+                  Secondary
+                </button>
+              </dds-drawer>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===9">
+          <h2>Action Menu</h2>
+          <div class="dds__row">
+            <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+              <dds-actionmenu>
+                <div action-trigger>
+                  <button
+                    type="button"
+                    class="dds__button dds__button--secondary"
+                  >
+                    Action Menu
+                  </button>
+                </div>
+                <dds-actionmenu-menu elementId="amMenu1" name="Actions">
+                  <dds-actionmenu-item
+                    elementId="amAction1"
+                    icon="copy-alt"
+                    (click)="actionMenuAction('copy click')"
+                  >
+                    Copy
+                  </dds-actionmenu-item>
+                </dds-actionmenu-menu>
+
+                <dds-actionmenu-menu elementId="amCheck" separator="true">
+                  View Strategy
+                </dds-actionmenu-menu>
+                <dds-actionmenu-item
+                  elementId="viewRows"
+                  checkbox="true"
+                  icon="view-row"
+                  value="rows"
+                  (onChecked)="actionMenuAction($event)"
+                >
+                  View Rows
+                </dds-actionmenu-item>
+                <dds-actionmenu-item
+                  elementId="viewCols"
+                  checkbox="true"
+                  checked="true"
+                  icon="view-column"
+                  value="columns"
+                  (onChecked)="actionMenuAction($event)"
+                >
+                  View Columns
+                </dds-actionmenu-item>
+              </dds-actionmenu>
+            </div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===10">
+          <h2>Button</h2>
+          <div class="dds__row">
+            <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+              <app-button
+                elementId="anyOldButton"
+                ariaLabel="Screen Reader Message"
+              >
+                Any Old Button
+              </app-button>
+              <hr />
+              <p>
+                Below is an unfinished experiment to get Button and ActionMenu
+                to work together. Please disregard.
+              </p>
+              <app-button
+                elementId="testButton"
+                action="amlinked"
+                ariaLabel="Screen Reader Message"
+              >
+                {{splitButtonValue}}
+              </app-button>
+              <dds-actionmenu
+                elementId="amlinked"
+                button="testButton"
+                alignment="end"
+              >
+                <div action-trigger>
+                  <button
+                    type="button"
+                    class="dds__button dds__button--secondary"
+                  >
+                    DoesntMatter
+                  </button>
+                </div>
+                <dds-actionmenu-menu elementId="amMenu1" name="Actions">
+                  <dds-actionmenu-item
+                    elementId="am1Action1"
+                    icon="copy-alt"
+                    (click)="actionMenuAction('Charlie')"
+                  >
+                    Charlie
+                  </dds-actionmenu-item>
+                  <dds-actionmenu-item
+                    elementId="am1Action2"
+                    icon="copy-alt"
+                    (click)="actionMenuAction('Daniels')"
+                  >
+                    Daniels
+                  </dds-actionmenu-item>
+                </dds-actionmenu-menu>
+              </dds-actionmenu>
+            </div>
+            <div
+              class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3"
+            ></div>
+          </div>
+        </span>
+
+        <span *ngIf="showPage===11">
+          <h2>Dropdown</h2>
+          <div class="dds__row">
+            <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+              <dds-dropdown
+                (optionSelected)="optionSelected($event)"
+                elementId="ddsDropdown"
+                label="Label Text"
+                helper="Helper Text"
+                groups="[{
+                  'hidden': true,
+                  'options': [{
+                    'name': 'Item1',
+                    'value': '101',
+                    'selected': true
+                  },{
+                    'name': 'Not Shown Item',
+                    'value': '999',
+                    'selected': true,
+                    'hidden': true
+                  },{
+                    'name': 'Item2',
+                    'value': '102',
+                    'selected': false
+                  },{
+                    'name': 'Not Shown Item2',
+                    'value': '9992',
+                    'selected': true,
+                    'hidden': true
+                  },{
+                    'name': 'Item3',
+                    'value': '103',
+                    'selected': true
+                  }
+                  ]
+                },{
+                  'name': 'Other Stuff',
+                  'options': [{
+                    'name': 'Item1',
+                    'value': '201',
+                    'selected': true
+                  },{
+                    'name': 'Item2',
+                    'value': '202',
+                    'selected': true
+                  },{
+                    'name': 'Item3',
+                    'value': '302',
+                    'selected': true
+                  }]
+                }]"
+              >
+              </dds-dropdown>
+            </div>
+          </div>
+        </span>
+        <!-- end of dds__container -->
+      </div>
+    </div>
+  </div>
+</div>

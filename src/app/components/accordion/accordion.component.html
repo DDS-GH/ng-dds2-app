@@ -1,0 +1,28 @@
+<div role="region" id="{{elementId}}" class="dds__accordion" data-dds="accordion" data-independent="true" data-sr-collapse-all="3 items collapsed." data-sr-expand-all="3 items expanded." data-sr-expand-item="item expanded." data-sr-collapse-item="item collapsed.">
+  <div class="dds__accordion__item {{isOpen ? 'dds__accordion__item--expanded' : ''}}">
+    <h5 class="dds__accordion__heading">
+      <button id="trigger{{elementId}}" 
+        class="dds__accordion__button"
+        
+        [attr.data-target]="'#' + elementId"
+
+        [attr.aria-expanded]="isOpen"
+        [attr.aria-controls]="elementId">
+        <span class="dds__mx-2">
+          <ng-content select="[accordion-title]"></ng-content>
+        </span>
+      </button>
+    </h5>
+    <div
+      id="{{ elementId }}"
+      class="dds__accordion__content"
+      role="region"
+      [attr.aria-labelledby]="'trigger'+elementId"
+    >
+      <div class="dds__accordion__body">
+        <ng-content select="[accordion-body]"></ng-content>
+      </div>
+    </div>
+
+  </div>
+</div>
