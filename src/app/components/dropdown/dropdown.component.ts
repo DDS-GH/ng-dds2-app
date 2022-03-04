@@ -1,12 +1,19 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core";
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  OnChanges,
+  SimpleChanges
+} from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, stringToBoolean } from "../../helpers/dds-helpers";
+import { setElementId } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-dropdown`,
   templateUrl: `./dropdown.component.html`
 })
-export class DropdownComponent extends DdsComponent {
+export class DropdownComponent extends DdsComponent implements OnChanges {
   @Input() label: string;
   @Input() helper: string;
   @Input() groups: any;
@@ -18,12 +25,7 @@ export class DropdownComponent extends DdsComponent {
       this.elementId,
       this.ddsInitializer.toLowerCase()
     );
-    this.groups = JSON.parse(
-      this.groups
-        .replace(/\\'/g, "@p0z")
-        .replace(/'/g, '"')
-        .replace(/@p0z/g, "'")
-    );
+    this.parseData();
     this.ddsAfterInit = () => {
       this.ddsElement.addEventListener(
         `ddsDropdownSelectionChangeEvent`,
@@ -32,5 +34,29 @@ export class DropdownComponent extends DdsComponent {
         }
       );
     };
+  }
+  parseData() {
+    console.log(`parseData`, this.groups);
+    try {
+      this.groups = JSON.parse(
+        this.groups
+          .replace(/\\'/g, "@p0z")
+          .replace(/'/g, '"')
+          .replace(/@p0z/g, "'")
+      );
+    } catch (e) {
+      console.log(e);
+      this.label = `Error parsing Dropdown Data`;
+      this.groups = [];
+      this.ddsInitializer = ``; // prevents Dropdown initialization
+    }
+  }
+  ngOnChanges(changes: SimpleChanges) {
+    if (
+      !changes.groups.firstChange &&
+      changes.groups.currentValue !== changes.groups.previousValue
+    ) {
+      this.parseData();
+    }
   }
 }

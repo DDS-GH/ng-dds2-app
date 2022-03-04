@@ -13,13 +13,6 @@ export class ButtonComponent extends DdsComponent implements AfterViewInit {
   @Input() action: string;
 
   ngOnInit() {
-    this.ddsInitializer = {
-      component: `Button`,
-      selector: `[data-toggle="dds__button"]`
-    };
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.component.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
   }
 }

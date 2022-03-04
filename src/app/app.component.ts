@@ -68,9 +68,64 @@ export class AppComponent implements OnInit {
   ];
   public splitButtonValue: string = `Country`;
   public splitButton2Value: string = `Singer`;
+  public dropdownData: any = [
+    {
+      hidden: true,
+      options: [
+        {
+          name: "Item1",
+          value: "101",
+          selected: true
+        },
+        {
+          name: "Not Shown Item",
+          value: "999",
+          selected: true,
+          hidden: true
+        },
+        {
+          name: "Item2",
+          value: "102",
+          selected: false
+        },
+        {
+          name: "Not Shown Item2",
+          value: "9992",
+          selected: true,
+          hidden: true
+        },
+        {
+          name: "Item3",
+          value: "103",
+          selected: true
+        }
+      ]
+    },
+    {
+      name: "Other Stuff",
+      options: [
+        {
+          name: "Item1",
+          value: "201",
+          selected: true
+        },
+        {
+          name: "Item2",
+          value: "202",
+          selected: true
+        },
+        {
+          name: "Item3",
+          value: "302",
+          selected: true
+        }
+      ]
+    }
+  ];
 
   ngOnInit() {
     console.clear();
+    this.dropdownData = JSON.stringify(this.dropdownData); // I shouldn't have to stringify but Sandbox is removing JSON formatting for the data
     this.getDelayedData();
 
     const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -130,5 +185,35 @@ export class AppComponent implements OnInit {
 
   actionMenu2Action(e: any) {
     this.splitButton2Value = e;
+  }
+
+  dropdownAction(instruct: string) {
+    switch (instruct) {
+      case "update":
+        this.dropdownData = [
+          {
+            name: "New Data",
+            options: [
+              {
+                name: "ND Item1",
+                value: "nd201",
+                selected: false
+              },
+              {
+                name: "ND Item2",
+                value: "nd202",
+                selected: true
+              },
+              {
+                name: "ND Item3",
+                value: "nd302",
+                selected: false
+              }
+            ]
+          }
+        ];
+        this.dropdownData = JSON.stringify(this.dropdownData);
+        break;
+    }
   }
 }

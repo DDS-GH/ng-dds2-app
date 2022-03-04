@@ -18,6 +18,10 @@ export class DdsComponent implements AfterViewInit {
 
   ngAfterViewInit() {
     this.ddsElement = document.getElementById(this.elementId);
+    this.initialize();
+  }
+
+  initialize() {
     if (this.ddsInitializer) {
       if (this.ddsStartImmediately) {
         this.initializeNow();

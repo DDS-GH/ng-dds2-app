@@ -16,3 +16,12 @@
   flex-direction: column;
   width: 100%;
 }
+
+::ng-deep .boxControl button {
+  margin-right: 0.625rem;
+}
+
+.boxControl input {
+  display: initial;
+  width: initial;
+}
