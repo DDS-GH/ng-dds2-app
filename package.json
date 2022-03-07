@@ -1,5 +1,5 @@
 {
-  "name": "ng-dds2-app",
+  "name": "ng-dds2-app-productivity-template",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -46,5 +46,5 @@
     "typescript": "~2.5.3"
   },
   "keywords": [],
-  "description": "v2.5.1"
+  "description": ""
 }
