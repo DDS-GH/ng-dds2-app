@@ -1,5 +1,6 @@
 import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
 
 import { AccordionComponent } from "./components/accordion/accordion.component";
 import { ActionMenuComponent } from "./components/actionmenu/actionmenu.component";
@@ -40,7 +41,7 @@ import { TooltipComponent } from "./components/tooltip/tooltip.component";
     TextAreaComponent,
     TooltipComponent
   ],
-  imports: [BrowserModule],
+  imports: [BrowserModule, FormsModule],
   providers: [MenuService],
   bootstrap: [AppComponent]
 })
