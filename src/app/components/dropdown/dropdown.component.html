@@ -52,12 +52,14 @@
               <li
                 *ngIf="!option.hidden"
                 class="dds__dropdown__item"
+                [class.ng__dropdown__item--hidden]="option.stored"
                 role="none"
               >
                 <button
                   class="dds__dropdown__item-option"
                   role="option"
-                  [attr.data-selected]="option.selected"
+                  [attr.data-selected]="option.selected === true || option.stored
+                  === true"
                   tabindex="-1"
                   [attr.data-value]="option.value"
                 >

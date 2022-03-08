@@ -1,6 +1,7 @@
 <header>
   This Sandbox uses the
   <a
+    target="blank"
     href="https://vanilla.delldesignsystem.com/2.5.1/index.html?path=/story/examples-templates-productivity--page"
     >Productivity Template</a
   >
@@ -538,9 +539,13 @@
         </div>
       </div>
       <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
           <dds-dropdown
-            (optionSelected)="optionSelected($event)"
+            searchText="Searching"
+            (onKeyUp)="handleDropdownKeyUp($event)"
+            (optionSelected)="handleDropdownSelected($event)"
+            (optionDeselected)="handleDropdownDeselected($event)"
+            (optionsCleared)="handleDropdownCleared($event)"
             elementId="ddsDropdown"
             label="Label Text"
             helper="Helper Text"
@@ -548,11 +553,18 @@
           >
           </dds-dropdown>
         </div>
+        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+          <ng-container *ngFor="let tag of dropdownStored">
+            <span class="dds__badge">
+              <span class="dds__badge__label">{{tag}}</span>
+            </span>
+          </ng-container>
+        </div>
       </div>
     </span>
     <!-- end of dds__container -->
   </div>
 </main>
 <footer>
-  Note when viewed within this iFrame, it doesn't stop when it should.
+  Note when viewed within Confluence, it doesn't stop when it should.
 </footer>

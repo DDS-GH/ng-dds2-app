@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from "@angular/core";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { ModalComponent } from "./components/modal/modal.component";
 import { DrawerComponent } from "./components/drawer/drawer.component";
+import { arrayAdd, arrayRemove } from "./helpers/dds-helpers";
 
 @Component({
   selector: "app-root",
@@ -12,7 +13,7 @@ export class AppComponent implements OnInit {
   @ViewChild(SidenavComponent) private sidenavComponent: SidenavComponent;
   @ViewChild(DrawerComponent) private drawerComponent: DrawerComponent;
   @ViewChild(ModalComponent) private modalComponent: ModalComponent;
-  public showPage = 0;
+  public showPage = 11;
   public selectValue1: Array<string> = [`Loading...`];
   public selectValue2: Array<string> = [`Loading...`];
   public textareaText: string = `You can get my logo from facebook something summery`;
@@ -70,34 +71,34 @@ export class AppComponent implements OnInit {
   public splitButton2Value: string = `Singer`;
   public dropdownData: any = [
     {
-      hidden: true,
+      hidden: false,
       options: [
         {
-          name: "Item1",
-          value: "101",
-          selected: true
+          name: "Alpha Item1",
+          value: "101", // to be used after v2.5.1
+          selected: false
         },
         {
           name: "Not Shown Item",
           value: "999",
-          selected: true,
+          selected: false,
           hidden: true
         },
         {
-          name: "Item2",
+          name: "Alpha Item2",
           value: "102",
           selected: false
         },
         {
           name: "Not Shown Item2",
           value: "9992",
-          selected: true,
+          selected: false,
           hidden: true
         },
         {
-          name: "Item3",
+          name: "Alpha Item3",
           value: "103",
-          selected: true
+          selected: false
         }
       ]
     },
@@ -105,23 +106,24 @@ export class AppComponent implements OnInit {
       name: "Other Stuff",
       options: [
         {
-          name: "Item1",
+          name: "Beta Item1",
           value: "201",
-          selected: true
+          selected: false
         },
         {
-          name: "Item2",
+          name: "Beta Item2",
           value: "202",
-          selected: true
+          selected: false
         },
         {
-          name: "Item3",
+          name: "Beta Item3",
           value: "302",
-          selected: true
+          selected: false
         }
       ]
     }
   ];
+  private dropdownStored: any = [];
 
   ngOnInit() {
     console.clear();
@@ -187,33 +189,80 @@ export class AppComponent implements OnInit {
     this.splitButton2Value = e;
   }
 
+  handleDropdownCleared(e: any) {
+    this.dropdownStored = [];
+    console.log(`stored: ${this.dropdownStored}`);
+  }
+
+  handleDropdownSelected(e: string) {
+    this.dropdownStored = arrayAdd(this.dropdownStored, e);
+  }
+
+  handleDropdownDeselected(e: string) {
+    this.dropdownStored = arrayRemove(this.dropdownStored, e);
+  }
+
+  handleDropdownKeyUp(e) {
+    setTimeout(() => {
+      const rememberThese = [];
+      const randomItems = this.dropdownRandomItems(e);
+      this.dropdownStored.forEach((storedOption) => {
+        if (!randomItems.selection.includes(storedOption)) {
+          rememberThese.push({
+            name: storedOption,
+            selected: true,
+            stored: true
+          });
+        }
+      });
+      this.dropdownData = [
+        {
+          name: "Results for " + e,
+          options: [...randomItems.items, ...rememberThese]
+        }
+      ];
+      console.log(this.dropdownData);
+      this.dropdownData = JSON.stringify(this.dropdownData);
+    }, 500);
+  }
+
   dropdownAction(instruct: string) {
     switch (instruct) {
       case "update":
+        const newData = this.dropdownRandomItems(`New Data`, false);
+        this.dropdownStored = newData.selection;
         this.dropdownData = [
           {
             name: "New Data",
-            options: [
-              {
-                name: "ND Item1",
-                value: "nd201",
-                selected: false
-              },
-              {
-                name: "ND Item2",
-                value: "nd202",
-                selected: true
-              },
-              {
-                name: "ND Item3",
-                value: "nd302",
-                selected: false
-              }
-            ]
+            options: newData.items
           }
         ];
         this.dropdownData = JSON.stringify(this.dropdownData);
         break;
     }
+  }
+
+  dropdownRandomItems(rName, noSelected = true) {
+    const selectedItems = [];
+    const randomItems = [];
+    for (let i = 0; i < Math.floor(Math.random() * 10) + 3; i++) {
+      let selected = noSelected ? false : Math.floor(Math.random() * 2) === 0;
+      const itemName = `${rName} Item ${i}`;
+      if (this.dropdownStored.includes(itemName)) {
+        selected = true;
+      }
+      randomItems.push({
+        name: itemName,
+        value: i,
+        selected: selected
+      });
+      if (selected) {
+        selectedItems.push(itemName);
+      }
+    }
+    return {
+      items: randomItems,
+      selection: selectedItems
+    };
   }
 }

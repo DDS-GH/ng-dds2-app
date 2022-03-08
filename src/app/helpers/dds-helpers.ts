@@ -90,3 +90,40 @@ export const ddsLink = (link: string): string => {
   }
   return link;
 };
+
+export const debounce = (func: any, timeout = 500) => {
+  let timer;
+  return (...args) => {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, timeout);
+  };
+};
+
+export const throttle = (func: any, timeout = 500) => {
+  let timer;
+  return (...args) => {
+    if (!timer) {
+      func.apply(this, args);
+    }
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      timer = undefined;
+    }, timeout);
+  };
+};
+
+export const arrayRemove = (arr, value) => {
+  return arr.filter(function (ele) {
+    return ele !== value;
+  });
+};
+
+export const arrayAdd = (arr, value) => {
+  console.log(`arr`, arr);
+  if (arr.includes && !arr.includes(value)) {
+    arr.push(value);
+  }
+  return arr;
+};

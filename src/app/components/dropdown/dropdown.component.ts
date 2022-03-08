@@ -7,17 +7,28 @@ import {
   SimpleChanges
 } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId } from "../../helpers/dds-helpers";
+import {
+  setElementId,
+  debounce,
+  throttle,
+  stringToBoolean
+} from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-dropdown`,
-  templateUrl: `./dropdown.component.html`
+  templateUrl: `./dropdown.component.html`,
+  styleUrls: [`./dropdown.component.scss`]
 })
 export class DropdownComponent extends DdsComponent implements OnChanges {
   @Input() label: string;
   @Input() helper: string;
   @Input() groups: any;
+  @Input() searchText: string;
+  @Input() onKeyUp: any;
   @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
+  @Output() onKeyUp: EventEmitter<string> = new EventEmitter<string>();
+  @Output() optionDeselected: EventEmitter<string> = new EventEmitter<string>();
+  @Output() optionsCleared: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit() {
     this.ddsInitializer = `Dropdown`;
@@ -27,16 +38,52 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
     );
     this.parseData();
     this.ddsAfterInit = () => {
-      this.ddsElement.addEventListener(
-        `ddsDropdownSelectionChangeEvent`,
-        (e) => {
-          this.optionSelected.emit(this.ddsComponent.getValue());
-        }
+      // this.ddsElement.addEventListener(
+      //   `ddsDropdownSelectionChangeEvent`,
+      //   (e) => {
+      //     this.optionSelected.emit(this.ddsComponent.getValue());
+      //   }
+      // );
+      const dropdownNotice = this.ddsElement.querySelector(
+        `.dds__dropdown__notice`
       );
+      const dropdownInput = this.ddsElement.querySelector(
+        `.dds__dropdown__input-field`
+      );
+      const dropdownClear = this.ddsElement.querySelector(`.dds__tag`);
+      const handleUpFinal = () => {
+        dropdownNotice.innerText = ``;
+        this.onKeyUp.emit(dropdownInput.value);
+      };
+      const handleDownFinal = (e) => {
+        const ignoredKeys = [`ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`];
+        if (!ignoredKeys.includes(e.key) && this.searchText) {
+          dropdownNotice.innerText = this.searchText;
+        }
+      };
+      const handleClear = () => {
+        this.optionsCleared.emit(this.ddsComponent.getValue());
+      };
+      const handleKeyUp = debounce(() => handleUpFinal());
+      const handleKeyDown = throttle((e) => handleDownFinal(e));
+      dropdownInput.addEventListener(`keyup`, handleKeyUp);
+      dropdownInput.addEventListener(`keydown`, handleKeyDown);
+      dropdownClear.addEventListener(`click`, handleClear);
+      this.ddsElement.addEventListener(`click`, (e) => {
+        if (
+          e.target.classList &&
+          e.target.classList.contains(`dds__dropdown__item-option`)
+        ) {
+          if (!stringToBoolean(e.target.getAttribute(`data-selected`))) {
+            this.optionDeselected.emit(e.target.innerText);
+          } else {
+            this.optionSelected.emit(e.target.innerText);
+          }
+        }
+      });
     };
   }
   parseData() {
-    console.log(`parseData`, this.groups);
     try {
       this.groups = JSON.parse(
         this.groups
