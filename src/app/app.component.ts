@@ -13,22 +13,18 @@ export class AppComponent implements OnInit {
   @ViewChild(SidenavComponent) private sidenavComponent: SidenavComponent;
   @ViewChild(DrawerComponent) private drawerComponent: DrawerComponent;
   @ViewChild(ModalComponent) private modalComponent: ModalComponent;
-  public showPage = 0;
+  public showPage = "Home";
   public selectValue1: Array<string> = [`Loading...`];
   public selectValue2: Array<string> = [`Loading...`];
   public textareaText: string = `You can get my logo from facebook something summery`;
   public menuItems = [
-    {
-      icon: `home`,
-      text: `Home`
-    },
     {
       icon: `card-swipe-left`,
       text: `Sidenav`
     },
     {
       icon: `cancelled`,
-      text: `Non-Initializing Components`
+      text: `Radio`
     },
     {
       icon: `card-info`,
@@ -56,7 +52,7 @@ export class AppComponent implements OnInit {
     },
     {
       icon: `bolt`,
-      text: `Action Menu`
+      text: `ActionMenu`
     },
     {
       icon: `fingerprint`,
@@ -127,6 +123,16 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     console.clear();
+    this.menuItems = [
+      {
+        icon: `home`,
+        text: `Home`
+      },
+      ...this.menuItems.sort((a, b) =>
+        a.text > b.text ? 1 : b.text > a.text ? -1 : 0
+      )
+    ];
+    console.log(this.menuItems);
     this.dropdownData = JSON.stringify(this.dropdownData); // I shouldn't have to stringify but Sandbox is removing JSON formatting for the data
     this.getDelayedData();
 

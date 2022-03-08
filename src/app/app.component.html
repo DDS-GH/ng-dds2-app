@@ -10,10 +10,10 @@
   <dds-sidenav>
     <dds-sidenav-item
       *ngFor="let item of menuItems; index as i;"
-      selected="{{showPage===i}}"
+      selected="{{showPage===item.text}}"
       icon="{{item.icon}}"
     >
-      <span (click)="sidenavItemClick(i)">{{item.text}}</span>
+      <span (click)="sidenavItemClick(item.text)">{{item.text}}</span>
     </dds-sidenav-item>
     <dds-sidenav-menu icon="game-controller" open="true" name="Fun Stuff">
       <dds-sidenav-item link="https://gather.town/">
@@ -28,7 +28,7 @@
 <main>
   <div class="dds__container">
     <h1>DDS2 Ng Wrappers</h1>
-    <span *ngIf="showPage===0">
+    <span *ngIf="showPage==='Home'">
       <p>
         This sandbox is very much a work-in-progress;
         <b>treat this as an example or experiment only</b>. If it is broken in
@@ -45,7 +45,7 @@
       </p>
     </span>
 
-    <span *ngIf="showPage===1">
+    <span *ngIf="showPage==='Sidenav'">
       <h2>Sidenav</h2>
       <div class="dds__row">
         <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
@@ -61,8 +61,8 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===2">
-      <h2>Non-Initializing Components</h2>
+    <span *ngIf="showPage==='Radio'">
+      <h2>Radio Buttons</h2>
       <div class="dds__row">
         <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
           <fieldset required="true" class="dds__fieldset dds__fieldset--lg">
@@ -120,7 +120,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===3">
+    <span *ngIf="showPage==='Textarea'">
       <h2>TextArea</h2>
       <div class="dds__row">
         <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
@@ -151,7 +151,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===4">
+    <span *ngIf="showPage==='Modal'">
       <h2>Modal</h2>
 
       <div class="dds__row">
@@ -195,7 +195,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===5">
+    <span *ngIf="showPage==='Select'">
       <h2>Select</h2>
       <div class="dds__row">
         <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
@@ -219,7 +219,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===6">
+    <span *ngIf="showPage==='Tooltip'">
       <h2>Tooltip</h2>
       <div class="dds__row">
         <div class="dds__col--1 dds__col--sm-6 dds__col--md-12 dds__mb-3">
@@ -231,7 +231,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===7">
+    <span *ngIf="showPage==='Accordion'">
       <h2>Accordion</h2>
       <div class="dds__row">
         <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
@@ -262,7 +262,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===8">
+    <span *ngIf="showPage==='Drawer'">
       <h2>Drawer</h2>
       <div class="dds__row">
         <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
@@ -422,7 +422,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===9">
+    <span *ngIf="showPage==='ActionMenu'">
       <h2>Action Menu</h2>
       <div class="dds__row">
         <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
@@ -469,7 +469,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===10">
+    <span *ngIf="showPage==='Button'">
       <h2>Button</h2>
       <div class="dds__row">
         <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
@@ -523,7 +523,7 @@
       </div>
     </span>
 
-    <span *ngIf="showPage===11">
+    <span *ngIf="showPage==='Dropdown'">
       <h2>Dropdown</h2>
       <div class="dds__row">
         <div
