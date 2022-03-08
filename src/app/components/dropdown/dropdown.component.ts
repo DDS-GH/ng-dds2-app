@@ -66,8 +66,10 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
       };
       const handleKeyUp = debounce(() => handleUpFinal());
       const handleKeyDown = throttle((e) => handleDownFinal(e));
-      dropdownInput.addEventListener(`keyup`, handleKeyUp);
-      dropdownInput.addEventListener(`keydown`, handleKeyDown);
+      if (this.searchText) {
+        dropdownInput.addEventListener(`keyup`, handleKeyUp);
+        dropdownInput.addEventListener(`keydown`, handleKeyDown);
+      }
       dropdownClear.addEventListener(`click`, handleClear);
       this.ddsElement.addEventListener(`click`, (e) => {
         if (

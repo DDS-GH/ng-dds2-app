@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   @ViewChild(SidenavComponent) private sidenavComponent: SidenavComponent;
   @ViewChild(DrawerComponent) private drawerComponent: DrawerComponent;
   @ViewChild(ModalComponent) private modalComponent: ModalComponent;
-  public showPage = "Home";
+  public showPage = "Dropdown";
   public selectValue1: Array<string> = [`Loading...`];
   public selectValue2: Array<string> = [`Loading...`];
   public textareaText: string = `You can get my logo from facebook something summery`;
@@ -65,6 +65,27 @@ export class AppComponent implements OnInit {
   ];
   public splitButtonValue: string = `Country`;
   public splitButton2Value: string = `Singer`;
+  public dropdownDataSimple: any = [
+    {
+      options: [
+        {
+          name: "Simple Item1",
+          value: "101", // to be used after v2.5.1
+          selected: false
+        },
+        {
+          name: "Simple Item2",
+          value: "102", // to be used after v2.5.1
+          selected: true
+        },
+        {
+          name: "Simple Item3",
+          value: "103", // to be used after v2.5.1
+          selected: false
+        }
+      ]
+    }
+  ];
   public dropdownData: any = [
     {
       hidden: false,
@@ -134,6 +155,7 @@ export class AppComponent implements OnInit {
     ];
     console.log(this.menuItems);
     this.dropdownData = JSON.stringify(this.dropdownData); // I shouldn't have to stringify but Sandbox is removing JSON formatting for the data
+    this.dropdownDataSimple = JSON.stringify(this.dropdownDataSimple); // I shouldn't have to stringify but Sandbox is removing JSON formatting for the data
     this.getDelayedData();
 
     const params = new Proxy(new URLSearchParams(window.location.search), {

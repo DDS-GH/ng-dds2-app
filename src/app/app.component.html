@@ -526,16 +526,20 @@
     <span *ngIf="showPage==='Dropdown'">
       <h2>Dropdown</h2>
       <div class="dds__row">
-        <div
-          class="boxControl dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3"
-        >
-          <app-button
-            elementId="dropdownUpdate"
-            ariaLabel="Update Data in dropdown"
-            (click)="dropdownAction('update')"
+        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+          <p>
+            Please be aware that CodeSandbox is requiring the array being used
+            to populate these Dropdowns to be stringified, because CodeSandbox
+            is auto-prettifying and removing JSON string names. You should not
+            need to do this in your implementation.
+          </p>
+          <dds-dropdown
+            elementId="ddsDropdownSimple"
+            label="Simple Dropdown Example"
+            helper="Helper Text"
+            groups="{{dropdownDataSimple}}"
           >
-            Update Data
-          </app-button>
+          </dds-dropdown>
         </div>
       </div>
       <div class="dds__row">
@@ -547,8 +551,8 @@
             (optionDeselected)="handleDropdownDeselected($event)"
             (optionsCleared)="handleDropdownCleared($event)"
             elementId="ddsDropdown"
-            label="Label Text"
-            helper="Helper Text"
+            label="Experimental Backend Searching"
+            helper="You must add a searchText value for this to kick in"
             groups="{{dropdownData}}"
           >
           </dds-dropdown>
@@ -559,6 +563,19 @@
               <span class="dds__badge__label">{{tag}}</span>
             </span>
           </ng-container>
+        </div>
+      </div>
+      <div class="dds__row">
+        <div
+          class="boxControl dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3"
+        >
+          <app-button
+            elementId="dropdownUpdate"
+            ariaLabel="Update Data in dropdown"
+            (click)="dropdownAction('update')"
+          >
+            Update Data
+          </app-button>
         </div>
       </div>
     </span>
