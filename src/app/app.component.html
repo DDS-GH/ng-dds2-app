@@ -12,9 +12,10 @@
       *ngFor="let item of menuItems; index as i;"
       selected="{{showPage===item.text}}"
       icon="{{item.icon}}"
-      (click)="sidenavItemClick(item.text)"
     >
-      {{item.text}}
+      <span (click)="sidenavItemClick(item.text)">
+        {{item.text}}
+      </span>
     </dds-sidenav-item>
     <dds-sidenav-menu icon="game-controller" open="true" name="Fun Stuff">
       <dds-sidenav-item link="https://gather.town/">
