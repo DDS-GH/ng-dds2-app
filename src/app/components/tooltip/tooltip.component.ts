@@ -13,10 +13,7 @@ export class TooltipComponent extends DdsComponent {
 
   ngOnInit() {
     this.ddsInitializer = `Tooltip`;
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
     if (!this.icon) {
       this.icon = `alert-info-cir`;
     }

@@ -16,10 +16,7 @@ export class SelectComponent extends DdsComponent {
 
   ngOnInit() {
     this.ddsInitializer = `Select`;
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
   }
 
   public onChange() {

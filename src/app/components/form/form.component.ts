@@ -16,9 +16,6 @@ export class FormValidationComponent extends DdsComponent
       component: `Form`,
       selector: `form-validation`
     };
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.component.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
   }
 }

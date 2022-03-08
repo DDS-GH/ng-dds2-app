@@ -31,10 +31,7 @@ export class ActionMenuComponent extends DdsComponent
 
   ngOnInit() {
     this.ddsInitializer = `ActionMenu`;
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
     this.ddsOptions = {
       alignment: this.alignment
     };

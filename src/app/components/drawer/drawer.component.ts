@@ -14,10 +14,7 @@ export class DrawerComponent extends DdsComponent {
 
   ngOnInit() {
     this.ddsInitializer = `Drawer`;
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
     this.ddsAfterInit = () => {
       if (this.icon) {
         this.ddsElement.querySelector(

@@ -29,10 +29,7 @@ export class TextAreaComponent extends DdsComponent {
 
   ngOnInit() {
     this.ddsInitializer = `TextArea`;
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
     this.textAreaId = `${this.ddsInitializer}-textarea${Uuid()}`;
     this.labelId = `${this.ddsInitializer}-label${Uuid()}`;
     this.helperId = `${this.ddsInitializer}-helper${Uuid()}`;

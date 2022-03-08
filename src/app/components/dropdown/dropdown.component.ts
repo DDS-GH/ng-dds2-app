@@ -32,10 +32,7 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
 
   ngOnInit() {
     this.ddsInitializer = `Dropdown`;
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
     this.parseData();
     this.ddsAfterInit = () => {
       // this.ddsElement.addEventListener(

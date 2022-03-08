@@ -23,7 +23,7 @@ export class AppComponent implements OnInit {
       text: `Sidenav`
     },
     {
-      icon: `cancelled`,
+      icon: `disc-software`,
       text: `Radio`
     },
     {

@@ -14,10 +14,7 @@ export class AccordionComponent extends DdsComponent implements OnInit, Input {
 
   ngOnInit() {
     this.ddsInitializer = `Accordion`;
-    this.elementId = setElementId(
-      this.elementId,
-      this.ddsInitializer.toLowerCase()
-    );
+    this.elementId = setElementId(this.elementId);
     this.isOpen = stringToBoolean(this.openState);
   }
 }
