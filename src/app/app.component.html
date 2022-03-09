@@ -236,7 +236,7 @@
             label="Select Movie"
             [(selectOptions)]="selectValue1"
             [defaultValue]="selectValue1[1]"
-            (optionSelected)="optionSelected($event)"
+            (optionSelected)="selectOptionSelected($event)"
           >
           </dds-select>
         </div>
@@ -245,7 +245,7 @@
             label="Select Book"
             [(selectOptions)]="selectValue2"
             [defaultValue]="selectValue2[2]"
-            (optionSelected)="optionSelected($event)"
+            (optionSelected)="selectOptionSelected($event)"
           >
           </dds-select>
         </div>
@@ -570,6 +570,7 @@
             elementId="ddsDropdownSimple"
             label="Simple Dropdown Example"
             helper="Helper Text"
+            selection="single"
             groups="{{dropdownDataSimple}}"
           >
           </dds-dropdown>
@@ -578,14 +579,18 @@
       <div class="dds__row">
         <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
           <dds-dropdown
-            searchText="Searching"
+            selection="multiple"
+            noOptionsLabel="Searching"
+            selectedLabel="Chosen"
+            srClearLabel="Get rid of selection"
+            useBackend="true"
             (onKeyUp)="handleDropdownKeyUp($event)"
             (optionSelected)="handleDropdownSelected($event)"
             (optionDeselected)="handleDropdownDeselected($event)"
             (optionsCleared)="handleDropdownCleared($event)"
             elementId="ddsDropdown"
             label="Experimental Backend Searching"
-            helper="You must add a searchText value for this to kick in"
+            helper="You must set useBackend to true for this to kick in"
             groups="{{dropdownData}}"
           >
           </dds-dropdown>

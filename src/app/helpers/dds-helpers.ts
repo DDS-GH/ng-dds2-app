@@ -121,7 +121,6 @@ export const arrayRemove = (arr, value) => {
 };
 
 export const arrayAdd = (arr, value) => {
-  console.log(`arr`, arr);
   if (arr.includes && !arr.includes(value)) {
     arr.push(value);
   }

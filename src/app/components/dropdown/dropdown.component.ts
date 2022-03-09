@@ -23,8 +23,12 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
   @Input() label: string;
   @Input() helper: string;
   @Input() groups: any;
-  @Input() searchText: string;
+  @Input() noOptionsLabel: string = `No options found`;
+  @Input() selectedLabel: string = `selected`;
+  @Input() srClearLabel: string = `clear selected items`;
+  @Input() useBackend: any = `false`;
   @Input() onKeyUp: any;
+  @Input() selection: string = `single`;
   @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
   @Output() onKeyUp: EventEmitter<string> = new EventEmitter<string>();
   @Output() optionDeselected: EventEmitter<string> = new EventEmitter<string>();
@@ -32,7 +36,14 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
 
   ngOnInit() {
     this.ddsInitializer = `Dropdown`;
+    this.ddsOptions = {
+      selection: this.selection,
+      noOptionsLabel: this.noOptionsLabel,
+      selectedLabel: this.selectedLabel,
+      srClearLabel: this.srClearLabel
+    };
     this.elementId = setElementId(this.elementId);
+    this.useBackend = stringToBoolean(this.useBackend);
     this.parseData();
     this.ddsAfterInit = () => {
       // this.ddsElement.addEventListener(
@@ -54,8 +65,8 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
       };
       const handleDownFinal = (e) => {
         const ignoredKeys = [`ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`];
-        if (!ignoredKeys.includes(e.key) && this.searchText) {
-          dropdownNotice.innerText = this.searchText;
+        if (!ignoredKeys.includes(e.key) && this.noOptionsLabel) {
+          dropdownNotice.innerText = this.noOptionsLabel;
         }
       };
       const handleClear = () => {
@@ -63,11 +74,13 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
       };
       const handleKeyUp = debounce(() => handleUpFinal());
       const handleKeyDown = throttle((e) => handleDownFinal(e));
-      if (this.searchText) {
+      if (this.useBackend) {
         dropdownInput.addEventListener(`keyup`, handleKeyUp);
         dropdownInput.addEventListener(`keydown`, handleKeyDown);
       }
-      dropdownClear.addEventListener(`click`, handleClear);
+      if (dropdownClear) {
+        dropdownClear.addEventListener(`click`, handleClear);
+      }
       this.ddsElement.addEventListener(`click`, (e) => {
         if (
           e.target.classList &&

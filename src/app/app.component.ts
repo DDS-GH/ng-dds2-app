@@ -205,8 +205,8 @@ export class AppComponent implements OnInit {
     this.drawerComponent.openDrawer(e);
   }
 
-  optionSelected(e: any) {
-    console.log(e);
+  selectOptionSelected(e: any) {
+    console.log(`select component`, e);
   }
 
   sidenavItemClick(e: any) {
@@ -223,7 +223,6 @@ export class AppComponent implements OnInit {
 
   handleDropdownCleared(e: any) {
     this.dropdownStored = [];
-    console.log(`stored: ${this.dropdownStored}`);
   }
 
   handleDropdownSelected(e: string) {
@@ -253,7 +252,6 @@ export class AppComponent implements OnInit {
           options: [...randomItems.items, ...rememberThese]
         }
       ];
-      console.log(this.dropdownData);
       this.dropdownData = JSON.stringify(this.dropdownData);
     }, 500);
   }

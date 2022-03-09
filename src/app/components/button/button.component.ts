@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from "@angular/core";
+import { Component, Input, AfterViewInit } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
 import { setElementId } from "../../helpers/dds-helpers";
 
