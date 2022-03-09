@@ -65,6 +65,10 @@ export class AppComponent implements OnInit {
     {
       icon: `alert-check-sqr`,
       text: `Checkbox`
+    },
+    {
+      icon: `alert-check-sqr`,
+      text: `Badge`
     }
   ];
   public checkboxOn: boolean = true;

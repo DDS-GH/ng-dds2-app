@@ -3,7 +3,7 @@ import { DdsComponent } from "../../helpers/dds-component-shell";
 import { setElementId } from "../../helpers/dds-helpers";
 
 @Component({
-  selector: "app-button",
+  selector: "dds-button",
   templateUrl: "./button.component.html",
   styleUrls: ["./button.component.scss"]
 })
