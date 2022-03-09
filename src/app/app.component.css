@@ -1,8 +1,10 @@
-.boxH2 {
+.boxH3 {
   text-align: right;
-  border-bottom: 1rem solid gray;
+}
+
+.boxH4 {
   margin-top: 2rem;
-  margin-bottom: 1rem;
+  border-bottom: 2px dashed gray;
 }
 
 .page-content {

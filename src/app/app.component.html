@@ -35,13 +35,8 @@
 <main>
   <div class="dds__container">
     <span *ngIf="showPage==='Home'">
-      <style>
-        .boxh3 {
-          text-align: right;
-        }
-      </style>
       <h2>README</h2>
-      <h3 class="boxh3">Disclaimer</h3>
+      <h3 class="boxH3">Disclaimer</h3>
       <p>
         This sandbox is version-controlled, and has been created as a result of
         demand, as well as in response to tickets filed for solving specific
@@ -54,8 +49,8 @@
         >
         the DDS2 Support and Automation team for further information.
       </p>
-      <h3 class="boxh3">Notes</h3>
-      <h4>Sidenav Links</h4>
+      <h3 class="boxH3">Notes</h3>
+      <h4 class="boxH4">Sidenav Links</h4>
       <p>
         This sandbox does not, as of this writing, use routing, and as a
         side-effect of that, the sidenav Links aren't working quite right; you
@@ -64,14 +59,14 @@
         being acted upon in this app.
         <b>The links shown in "Fun Stuff" show proper link usage.</b>
       </p>
-      <h4>Shell Inheritance</h4>
+      <h4 class="boxH4">Shell Inheritance</h4>
       <p>
         All wrapping components inherit from
         <i>helpers/dds-component.shell.ts</i> This inheritance is pretty good,
         but can probably be made better, because using AfterViewInit inside one
         of the inherting components cancels out the parent's.
       </p>
-      <h4>Initialization Timing</h4>
+      <h4 class="boxH4">Initialization Timing</h4>
       <p>
         The component shell normally initializes the DDS component within the
         AfterViewInit life cycle stage. However if you add the
