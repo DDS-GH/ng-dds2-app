@@ -10,12 +10,14 @@ import { setElementId } from "../../helpers/dds-helpers";
 export class FormValidationComponent extends DdsComponent
   implements AfterViewInit {
   @Input() class: string;
+  @Input() init: string = `now`;
 
   ngOnInit() {
     this.ddsInitializer = {
       component: `Form`,
       selector: `form-validation`
     };
+    this.ddsStartImmediately = this.init === `now`;
     this.elementId = setElementId(this.elementId);
   }
 }

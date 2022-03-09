@@ -11,12 +11,14 @@ export class ModalComponent extends DdsComponent {
   @ViewChild("triggerContainer") triggerContainer: ElementRef<HTMLElement>;
   @Input() modalId: string;
   @Input() backdrop: any;
+  @Input() init: string = `now`;
   private modalTitleId: string;
   private modalTriggerId: string;
 
   ngOnInit() {
     this.backdrop = stringToBoolean(this.backdrop);
     this.ddsInitializer = `Modal`;
+    this.ddsStartImmediately = this.init === `now`;
     this.modalTitleId = `${this.ddsInitializer}-title${Uuid()}`;
     this.modalTriggerId = `${this.ddsInitializer}-trigger${Uuid()}`;
     this.elementId = setElementId(this.elementId);

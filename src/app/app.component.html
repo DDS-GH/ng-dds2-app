@@ -1,13 +1,18 @@
 <header>
-  This Sandbox uses the
-  <a
-    target="blank"
-    href="https://vanilla.delldesignsystem.com/2.5.1/index.html?path=/story/examples-templates-productivity--page"
-    >Productivity Template</a
-  >
+  <div style="display: flex;">
+    <h1>DDS2 Ng Wrappers</h1>
+    <sub style="padding-top: 2rem;">
+      This Sandbox uses the
+      <a
+        target="blank"
+        href="https://vanilla.delldesignsystem.com/2.5.1/index.html?path=/story/examples-templates-productivity--page"
+        >Productivity Template</a
+      >
+    </sub>
+  </div>
 </header>
 <nav>
-  <dds-sidenav fixed="false">
+  <dds-sidenav fixed="false" init="later">
     <dds-sidenav-item
       *ngFor="let item of menuItems; index as i;"
       selected="{{showPage===item.text}}"
@@ -29,21 +34,50 @@
 </nav>
 <main>
   <div class="dds__container">
-    <h1>DDS2 Ng Wrappers</h1>
     <span *ngIf="showPage==='Home'">
+      <style>
+        .boxh3 {
+          text-align: right;
+        }
+      </style>
+      <h2>README</h2>
+      <h3 class="boxh3">Disclaimer</h3>
       <p>
-        This sandbox is very much a work-in-progress;
-        <b>treat this as an example or experiment only</b>. If it is broken in
-        any way, it is likely that it is actively being edited. Please
+        This sandbox is version-controlled, and has been created as a result of
+        demand, as well as in response to tickets filed for solving specific
+        problems. There are occasionally oddities, and experiments shown that
+        can and in some instances should be ignored. Please
         <a
+          target="blank"
           href="https://forms.office.com/Pages/ResponsePage.aspx?id=mhlclKKDgE6fjFqRvldS3Tu72-e1EktEmC896wPSUmFUOUcwSE9NMVBLQkVONzk1SUVZNllWMUtMWiQlQCN0PWcu"
           >contact</a
         >
         the DDS2 Support and Automation team for further information.
       </p>
+      <h3 class="boxh3">Notes</h3>
+      <h4>Sidenav Links</h4>
       <p>
-        Also note that the inhertance implemented in the
-        <b>helpers/dds-component-shell</b> file is unfinished.
+        This sandbox does not, as of this writing, use routing, and as a
+        side-effect of that, the sidenav Links aren't working quite right; you
+        have to click directly on the text of the links because link values are
+        not being supplied to the DDS component, but instead (click) events are
+        being acted upon in this app.
+        <b>The links shown in "Fun Stuff" show proper link usage.</b>
+      </p>
+      <h4>Shell Inheritance</h4>
+      <p>
+        All wrapping components inherit from
+        <i>helpers/dds-component.shell.ts</i> This inheritance is pretty good,
+        but can probably be made better, because using AfterViewInit inside one
+        of the inherting components cancels out the parent's.
+      </p>
+      <h4>Initialization Timing</h4>
+      <p>
+        The component shell normally initializes the DDS component within the
+        AfterViewInit life cycle stage. However if you add the
+        <i>init</i> property to any of the components' instances, it will
+        initialize AFTER that step, whenever the DDS component is found in the
+        DOM.
       </p>
     </span>
 
@@ -621,5 +655,5 @@
   </div>
 </main>
 <footer>
-  Note when viewed within Confluence, it doesn't stop when it should.
+  If viewed within Confluence, this template doesn't stop when it should.
 </footer>

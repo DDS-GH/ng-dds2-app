@@ -20,6 +20,7 @@ export class ActionMenuComponent extends DdsComponent
   implements OnInit, OnDestroy {
   @Input() button: string;
   @Input() alignment: "start" | "end" = "start";
+  @Input() init: string = `now`;
   private menuService: MenuService;
   private subscription: Subscription;
   private wasInside: boolean = false;
@@ -31,6 +32,7 @@ export class ActionMenuComponent extends DdsComponent
 
   ngOnInit() {
     this.ddsInitializer = `ActionMenu`;
+    this.ddsStartImmediately = this.init === `now`;
     this.elementId = setElementId(this.elementId);
     this.ddsOptions = {
       alignment: this.alignment

@@ -11,11 +11,13 @@ export class SelectComponent extends DdsComponent {
   @Input() selectOptions: Array<string>;
   @Input() label: string;
   @Input() defaultValue: string;
+  @Input() init: string = `now`;
   @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
   private selectedValue: string;
 
   ngOnInit() {
     this.ddsInitializer = `Select`;
+    this.ddsStartImmediately = this.init === `now`;
     this.elementId = setElementId(this.elementId);
   }
 

@@ -11,9 +11,11 @@ export class DrawerComponent extends DdsComponent {
   @ViewChild("triggerContainer") triggerContainer: ElementRef<HTMLElement>;
   @Input() elementId: string;
   @Input() icon: string;
+  @Input() init: string = `now`;
 
   ngOnInit() {
     this.ddsInitializer = `Drawer`;
+    this.ddsStartImmediately = this.init === `now`;
     this.elementId = setElementId(this.elementId);
     this.ddsAfterInit = () => {
       if (this.icon) {
