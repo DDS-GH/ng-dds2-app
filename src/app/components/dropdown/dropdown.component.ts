@@ -29,7 +29,6 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
   @Input() useBackend: any = `false`;
   @Input() onKeyUp: any;
   @Input() selection: string = `single`;
-  @Input() init: string = `now`;
   @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
   @Output() onKeyUp: EventEmitter<string> = new EventEmitter<string>();
   @Output() optionDeselected: EventEmitter<string> = new EventEmitter<string>();
@@ -37,7 +36,6 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
 
   ngOnInit() {
     this.ddsInitializer = `Dropdown`;
-    this.ddsStartImmediately = this.init === `now`;
     this.ddsOptions = {
       selection: this.selection,
       noOptionsLabel: this.noOptionsLabel,

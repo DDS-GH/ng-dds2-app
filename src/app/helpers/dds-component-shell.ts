@@ -7,8 +7,8 @@ declare var DDS: any; // Use declare if you import via CDN. Regular Angular (nod
 @Component({})
 export class DdsComponent implements AfterViewInit {
   @Input() elementId: string;
+  @Input() init: string = `now`;
 
-  public ddsStartImmediately: boolean = true;
   public ddsInitializer: any;
   public ddsElement: any;
   public ddsComponent: any;
@@ -23,7 +23,7 @@ export class DdsComponent implements AfterViewInit {
 
   initialize() {
     if (this.ddsInitializer) {
-      if (this.ddsStartImmediately) {
+      if (this.init === `now`) {
         this.initializeNow();
         if (this.ddsAfterInit) {
           this.ddsAfterInit();

@@ -10,12 +10,10 @@ import { setElementId, stringToBoolean } from "../../helpers/dds-helpers";
 export class SidenavComponent extends DdsComponent {
   @Input() openState: string;
   @Input() fixed: boolean;
-  @Input() init: string = `now`;
   private isOpen: boolean;
 
   ngOnInit() {
     this.ddsInitializer = `SideNav`;
-    this.ddsStartImmediately = this.init === `now`;
     this.fixed = stringToBoolean(this.fixed);
     this.isOpen = stringToBoolean(this.openState);
     this.elementId = setElementId(this.elementId);

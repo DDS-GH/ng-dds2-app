@@ -14,6 +14,7 @@ import { DropdownComponent } from "./components/dropdown/dropdown.component";
 import { FormValidationComponent } from "./components/form/form.component";
 import { IsSelectedDirective } from "./helpers/isselected.directive";
 import { MenuService } from "./helpers/menu.service";
+import { MessageBarComponent } from "./components/messagebar/messagebar.component";
 import { ModalComponent } from "./components/modal/modal.component";
 import { SelectComponent } from "./components/select/select.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
@@ -35,6 +36,7 @@ import { TooltipComponent } from "./components/tooltip/tooltip.component";
     DropdownComponent,
     FormValidationComponent,
     IsSelectedDirective,
+    MessageBarComponent,
     ModalComponent,
     SelectComponent,
     SidenavComponent,

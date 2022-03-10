@@ -18,7 +18,6 @@ export class TextAreaComponent extends DdsComponent {
   @ViewChild("srContainer") srContainer: ElementRef;
   @Input() isRequired: string;
   @Input() maxLength: string;
-  @Input() init: string = `now`;
   private defaultText: string;
   private srText: string;
   private textAreaId: string;
@@ -30,7 +29,6 @@ export class TextAreaComponent extends DdsComponent {
 
   ngOnInit() {
     this.ddsInitializer = `TextArea`;
-    this.ddsStartImmediately = this.init === `now`;
     this.elementId = setElementId(this.elementId);
     this.textAreaId = `${this.ddsInitializer}-textarea${Uuid()}`;
     this.labelId = `${this.ddsInitializer}-label${Uuid()}`;

@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   @ViewChild(SidenavComponent) private sidenavComponent: SidenavComponent;
   @ViewChild(DrawerComponent) private drawerComponent: DrawerComponent;
   @ViewChild(ModalComponent) private modalComponent: ModalComponent;
-  public showPage = "Home";
+  public showPage = `MessageBar`;
   public selectValue1: Array<string> = [`Loading...`];
   public selectValue2: Array<string> = [`Loading...`];
   public textareaText: string = `You can get my logo from facebook something summery`;
@@ -67,8 +67,12 @@ export class AppComponent implements OnInit {
       text: `Checkbox`
     },
     {
-      icon: `alert-check-sqr`,
+      icon: `shield-check`,
       text: `Badge`
+    },
+    {
+      icon: `app-window`,
+      text: `MessageBar`
     }
   ];
   public checkboxOn: boolean = true;
