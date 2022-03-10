@@ -73,6 +73,10 @@ export class AppComponent implements OnInit {
     {
       icon: `app-window`,
       text: `MessageBar`
+    },
+    {
+      icon: `ellipsis`,
+      text: `Breadcrumb`
     }
   ];
   public checkboxOn: boolean = true;

@@ -8,6 +8,7 @@ import { ActionMenuItemComponent } from "./components/actionmenu/actionmenu.item
 import { ActionMenuMenuComponent } from "./components/actionmenu/actionmenu.menu.component";
 import { AppComponent } from "./app.component";
 import { BadgeComponent } from "./components/badge/badge.component";
+import { BreadcrumbComponent } from "./components/breadcrumb/breadcrumb.component";
 import { ButtonComponent } from "./components/button/button.component";
 import { DrawerComponent } from "./components/drawer/drawer.component";
 import { DropdownComponent } from "./components/dropdown/dropdown.component";
@@ -31,6 +32,7 @@ import { TooltipComponent } from "./components/tooltip/tooltip.component";
     ActionMenuMenuComponent,
     AppComponent,
     BadgeComponent,
+    BreadcrumbComponent,
     ButtonComponent,
     DrawerComponent,
     DropdownComponent,

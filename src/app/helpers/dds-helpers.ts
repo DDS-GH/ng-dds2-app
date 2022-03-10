@@ -126,3 +126,16 @@ export const arrayAdd = (arr, value) => {
   }
   return arr;
 };
+
+export const parseData = (data) => {
+  try {
+    // replace single quotes with double quotes for true JSON
+    data = JSON.parse(
+      data.replace(/\\'/g, "@p0z").replace(/'/g, '"').replace(/@p0z/g, "'")
+    );
+  } catch (e) {
+    console.log(e);
+    data = [];
+  }
+  return data;
+};
