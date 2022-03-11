@@ -96,15 +96,16 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
     };
   }
   parseData() {
+    if (typeof this.groups === `string`) {
+      this.groups = this.groups
+        .replace(/\\'/g, "@p0z")
+        .replace(/'/g, '"')
+        .replace(/@p0z/g, "'");
+    }
     try {
-      this.groups = JSON.parse(
-        this.groups
-          .replace(/\\'/g, "@p0z")
-          .replace(/'/g, '"')
-          .replace(/@p0z/g, "'")
-      );
+      this.groups = JSON.parse(this.groups);
     } catch (e) {
-      console.log(e);
+      console.log(e.message);
       this.label = `Error parsing Dropdown Data`;
       this.groups = [];
       this.ddsInitializer = ``; // prevents Dropdown initialization

@@ -86,55 +86,34 @@ export class AppComponent implements OnInit {
   public checkboxOn: boolean = true;
   public splitButtonValue: string = `Country`;
   public splitButton2Value: string = `Singer`;
-  public dropdownDataSimple: any = [
-    {
-      options: [
-        {
-          name: "Simple Item1",
-          value: "101", // to be used after v2.5.1
-          selected: false
-        },
-        {
-          name: "Simple Item2",
-          value: "102", // to be used after v2.5.1
-          selected: true
-        },
-        {
-          name: "Simple Item3",
-          value: "103", // to be used after v2.5.1
-          selected: false
-        }
-      ]
-    }
-  ];
-  public dropdownData: any = [
+  private dropdownBase: Array<any> = [
     {
       hidden: false,
       options: [
         {
-          name: "Alpha Item1",
+          name: "Alpha Item 0",
           value: "101", // to be used after v2.5.1
           selected: false
         },
         {
-          name: "Not Shown Item",
+          name: "Not Shown Item 0",
           value: "999",
           selected: false,
           hidden: true
         },
         {
-          name: "Alpha Item2",
+          name: "Alpha Item 1",
           value: "102",
           selected: false
         },
         {
-          name: "Not Shown Item2",
+          name: "Not Shown Item 1",
           value: "9992",
           selected: false,
           hidden: true
         },
         {
-          name: "Alpha Item3",
+          name: "Alpha Item 2",
           value: "103",
           selected: false
         }
@@ -144,24 +123,37 @@ export class AppComponent implements OnInit {
       name: "Other Stuff",
       options: [
         {
-          name: "Beta Item1",
+          name: "Beta Item 0",
           value: "201",
           selected: false
         },
         {
-          name: "Beta Item2",
+          name: "Beta Item 1",
           value: "202",
           selected: false
         },
         {
-          name: "Beta Item3",
+          name: "Beta Item 2",
           value: "302",
           selected: false
         }
       ]
     }
   ];
-  private dropdownStored: any = [];
+  public dropdownData: Array<any> = [
+    {
+      stored: [],
+      groups: this.dropdownBase
+    },
+    {
+      stored: [],
+      groups: this.dropdownBase
+    },
+    {
+      stored: [],
+      groups: this.dropdownBase
+    }
+  ];
 
   ngOnInit() {
     console.clear();
@@ -174,8 +166,10 @@ export class AppComponent implements OnInit {
         a.text > b.text ? 1 : b.text > a.text ? -1 : 0
       )
     ];
-    this.dropdownData = JSON.stringify(this.dropdownData); // I shouldn't have to stringify but Sandbox is removing JSON formatting for the data
-    this.dropdownDataSimple = JSON.stringify(this.dropdownDataSimple); // I shouldn't have to stringify but Sandbox is removing JSON formatting for the data
+    this.dropdownData.forEach((ddata: any) => {
+      // I shouldn't have to stringify but Sandbox is removing JSON formatting for the data
+      ddata.groups = JSON.stringify(ddata.groups);
+    });
     this.getDelayedData();
 
     const params = new Proxy(new URLSearchParams(window.location.search), {
@@ -184,7 +178,7 @@ export class AppComponent implements OnInit {
     // Get the value of "some_key" in eg "https://example.com/?some_key=some_value"
     let qsShowPage = params.showPage; // "some_value"
     if (qsShowPage) {
-      this.showPage = Number(qsShowPage);
+      this.showPage = qsShowPage;
     }
   }
 
@@ -237,23 +231,43 @@ export class AppComponent implements OnInit {
     this.splitButton2Value = e;
   }
 
-  handleDropdownCleared(e: any) {
-    this.dropdownStored = [];
-  }
+  dropdownHandlers = {
+    clear: (index: number, e: any) => {
+      this.dropdownData[index].stored = [];
+    },
+    select: (index: number, e: any) => {
+      this.dropdownData[index].stored = arrayAdd(
+        this.dropdownData[index].stored,
+        e
+      );
+    },
+    deselect: (index: number, e: any) => {
+      this.dropdownData[index].stored = arrayRemove(
+        this.dropdownData[index].stored,
+        e
+      );
+    },
+    keyUp: (index: number, e: any) => {
+      this.fakeBackendSearch(index, e);
+    },
+    externalUpdate: (e: any) => {
+      const newData = this.dropdownRandomItems(`New Data`, 1, false);
+      this.dropdownData[1].stored = newData.selection;
+      this.dropdownData[1].groups = [
+        {
+          name: `New Data`,
+          options: newData.items
+        }
+      ];
+      this.dropdownData[1].groups = JSON.stringify(this.dropdownData[1].groups);
+    }
+  };
 
-  handleDropdownSelected(e: string) {
-    this.dropdownStored = arrayAdd(this.dropdownStored, e);
-  }
-
-  handleDropdownDeselected(e: string) {
-    this.dropdownStored = arrayRemove(this.dropdownStored, e);
-  }
-
-  handleDropdownKeyUp(e) {
+  fakeBackendSearch = (index, e): any => {
     setTimeout(() => {
       const rememberThese = [];
-      const randomItems = this.dropdownRandomItems(e);
-      this.dropdownStored.forEach((storedOption) => {
+      const randomItems = this.dropdownRandomItems(e, index);
+      this.dropdownData[index].stored.forEach((storedOption) => {
         if (!randomItems.selection.includes(storedOption)) {
           rememberThese.push({
             name: storedOption,
@@ -262,39 +276,26 @@ export class AppComponent implements OnInit {
           });
         }
       });
-      this.dropdownData = [
+      const compiledNewData = [
         {
           name: "Results for " + e,
           options: [...randomItems.items, ...rememberThese]
         }
       ];
-      this.dropdownData = JSON.stringify(this.dropdownData);
+      this.dropdownData[index].groups = JSON.stringify(compiledNewData);
     }, 500);
-  }
+  };
 
-  dropdownAction(instruct: string) {
-    switch (instruct) {
-      case `update`:
-        const newData = this.dropdownRandomItems(`New Data`, false);
-        this.dropdownStored = newData.selection;
-        this.dropdownData = [
-          {
-            name: `New Data`,
-            options: newData.items
-          }
-        ];
-        this.dropdownData = JSON.stringify(this.dropdownData);
-        break;
-    }
-  }
-
-  dropdownRandomItems(rName, noSelected = true) {
+  dropdownRandomItems(rName, index = 0, noSelected = true) {
     const selectedItems = [];
     const randomItems = [];
     for (let i = 0; i < Math.floor(Math.random() * 10) + 3; i++) {
       let selected = noSelected ? false : Math.floor(Math.random() * 2) === 0;
       const itemName = `${rName} Item ${i}`;
-      if (this.dropdownStored.includes(itemName)) {
+      if (!this.dropdownData[index].stored) {
+        this.dropdownData[index].stored = [];
+      }
+      if (this.dropdownData[index].stored.includes(itemName)) {
         selected = true;
       }
       randomItems.push({
