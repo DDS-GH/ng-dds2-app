@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   @ViewChild(SidenavComponent) private sidenavComponent: SidenavComponent;
   @ViewChild(DrawerComponent) private drawerComponent: DrawerComponent;
   @ViewChild(ModalComponent) private modalComponent: ModalComponent;
-  public showPage = `Home`;
+  public showPage = `Dropdown`;
   public selectValue1: Array<string> = [`Loading...`];
   public selectValue2: Array<string> = [`Loading...`];
   public textareaText: string = `You can get my logo from facebook something summery`;
@@ -77,6 +77,10 @@ export class AppComponent implements OnInit {
     {
       icon: `ellipsis`,
       text: `Breadcrumb`
+    },
+    {
+      icon: `tag`,
+      text: `Tag`
     }
   ];
   public checkboxOn: boolean = true;
@@ -270,12 +274,12 @@ export class AppComponent implements OnInit {
 
   dropdownAction(instruct: string) {
     switch (instruct) {
-      case "update":
+      case `update`:
         const newData = this.dropdownRandomItems(`New Data`, false);
         this.dropdownStored = newData.selection;
         this.dropdownData = [
           {
-            name: "New Data",
+            name: `New Data`,
             options: newData.items
           }
         ];

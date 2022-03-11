@@ -118,4 +118,15 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
       this.parseData();
     }
   }
+  deselect(byText: string) {
+    const ddOptions = this.ddsElement.querySelectorAll(
+      `.dds__dropdown__item-option`
+    );
+    for (let i = 0; i < ddOptions.length; i++) {
+      if (ddOptions[i].textContent.trim() === byText.trim()) {
+        ddOptions[i].parentElement.querySelector(`button`).click(); // This will be replaced *after* DDS2 v2.5.1
+        this.optionDeselected.emit(byText.trim());
+      }
+    }
+  }
 }

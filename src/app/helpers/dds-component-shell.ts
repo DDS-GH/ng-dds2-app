@@ -10,9 +10,9 @@ export class DdsComponent implements AfterViewInit {
   @Input() init: string = `now`;
 
   public ddsInitializer: any;
+  public ddsOptions: any;
   public ddsElement: any;
   public ddsComponent: any;
-  public ddsOptions: any;
   public ddsAfterInit: any;
   private observers: Array<any>;
 
