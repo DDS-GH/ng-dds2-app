@@ -21,6 +21,7 @@ import { SelectComponent } from "./components/select/select.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { SidenavItemComponent } from "./components/sidenav/sidenav.item.component";
 import { SidenavMenuComponent } from "./components/sidenav/sidenav.menu.component";
+import { TabsComponent } from "./components/tabs/tabs.component";
 import { TagComponent } from "./components/tag/tag.component";
 import { TextAreaComponent } from "./components/textarea/textarea.component";
 import { TooltipComponent } from "./components/tooltip/tooltip.component";
@@ -45,6 +46,7 @@ import { TooltipComponent } from "./components/tooltip/tooltip.component";
     SidenavComponent,
     SidenavItemComponent,
     SidenavMenuComponent,
+    TabsComponent,
     TagComponent,
     TextAreaComponent,
     TooltipComponent

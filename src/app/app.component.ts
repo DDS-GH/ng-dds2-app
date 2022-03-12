@@ -81,6 +81,10 @@ export class AppComponent implements OnInit {
     {
       icon: `tag`,
       text: `Tag`
+    },
+    {
+      icon: `app-window`,
+      text: `Tabs`
     }
   ];
   public checkboxOn: boolean = true;
@@ -311,5 +315,9 @@ export class AppComponent implements OnInit {
       items: randomItems,
       selection: selectedItems
     };
+  }
+
+  tabsSelect(tabIndex: number) {
+    document.getElementById(`ddsTabs`).Tabs.setActiveTab(tabIndex);
   }
 }
