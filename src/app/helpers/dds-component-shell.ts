@@ -13,7 +13,6 @@ export class DdsComponent implements AfterViewInit {
   public ddsOptions: any;
   public ddsElement: any;
   public ddsComponent: any;
-  public ddsAfterInit: any;
   private observers: Array<any>;
 
   ngAfterViewInit() {
@@ -25,9 +24,6 @@ export class DdsComponent implements AfterViewInit {
     if (this.ddsInitializer) {
       if (this.init === `now`) {
         this.initializeNow();
-        if (this.ddsAfterInit) {
-          this.ddsAfterInit();
-        }
       } else {
         this.initializeLater();
       }
@@ -93,9 +89,6 @@ export class DdsComponent implements AfterViewInit {
         selectr: ddsSel,
         command: (elem: any) => {
           this.ddsComponent = new DDS[ddsCom](elem, this.ddsOptions);
-          if (this.ddsAfterInit) {
-            this.ddsAfterInit();
-          }
         }
       }
     ];

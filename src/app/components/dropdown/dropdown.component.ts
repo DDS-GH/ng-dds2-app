@@ -45,56 +45,53 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
     this.elementId = setElementId(this.elementId);
     this.useBackend = stringToBoolean(this.useBackend);
     this.parseData();
-    this.ddsAfterInit = () => {
-      // this.ddsElement.addEventListener(
-      //   `ddsDropdownSelectionChangeEvent`,
-      //   (e) => {
-      //     this.optionSelected.emit(this.ddsComponent.getValue());
-      //   }
-      // );
-      const dropdownNotice = this.ddsElement.querySelector(
-        `.dds__dropdown__notice`
-      );
-      const dropdownInput = this.ddsElement.querySelector(
-        `.dds__dropdown__input-field`
-      );
-      const dropdownClear = this.ddsElement.querySelector(`.dds__tag`);
-      const handleUpFinal = () => {
-        dropdownNotice.innerText = ``;
-        this.onKeyUp.emit(dropdownInput.value);
-      };
-      const handleDownFinal = (e) => {
-        const ignoredKeys = [`ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`];
-        if (!ignoredKeys.includes(e.key) && this.noOptionsLabel) {
-          dropdownNotice.innerText = this.noOptionsLabel;
-        }
-      };
-      const handleClear = () => {
-        this.optionsCleared.emit(this.ddsComponent.getValue());
-      };
-      const handleKeyUp = debounce(() => handleUpFinal());
-      const handleKeyDown = throttle((e) => handleDownFinal(e));
-      if (this.useBackend) {
-        dropdownInput.addEventListener(`keyup`, handleKeyUp);
-        dropdownInput.addEventListener(`keydown`, handleKeyDown);
-      }
-      if (dropdownClear) {
-        dropdownClear.addEventListener(`click`, handleClear);
-      }
-      this.ddsElement.addEventListener(`click`, (e) => {
-        if (
-          e.target.classList &&
-          e.target.classList.contains(`dds__dropdown__item-option`)
-        ) {
-          if (!stringToBoolean(e.target.getAttribute(`data-selected`))) {
-            this.optionDeselected.emit(e.target.innerText);
-          } else {
-            this.optionSelected.emit(e.target.innerText);
-          }
-        }
-      });
-    };
   }
+
+  ngAfterViewInit() {
+    super.ngAfterViewInit();
+    const dropdownNotice = this.ddsElement.querySelector(
+      `.dds__dropdown__notice`
+    );
+    const dropdownInput = this.ddsElement.querySelector(
+      `.dds__dropdown__input-field`
+    );
+    const dropdownClear = this.ddsElement.querySelector(`.dds__tag`);
+    const handleUpFinal = () => {
+      dropdownNotice.innerText = ``;
+      this.onKeyUp.emit(dropdownInput.value);
+    };
+    const handleDownFinal = (e) => {
+      const ignoredKeys = [`ArrowLeft`, `ArrowRight`, `ArrowUp`, `ArrowDown`];
+      if (!ignoredKeys.includes(e.key) && this.noOptionsLabel) {
+        dropdownNotice.innerText = this.noOptionsLabel;
+      }
+    };
+    const handleClear = () => {
+      this.optionsCleared.emit(this.ddsComponent.getValue());
+    };
+    const handleKeyUp = debounce(() => handleUpFinal());
+    const handleKeyDown = throttle((e) => handleDownFinal(e));
+    if (this.useBackend) {
+      dropdownInput.addEventListener(`keyup`, handleKeyUp);
+      dropdownInput.addEventListener(`keydown`, handleKeyDown);
+    }
+    if (dropdownClear) {
+      dropdownClear.addEventListener(`click`, handleClear);
+    }
+    this.ddsElement.addEventListener(`click`, (e) => {
+      if (
+        e.target.classList &&
+        e.target.classList.contains(`dds__dropdown__item-option`)
+      ) {
+        if (!stringToBoolean(e.target.getAttribute(`data-selected`))) {
+          this.optionDeselected.emit(e.target.innerText);
+        } else {
+          this.optionSelected.emit(e.target.innerText);
+        }
+      }
+    });
+  }
+
   parseData() {
     if (typeof this.groups === `string`) {
       this.groups = this.groups

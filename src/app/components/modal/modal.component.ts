@@ -20,13 +20,15 @@ export class ModalComponent extends DdsComponent {
     this.modalTitleId = `${this.ddsInitializer}-title${Uuid()}`;
     this.modalTriggerId = `${this.ddsInitializer}-trigger${Uuid()}`;
     this.elementId = setElementId(this.elementId);
-    this.ddsAfterInit = () => {
-      this.ddsComponent.element.addEventListener(`click`, (e) => {
-        if (this.backdrop && e.target.getAttribute(`role`) === `dialog`) {
-          this.ddsComponent.close();
-        }
-      });
-    };
+  }
+
+  ngAfterViewInit() {
+    super.ngAfterViewInit();
+    this.ddsComponent.element.addEventListener(`click`, (e) => {
+      if (this.backdrop && e.target.getAttribute(`role`) === `dialog`) {
+        this.ddsComponent.close();
+      }
+    });
   }
 
   openModal = (e: any) => {

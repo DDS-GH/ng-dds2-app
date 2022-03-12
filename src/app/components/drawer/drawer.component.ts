@@ -15,13 +15,15 @@ export class DrawerComponent extends DdsComponent {
   ngOnInit() {
     this.ddsInitializer = `Drawer`;
     this.elementId = setElementId(this.elementId);
-    this.ddsAfterInit = () => {
-      if (this.icon) {
-        this.ddsElement.querySelector(
-          `.dds__drawer__close`
-        ).innerHTML = `<i class="dds__icon dds__icon--${this.icon}"></i>`;
-      }
-    };
+  }
+
+  ngAfterViewInit() {
+    super.ngAfterViewInit();
+    if (this.icon) {
+      this.ddsElement.querySelector(
+        `.dds__drawer__close`
+      ).innerHTML = `<i class="dds__icon dds__icon--${this.icon}"></i>`;
+    }
   }
 
   openDrawer = (e: any) => {
