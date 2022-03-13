@@ -1,23 +1,40 @@
-const foundEls = [];
+const foundEls = []; // keeps a log of elements that are found and initialized, so as not to try reinitializing them
+export interface ObserverDef {
+  selector: String;
+  callback: (elem: any) => void;
+}
 
-const handleFound = (elems, initr) => {
-  elems.forEach((elem) => {
-    if (!foundEls.includes(elem.id)) {
-      foundEls.push(elem.id);
-      initr.command(elem);
+/**
+ * handler to process user-defined callback when element is located in DOM
+ * @param {NodeList} elements - All elements found matching the user-defined selector in "observerDefs"
+ * @return {void}
+ */
+const handleFound = (
+  elements: NodeListOf<HTMLElement>,
+  observerDef: any
+): void => {
+  elements.forEach((element) => {
+    if (!foundEls.includes(element.id)) {
+      foundEls.push(element.id);
+      observerDef.callback(element);
     }
   });
 };
 
-export const createObserver = (waitForElements) => {
+/**
+ * Creates a single-use observer to await the existance of a DOM element
+ * @param {Array<ObserverDef>} observerDefs - an array of elements to await
+ * @return {Array<observer} observers - an array of all MutationObservers created
+ */
+export const createObserver = (observerDefs) => {
   // As assistance for delayed initialization, define an observer to watch for changes
   var observers = [];
-  waitForElements.forEach(function (initr) {
+  observerDefs.forEach(function (obd) {
     observers.push(
       new MutationObserver(function (mutations, me) {
-        var targetElems = document.querySelectorAll(initr.selectr);
+        var targetElems = document.querySelectorAll(obd.selector);
         if (targetElems.length > 0) {
-          handleFound(targetElems, initr);
+          handleFound(targetElems, obd);
           me.disconnect(); // stop observing
           return;
         }

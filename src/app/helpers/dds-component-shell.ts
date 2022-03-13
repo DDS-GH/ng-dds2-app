@@ -1,8 +1,8 @@
 import { Component, AfterViewInit, Input } from "@angular/core";
-import { createObserver, pascalDash } from "./dds-helpers";
+import { createObserver, pascalDash, ObserverDef } from "./dds-helpers";
 
 // import { <Component> } from @dds/components;  You would use this if you were using the node module for DDS
-declare var DDS: any; // Use declare if you import via CDN. Regular Angular (node_modules) usage would be via an import
+declare const DDS: any; // Use declare if you import via CDN. Regular Angular (node_modules) usage would be via an import
 
 @Component({})
 export class DdsComponent implements AfterViewInit {
@@ -84,10 +84,10 @@ export class DdsComponent implements AfterViewInit {
   initializeLater = () => {
     const ddsCom: string = this.parseInitializer(`component`);
     const ddsSel: string = this.parseInitializer(`selector`);
-    var waitForElements = [
+    const waitForElements: Array<ObserverDef> = [
       {
-        selectr: ddsSel,
-        command: (elem: any) => {
+        selector: ddsSel,
+        callback: (elem: any): void => {
           this.ddsComponent = new DDS[ddsCom](elem, this.ddsOptions);
         }
       }
