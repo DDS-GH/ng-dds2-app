@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, Input } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, stringToBoolean } from "../../helpers/dds-helpers";
+import { stringToBoolean } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-tabs`,
@@ -16,8 +16,8 @@ export class TabsComponent extends DdsComponent {
   @Input() class: any;
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `Tabs`;
-    this.elementId = setElementId(this.elementId);
     this.contained = stringToBoolean(this.contained);
     this.selected = Number(this.selected) - 1;
     this.labels = this.labels.split(`,`);

@@ -1,12 +1,6 @@
-import {
-  Component,
-  Input,
-  ViewChild,
-  ElementRef,
-  AfterViewInit
-} from "@angular/core";
+import { Component, Input, ViewChild, ElementRef } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, Uuid, stringToBoolean } from "../../helpers/dds-helpers";
+import { Uuid, stringToBoolean } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-textarea`,
@@ -28,8 +22,8 @@ export class TextAreaComponent extends DdsComponent {
   };
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `TextArea`;
-    this.elementId = setElementId(this.elementId);
     this.textAreaId = `${this.ddsInitializer}-textarea${Uuid()}`;
     this.labelId = `${this.ddsInitializer}-label${Uuid()}`;
     this.helperId = `${this.ddsInitializer}-helper${Uuid()}`;

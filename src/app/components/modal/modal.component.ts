@@ -1,6 +1,6 @@
 import { Component, ElementRef, ViewChild, Input } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, Uuid, stringToBoolean } from "../../helpers/dds-helpers";
+import { Uuid, stringToBoolean } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-modal`,
@@ -15,11 +15,11 @@ export class ModalComponent extends DdsComponent {
   private modalTriggerId: string;
 
   ngOnInit() {
+    super.ngOnInit();
     this.backdrop = stringToBoolean(this.backdrop);
     this.ddsInitializer = `Modal`;
     this.modalTitleId = `${this.ddsInitializer}-title${Uuid()}`;
     this.modalTriggerId = `${this.ddsInitializer}-trigger${Uuid()}`;
-    this.elementId = setElementId(this.elementId);
   }
 
   ngAfterViewInit() {

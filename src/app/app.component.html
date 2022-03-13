@@ -843,6 +843,61 @@
         </div>
       </div>
     </span>
+
+    <span *ngIf="showPage==='TextInput'">
+      <h2>TextInput</h2>
+      <div class="dds__row">
+        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+          <dds-form>
+            <dds-textinput
+              elementId="ddsTextInput"
+              label="Cat Food"
+              placeholder="Supply Cat Food"
+              helper="Small kitty warm kitty little balls of fur"
+              value="Mrrrow"
+            >
+            </dds-textinput>
+            <hr />
+            <dds-textinput
+              elementId="ddsTextInputPassword"
+              type="password"
+              label="Laser Mice"
+              placeholder="Claw your carpet"
+              helper="too hot lasers are tiny mice"
+              feedback="break a planter, eat own hair, hiss, chirp at birds"
+              sr-hide="Show Password"
+              sr-show="Hide Password"
+              hide="Hide"
+              show="Show"
+              minlength="2"
+              maxlength="10"
+              required="true"
+            >
+            </dds-textinput>
+            <hr />
+            <dds-textinput
+              elementId="ddsTextInputTel"
+              type="tel"
+              label="Cat Fone"
+              placeholder="Order Mor Cat Food"
+              helper="then scratch her face for hiiiiiiiiii feed me now"
+              feedback="being petted morning beauty routine of licking self."
+              mask="(999) 999-9999"
+              required="true"
+            >
+            </dds-textinput>
+            <hr />
+            <dds-button
+              elementId="ddsTextInputSubmit"
+              ariaLabel="Submit the Form"
+              type="submit"
+            >
+              Submit
+            </dds-button>
+          </dds-form>
+        </div>
+      </div>
+    </span>
     <!-- end of dds__container -->
   </div>
 </main>

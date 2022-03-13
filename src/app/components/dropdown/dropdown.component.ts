@@ -7,12 +7,7 @@ import {
   SimpleChanges
 } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import {
-  setElementId,
-  debounce,
-  throttle,
-  stringToBoolean
-} from "../../helpers/dds-helpers";
+import { debounce, throttle, stringToBoolean } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-dropdown`,
@@ -35,6 +30,7 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
   @Output() optionsCleared: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `Dropdown`;
     this.ddsOptions = {
       selection: this.selection,
@@ -42,7 +38,6 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
       selectedLabel: this.selectedLabel,
       srClearLabel: this.srClearLabel
     };
-    this.elementId = setElementId(this.elementId);
     this.useBackend = stringToBoolean(this.useBackend);
     this.parseData();
   }

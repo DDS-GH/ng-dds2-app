@@ -1,6 +1,6 @@
 import { Component, Input, AfterViewInit } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, stringToBoolean } from "../../helpers/dds-helpers";
+import { stringToBoolean } from "../../helpers/dds-helpers";
 
 @Component({
   selector: "dds-tag",
@@ -13,8 +13,8 @@ export class TagComponent extends DdsComponent implements AfterViewInit {
   @Input() classList: string = ``;
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `Tag`;
-    this.elementId = setElementId(this.elementId);
     this.dismiss = stringToBoolean(this.dismiss);
     this.ddsOptions = {
       srDismiss: this.aria,

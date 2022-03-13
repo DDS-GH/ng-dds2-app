@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, parseData } from "../../helpers/dds-helpers";
+import { parseData } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-breadcrumb`,
@@ -14,8 +14,8 @@ export class BreadcrumbComponent extends DdsComponent implements OnInit {
   public items: Array<any> = [];
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `Breadcrumb`;
-    this.elementId = setElementId(this.elementId);
     if (this.data) {
       this.data = parseData(this.data);
       this.data.forEach((item: any) => {

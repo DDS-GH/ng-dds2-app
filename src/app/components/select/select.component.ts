@@ -1,6 +1,5 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-select`,
@@ -15,8 +14,8 @@ export class SelectComponent extends DdsComponent {
   private selectedValue: string;
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `Select`;
-    this.elementId = setElementId(this.elementId);
   }
 
   public onChange() {

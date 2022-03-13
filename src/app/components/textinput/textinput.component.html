@@ -1,0 +1,36 @@
+<div class="dds__textinput__content" #content>
+  <ng-content></ng-content>
+</div>
+<div
+  id="{{elementId}}"
+  class="dds__input-text__container"
+  [attr.data-dds]="dataDds"
+>
+  <label id="{{elementId}}-label" for="{{elementId}}-input">{{label}}</label>
+  <ng-container *ngIf="type==='password'">
+    <button type="button" class="dds__input__action dds__input__action--switch">
+      {{show}}
+    </button>
+  </ng-container>
+  <div class="dds__input-text__wrapper">
+    <input
+      type="{{type}}"
+      class="dds__input-text"
+      placeholder="{{placeholder}}"
+      name="{{elementId}}-input"
+      id="{{elementId}}-input"
+      required=""
+      [attr.aria-labelledby]="elementId + '-label' + elementId + '-helper'"
+      value="{{value}}"
+      required="{{required}}"
+      [attr.maxlength]="maxlength"
+      [attr.minlength]="minlength"
+    />
+    <small id="{{elementId}}-helper" class="dds__input-text__helper">
+      {{helper}}
+    </small>
+    <div id="{{elementId}}-feedback" class="dds__invalid-feedback">
+      {{feedback}}
+    </div>
+  </div>
+</div>

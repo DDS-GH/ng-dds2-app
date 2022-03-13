@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, stringToBoolean } from "../../helpers/dds-helpers";
+import { stringToBoolean } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-messagebar`,
@@ -15,9 +15,9 @@ export class MessageBarComponent extends DdsComponent implements OnInit {
   @Input() layout: "contextual" | "global" = "contextual";
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `MessageBar`;
     this.dismissible = stringToBoolean(this.dismissible);
-    this.elementId = setElementId(this.elementId);
     if (!this.icon) {
       switch (this.variant) {
         case "informative":

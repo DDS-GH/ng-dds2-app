@@ -1,11 +1,12 @@
-import { Component, AfterViewInit, Input } from "@angular/core";
+import { Component, AfterViewInit, Input, OnInit } from "@angular/core";
 import { createObserver, pascalDash, ObserverDef } from "./dds-helpers";
+import { setElementId } from "./dds-helpers";
 
 // import { <Component> } from @dds/components;  You would use this if you were using the node module for DDS
 declare const DDS: any; // Use declare if you import via CDN. Regular Angular (node_modules) usage would be via an import
 
 @Component({})
-export class DdsComponent implements AfterViewInit {
+export class DdsComponent implements OnInit, AfterViewInit {
   @Input() elementId: string;
   @Input() init: string = `now`;
 
@@ -14,6 +15,10 @@ export class DdsComponent implements AfterViewInit {
   public ddsElement: any;
   public ddsComponent: any;
   private observers: Array<any>;
+
+  ngOnInit() {
+    this.elementId = setElementId(this.elementId);
+  }
 
   ngAfterViewInit() {
     this.ddsElement = document.getElementById(this.elementId);

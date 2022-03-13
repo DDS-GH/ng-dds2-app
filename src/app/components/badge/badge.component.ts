@@ -1,5 +1,4 @@
 import { Component, Input, AfterViewInit, OnInit } from "@angular/core";
-import { setElementId } from "../../helpers/dds-helpers";
 
 @Component({
   selector: "dds-badge",
@@ -19,7 +18,7 @@ export class BadgeComponent implements OnInit, AfterViewInit {
   };
 
   ngOnInit() {
-    this.elementId = setElementId(this.elementId);
+    super.ngOnInit();
     this.has.icon = this.icon !== ``;
     this.has.value = this.value !== ``;
     this.has.units = this.units !== ``;

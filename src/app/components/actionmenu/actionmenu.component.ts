@@ -7,7 +7,7 @@ import {
   Input
 } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, ddsIcon } from "../../helpers/dds-helpers";
+import { ddsIcon } from "../../helpers/dds-helpers";
 import { MenuService, toState } from "../../helpers/menu.service";
 import { Subscription } from "rxjs";
 
@@ -30,8 +30,8 @@ export class ActionMenuComponent extends DdsComponent
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `ActionMenu`;
-    this.elementId = setElementId(this.elementId);
     this.ddsOptions = {
       alignment: this.alignment
     };

@@ -1,6 +1,5 @@
 import { Component, ElementRef, ViewChild, Input } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-drawer`,
@@ -13,8 +12,8 @@ export class DrawerComponent extends DdsComponent {
   @Input() icon: string;
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `Drawer`;
-    this.elementId = setElementId(this.elementId);
   }
 
   ngAfterViewInit() {

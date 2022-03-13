@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId, stringToBoolean } from "../../helpers/dds-helpers";
+import { stringToBoolean } from "../../helpers/dds-helpers";
 
 @Component({
   selector: "dds-accordion",
@@ -13,8 +13,8 @@ export class AccordionComponent extends DdsComponent implements OnInit, Input {
   private isOpen: boolean;
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `Accordion`;
-    this.elementId = setElementId(this.elementId);
     this.isOpen = stringToBoolean(this.openState);
   }
 }

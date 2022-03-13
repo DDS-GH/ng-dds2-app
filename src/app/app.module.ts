@@ -24,6 +24,7 @@ import { SidenavMenuComponent } from "./components/sidenav/sidenav.menu.componen
 import { TabsComponent } from "./components/tabs/tabs.component";
 import { TagComponent } from "./components/tag/tag.component";
 import { TextAreaComponent } from "./components/textarea/textarea.component";
+import { TextInputComponent } from "./components/textinput/textinput.component";
 import { TooltipComponent } from "./components/tooltip/tooltip.component";
 
 @NgModule({
@@ -49,6 +50,7 @@ import { TooltipComponent } from "./components/tooltip/tooltip.component";
     TabsComponent,
     TagComponent,
     TextAreaComponent,
+    TextInputComponent,
     TooltipComponent
   ],
   imports: [BrowserModule, FormsModule],

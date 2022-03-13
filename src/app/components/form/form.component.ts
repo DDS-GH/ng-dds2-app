@@ -1,6 +1,5 @@
 import { Component, AfterViewInit, Input } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-form`,
@@ -12,10 +11,10 @@ export class FormValidationComponent extends DdsComponent
   @Input() class: string;
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = {
       component: `Form`,
       selector: `form-validation`
     };
-    this.elementId = setElementId(this.elementId);
   }
 }

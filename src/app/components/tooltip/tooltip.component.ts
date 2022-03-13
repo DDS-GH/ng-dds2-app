@@ -1,6 +1,5 @@
 import { Component, Input } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { setElementId } from "../../helpers/dds-helpers";
 
 @Component({
   selector: "dds-tooltip",
@@ -12,8 +11,8 @@ export class TooltipComponent extends DdsComponent {
   @Input() placement: "top" | "right" | "bottom" | "left" = "top";
 
   ngOnInit() {
+    super.ngOnInit();
     this.ddsInitializer = `Tooltip`;
-    this.elementId = setElementId(this.elementId);
     if (!this.icon) {
       this.icon = `alert-info-cir`;
     }
