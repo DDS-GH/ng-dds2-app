@@ -27,6 +27,7 @@ import { TagComponent } from "./components/tag/tag.component";
 import { TextAreaComponent } from "./components/textarea/textarea.component";
 import { TextInputComponent } from "./components/textinput/textinput.component";
 import { TooltipComponent } from "./components/tooltip/tooltip.component";
+import { HeaderComponent } from "./components/header/header.component";
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { TooltipComponent } from "./components/tooltip/tooltip.component";
     DropdownComponent,
     FormValidationComponent,
     IsSelectedDirective,
+    HeaderComponent,
     MessageBarComponent,
     ModalComponent,
     MoreLessComponent,
