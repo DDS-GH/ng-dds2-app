@@ -17,6 +17,7 @@ import { IsSelectedDirective } from "./helpers/isselected.directive";
 import { MenuService } from "./helpers/menu.service";
 import { MessageBarComponent } from "./components/messagebar/messagebar.component";
 import { ModalComponent } from "./components/modal/modal.component";
+import { MoreLessComponent } from "./components/moreless/moreless.component";
 import { SelectComponent } from "./components/select/select.component";
 import { SidenavComponent } from "./components/sidenav/sidenav.component";
 import { SidenavItemComponent } from "./components/sidenav/sidenav.item.component";
@@ -43,6 +44,7 @@ import { TooltipComponent } from "./components/tooltip/tooltip.component";
     IsSelectedDirective,
     MessageBarComponent,
     ModalComponent,
+    MoreLessComponent,
     SelectComponent,
     SidenavComponent,
     SidenavItemComponent,
