@@ -22,6 +22,7 @@ export class TextInputComponent extends DdsComponent {
   @Input() maxlength: string;
   @Input() required: string;
   @Input() mask: string;
+  @Input() button: string;
   public dataDds: string = ``;
 
   ngOnInit() {

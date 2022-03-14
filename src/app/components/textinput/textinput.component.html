@@ -12,7 +12,10 @@
       {{show}}
     </button>
   </ng-container>
-  <div class="dds__input-text__wrapper">
+  <div
+    class="dds__input-text__wrapper"
+    [class.dds__input-text__wrapper--button]="button"
+  >
     <input
       type="{{type}}"
       class="dds__input-text"
@@ -26,6 +29,13 @@
       [attr.maxlength]="maxlength"
       [attr.minlength]="minlength"
     />
+    <button
+      *ngIf="button"
+      class="dds__button dds__button--primary dds__button--lg"
+      type="submit"
+    >
+      {{button}}
+    </button>
     <small id="{{elementId}}-helper" class="dds__input-text__helper">
       {{helper}}
     </small>
