@@ -854,28 +854,29 @@
           <dds-form>
             <dds-textinput
               elementId="ddsTextInput"
-              label="Cat Food"
+              label="Basic"
               placeholder="Supply Cat Food"
               helper="Small kitty warm kitty little balls of fur"
               value="Mrrrow"
             >
             </dds-textinput>
+            <hr />
 
             <dds-textinput
               elementId="ddsTextInput"
-              label="Cat Food"
+              label="with Button"
               placeholder="Supply Cat Food"
               helper="Small kitty warm kitty little balls of fur"
-              value="Mrrrow"
+              value="Hiss"
               button="Purrrr"
             >
             </dds-textinput>
-
             <hr />
+
             <dds-textinput
               elementId="ddsTextInputPassword"
               type="password"
-              label="Laser Mice"
+              label="Password"
               placeholder="Claw your carpet"
               helper="too hot lasers are tiny mice"
               feedback="break a planter, eat own hair, hiss, chirp at birds"
@@ -889,10 +890,11 @@
             >
             </dds-textinput>
             <hr />
+
             <dds-textinput
               elementId="ddsTextInputTel"
               type="tel"
-              label="Cat Fone"
+              label="Phone"
               placeholder="Order Mor Cat Food"
               helper="then scratch her face for hiiiiiiiiii feed me now"
               feedback="being petted morning beauty routine of licking self."
@@ -901,6 +903,18 @@
             >
             </dds-textinput>
             <hr />
+
+            <dds-textinput
+              elementId="ddsTextInputExperiment"
+              label="Icon Button (EXPERIMENT)"
+              placeholder="hanging around eating catnip"
+              helper="Snuggles up to shoulders or knees and purrs you to sleep"
+              icons="close-x, search"
+              (onIconClick)="textInputIconClick($event)"
+            >
+            </dds-textinput>
+            <hr />
+
             <dds-button
               elementId="ddsTextInputSubmit"
               ariaLabel="Submit the Form"

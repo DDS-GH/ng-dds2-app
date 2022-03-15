@@ -1,3 +1,25 @@
 .dds__textinput__content {
   display: none;
 }
+
+.dds__textinput__icon--embedded {
+  font-size: 1.25rem;
+  cursor: pointer;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  height: 1rem;
+  width: 1rem;
+}
+
+.dds__textinput__icon--index1 {
+  right: 3rem;
+}
+
+.dds__textinput__icon--index2 {
+  right: 6rem;
+}
+
+.dds__textinput__icon--index3 {
+  right: 9rem;
+}

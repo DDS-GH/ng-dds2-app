@@ -29,6 +29,13 @@
       [attr.maxlength]="maxlength"
       [attr.minlength]="minlength"
     />
+    <ng-container *ngFor="let icon of iconList; index as i">
+      <i
+        (click)="handleIconClick($event)"
+        [attr.data-type]="icon"
+        class="dds__icon dds__icon--{{icon}} dds__textinput__icon--embedded dds__textinput__icon--index{{i}}"
+      ></i>
+    </ng-container>
     <button
       *ngIf="button"
       class="dds__button dds__button--primary dds__button--lg"

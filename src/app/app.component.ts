@@ -328,4 +328,8 @@ export class AppComponent implements OnInit {
   tabsSelect(tabIndex: number) {
     document.getElementById(`ddsTabs`).Tabs.setActiveTab(tabIndex);
   }
+
+  textInputIconClick(e: any) {
+    console.log(`textInput icon ${e.type}: ${e.value}`);
+  }
 }
