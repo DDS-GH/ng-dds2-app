@@ -854,10 +854,12 @@
           <dds-form>
             <dds-textinput
               elementId="ddsTextInput"
+              iconStart="user"
               label="Basic"
               placeholder="Supply Cat Food"
               helper="Small kitty warm kitty little balls of fur"
               value="Mrrrow"
+              required="true"
             >
             </dds-textinput>
             <hr />
@@ -909,7 +911,8 @@
               label="Icon Button (EXPERIMENT)"
               placeholder="hanging around eating catnip"
               helper="Snuggles up to shoulders or knees and purrs you to sleep"
-              icons="close-x, search"
+              icons="close-x, search, airplane"
+              iconClickable="true"
               (onIconClick)="textInputIconClick($event)"
             >
             </dds-textinput>

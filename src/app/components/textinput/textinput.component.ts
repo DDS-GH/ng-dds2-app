@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
-import { pascalDash } from "../../helpers/dds-helpers";
+import { pascalDash, stringToBoolean } from "../../helpers/dds-helpers";
 
 @Component({
   selector: `dds-textinput`,
@@ -21,15 +21,22 @@ export class TextInputComponent extends DdsComponent {
   @Input() show: string = `Show`;
   @Input() minlength: string;
   @Input() maxlength: string;
-  @Input() required: string;
   @Input() mask: string;
   @Input() button: string;
   @Input() icons: string = ``;
+  @Input() iconStart: string = ``;
+  @Input() iconClickable: any = `false`;
+  @Input() disabled: any = `false`;
+  @Input() required: any = `false`;
+  @Input() optionalText: string = ` (optional)`;
   public dataDds: string = ``;
   public iconList: Array<string> = [];
 
   ngOnInit() {
     super.ngOnInit();
+    this.iconClickable = stringToBoolean(this.iconClickable);
+    this.disabled = stringToBoolean(this.disabled);
+    this.required = stringToBoolean(this.required);
     if (this.icons) {
       this.iconList = this.icons.replace(/ /g, ``).split(`,`);
     }
@@ -55,9 +62,17 @@ export class TextInputComponent extends DdsComponent {
   }
 
   handleIconClick(e: any) {
-    this.onIconClick.emit({
-      type: e.target.getAttribute(`data-type`),
-      value: this.ddsElement.querySelector(`input`).value || undefined
-    });
+    if (this.iconClickable) {
+      this.onIconClick.emit({
+        type: e.target.getAttribute(`data-type`),
+        value: this.ddsElement.querySelector(`input`).value || undefined
+      });
+    }
+  }
+
+  handleIconKeyup(e: any) {
+    if (e.key === `Enter`) {
+      this.handleIconClick(e);
+    }
   }
 }
