@@ -628,7 +628,7 @@
         <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
           <ng-container *ngFor="let tag of dropdownData[1].stored">
             <dds-tag (click)="multipleDropdown.deselect(tag)">
-              {{tag}}
+              {{tag.text}}
             </dds-tag>
           </ng-container>
         </div>
@@ -669,7 +669,7 @@
         <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
           <ng-container *ngFor="let tag of dropdownData[2].stored">
             <dds-tag (click)="otherDropdown.deselect(tag)">
-              {{tag}}
+              {{tag.text}}
             </dds-tag>
           </ng-container>
         </div>
