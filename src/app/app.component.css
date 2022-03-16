@@ -1,3 +1,21 @@
+.dds__template--productivity > footer,
+.dds__template--productivity > header {
+  border: 1px dashed #000;
+}
+.dds__template--productivity > footer,
+.dds__template--productivity > header,
+.dds__template--productivity > main {
+  padding: 1rem;
+}
+
+nav {
+  padding-top: 58px;
+}
+
+main {
+  padding-top: 6rem;
+}
+
 .boxH3 {
   text-align: right;
 }
@@ -5,6 +23,11 @@
 .boxH4 {
   margin-top: 2rem;
   border-bottom: 2px dashed gray;
+}
+
+::ng-deep.boxHeaderClass {
+  background-color: white;
+  border-bottom: 2px solid lightgray;
 }
 
 .page-content {

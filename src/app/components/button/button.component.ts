@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit } from "@angular/core";
+import { Component, Input } from "@angular/core";
 import { DdsComponent } from "../../helpers/dds-component-shell";
 
 @Component({
@@ -6,7 +6,7 @@ import { DdsComponent } from "../../helpers/dds-component-shell";
   templateUrl: "./button.component.html",
   styleUrls: ["./button.component.scss"]
 })
-export class ButtonComponent extends DdsComponent implements AfterViewInit {
+export class ButtonComponent extends DdsComponent {
   @Input() elementId: string;
   @Input() ariaLabel: string;
   @Input() action: string;
