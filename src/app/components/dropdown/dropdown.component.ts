@@ -24,9 +24,9 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
   @Input() useBackend: any = `false`;
   @Input() onKeyUp: any;
   @Input() selection: string = `single`;
-  @Output() optionSelected: EventEmitter<string> = new EventEmitter<string>();
   @Output() onKeyUp: EventEmitter<string> = new EventEmitter<string>();
-  @Output() optionDeselected: EventEmitter<string> = new EventEmitter<string>();
+  @Output() optionSelected: EventEmitter<object> = new EventEmitter<object>();
+  @Output() optionDeselected: EventEmitter<object> = new EventEmitter<object>();
   @Output() optionsCleared: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit() {
@@ -78,10 +78,14 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
         e.target.classList &&
         e.target.classList.contains(`dds__dropdown__item-option`)
       ) {
+        const valueToSubmit = {
+          value: e.target.getAttribute("data-value"),
+          text: e.target.innerText
+        };
         if (!stringToBoolean(e.target.getAttribute(`data-selected`))) {
-          this.optionDeselected.emit(e.target.innerText);
+          this.optionDeselected.emit(valueToSubmit);
         } else {
-          this.optionSelected.emit(e.target.innerText);
+          this.optionSelected.emit(valueToSubmit);
         }
       }
     });
@@ -111,15 +115,15 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
       this.parseData();
     }
   }
-  deselect(byText: string) {
-    const ddOptions = this.ddsElement.querySelectorAll(
-      `.dds__dropdown__item-option`
-    );
-    for (let i = 0; i < ddOptions.length; i++) {
-      if (ddOptions[i].textContent.trim() === byText.trim()) {
-        ddOptions[i].parentElement.querySelector(`button`).click(); // This will be replaced *after* DDS2 v2.5.1
-        this.optionDeselected.emit(byText.trim());
+  deselect(removalValue: any) {
+    try {
+      if (typeof removalValue === `string`) {
+        this.ddsComponent.deselectOption(removalValue.trim());
+      } else {
+        this.ddsComponent.deselectOption(removalValue.value.trim());
       }
+    } catch (e) {
+      console.log(e, removalValue);
     }
   }
 }

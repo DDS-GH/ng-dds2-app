@@ -131,15 +131,33 @@ export const throttle = (func: any, timeout = 500) => {
   };
 };
 
-export const arrayRemove = (arr, value) => {
-  return arr.filter(function (ele) {
-    return ele !== value;
-  });
+export const arrayRemove = (arr: Array<any>, value: any, key: string) => {
+  if (typeof value === `string`) {
+    // search by string value to remove
+    return arr.filter(function (ele) {
+      return ele !== value;
+    });
+  } else {
+    // remove by object property
+    for (var i = arr.length - 1; i >= 0; --i) {
+      if (arr[i][key] === value) {
+        arr.splice(i, 1);
+      }
+    }
+  }
 };
 
-export const arrayAdd = (arr, value) => {
-  if (arr.includes && !arr.includes(value)) {
-    arr.push(value);
+export const arrayAdd = (arr: Array<any>, value: any, key: string) => {
+  if (typeof value === `string`) {
+    // search by string value to find if exists
+    if (arr.includes && !arr.includes(value)) {
+      arr.push(value);
+    }
+  } else {
+    // search by object property to find if exists
+    if (!arr.find((i) => i[key] === value)) {
+      arr.push(value);
+    }
   }
   return arr;
 };

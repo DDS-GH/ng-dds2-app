@@ -927,7 +927,7 @@
         <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
           <ng-container *ngFor="let tag of dropdownData[1].stored">
             <dds-tag (click)="multipleDropdown.deselect(tag)">
-              {{tag}}
+              {{tag.text}}
             </dds-tag>
           </ng-container>
         </div>
@@ -968,7 +968,7 @@
         <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
           <ng-container *ngFor="let tag of dropdownData[2].stored">
             <dds-tag (click)="otherDropdown.deselect(tag)">
-              {{tag}}
+              {{tag.text}}
             </dds-tag>
           </ng-container>
         </div>
@@ -1153,28 +1153,31 @@
           <dds-form>
             <dds-textinput
               elementId="ddsTextInput"
-              label="Cat Food"
+              iconStart="user"
+              label="Basic"
               placeholder="Supply Cat Food"
               helper="Small kitty warm kitty little balls of fur"
               value="Mrrrow"
+              required="true"
             >
             </dds-textinput>
+            <hr />
 
             <dds-textinput
               elementId="ddsTextInput"
-              label="Cat Food"
+              label="with Button"
               placeholder="Supply Cat Food"
               helper="Small kitty warm kitty little balls of fur"
-              value="Mrrrow"
+              value="Hiss"
               button="Purrrr"
             >
             </dds-textinput>
-
             <hr />
+
             <dds-textinput
               elementId="ddsTextInputPassword"
               type="password"
-              label="Laser Mice"
+              label="Password"
               placeholder="Claw your carpet"
               helper="too hot lasers are tiny mice"
               feedback="break a planter, eat own hair, hiss, chirp at birds"
@@ -1188,10 +1191,11 @@
             >
             </dds-textinput>
             <hr />
+
             <dds-textinput
               elementId="ddsTextInputTel"
               type="tel"
-              label="Cat Fone"
+              label="Phone"
               placeholder="Order Mor Cat Food"
               helper="then scratch her face for hiiiiiiiiii feed me now"
               feedback="being petted morning beauty routine of licking self."
@@ -1200,6 +1204,19 @@
             >
             </dds-textinput>
             <hr />
+
+            <dds-textinput
+              elementId="ddsTextInputExperiment"
+              label="Icon Button (EXPERIMENT)"
+              placeholder="hanging around eating catnip"
+              helper="Snuggles up to shoulders or knees and purrs you to sleep"
+              icons="close-x, search, airplane"
+              iconClickable="true"
+              (onIconClick)="textInputIconClick($event)"
+            >
+            </dds-textinput>
+            <hr />
+
             <dds-button
               elementId="ddsTextInputSubmit"
               ariaLabel="Submit the Form"
