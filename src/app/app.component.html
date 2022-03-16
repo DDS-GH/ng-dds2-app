@@ -1,1044 +1,1075 @@
-<app-header elementId="appHeader" classes="boxHeaderClass">
-  <!-- not a DDS-supported component -->
-  <h1>DDS2 Ng</h1>
-  <sub style="padding-top: 2rem;">
-    This Sandbox uses a modified
-    <a
-      target="blank"
-      href="https://vanilla.delldesignsystem.com/2.5.1/index.html?path=/story/examples-templates-productivity--page"
-      >Productivity Template</a
-    >
-  </sub>
-</app-header>
-<nav>
-  <dds-sidenav fixed="false" init="later">
-    <dds-sidenav-item
-      *ngFor="let item of menuItems; index as i;"
-      selected="{{showPage===item.text}}"
-      icon="{{item.icon}}"
-    >
-      <span (click)="sidenavItemClick(item.text)">
-        {{item.text}}
+<div class="dds__template--productivity">
+  <app-header elementId="appHeader" classes="boxHeaderClass">
+    <!-- not a DDS-supported component -->
+    <h1>DDS2 Ng</h1>
+    <sub style="padding-top: 2rem;">
+      This Sandbox uses a modified
+      <a
+        target="blank"
+        href="https://vanilla.delldesignsystem.com/2.5.1/index.html?path=/story/examples-templates-productivity--page"
+        >Productivity Template</a
+      >
+    </sub>
+  </app-header>
+  <nav>
+    <dds-sidenav fixed="false" init="later">
+      <dds-sidenav-item
+        *ngFor="let item of menuItems; index as i;"
+        selected="{{showPage===item.text}}"
+        icon="{{item.icon}}"
+      >
+        <span (click)="sidenavItemClick(item.text)">
+          {{item.text}}
+        </span>
+      </dds-sidenav-item>
+      <dds-sidenav-menu icon="game-controller" open="true" name="Fun Stuff">
+        <dds-sidenav-item link="https://gather.town/">
+          Gather Town
+        </dds-sidenav-item>
+        <dds-sidenav-item link="https://gettoby.com">
+          Toby Bookmark Start Page
+        </dds-sidenav-item>
+      </dds-sidenav-menu>
+    </dds-sidenav>
+  </nav>
+  <main>
+    <div class="dds__container">
+      <span *ngIf="showPage==='Home'">
+        <h2>README</h2>
+        <h3 class="boxH3">Disclaimer</h3>
+        <p>
+          This sandbox is version-controlled, and has been created as a result
+          of demand, as well as in response to tickets filed for solving
+          specific problems. There are occasionally oddities, and experiments
+          shown that can and in some instances should be ignored. Please
+          <a
+            target="blank"
+            href="https://forms.office.com/Pages/ResponsePage.aspx?id=mhlclKKDgE6fjFqRvldS3Tu72-e1EktEmC896wPSUmFUOUcwSE9NMVBLQkVONzk1SUVZNllWMUtMWiQlQCN0PWcu"
+            >contact</a
+          >
+          the DDS2 Support and Automation team for further information.
+        </p>
+        <h3 class="boxH3">Notes</h3>
+        <h4 class="boxH4">Sidenav Links</h4>
+        <p>
+          This sandbox does not, as of this writing, use routing, and as a
+          side-effect of that, the sidenav Links aren't working quite right; you
+          have to click directly on the text of the links because link values
+          are not being supplied to the DDS component, but instead (click)
+          events are being acted upon in this app.
+          <b>The links shown in "Fun Stuff" show proper link usage.</b>
+        </p>
+        <h4 class="boxH4">Shell Inheritance</h4>
+        <p>
+          All wrapping components inherit from
+          <i>helpers/dds-component.shell.ts</i> This inheritance is pretty good,
+          but can probably be made better, because using AfterViewInit inside
+          one of the inherting components cancels out the parent's.
+        </p>
+        <h4 class="boxH4">Initialization Timing</h4>
+        <p>
+          The component shell normally initializes the DDS component within the
+          AfterViewInit life cycle stage. However if you add the
+          <i>init</i> property to any of the components' instances, it will
+          initialize AFTER that step, whenever the DDS component is found in the
+          DOM.
+        </p>
       </span>
-    </dds-sidenav-item>
-    <dds-sidenav-menu icon="game-controller" open="true" name="Fun Stuff">
-      <dds-sidenav-item link="https://gather.town/">
-        Gather Town
-      </dds-sidenav-item>
-      <dds-sidenav-item link="https://gettoby.com">
-        Toby Bookmark Start Page
-      </dds-sidenav-item>
-    </dds-sidenav-menu>
-  </dds-sidenav>
-</nav>
-<main>
-  <div class="dds__container">
-    <span *ngIf="showPage==='Home'">
-      <h2>README</h2>
-      <h3 class="boxH3">Disclaimer</h3>
-      <p>
-        This sandbox is version-controlled, and has been created as a result of
-        demand, as well as in response to tickets filed for solving specific
-        problems. There are occasionally oddities, and experiments shown that
-        can and in some instances should be ignored. Please
-        <a
-          target="blank"
-          href="https://forms.office.com/Pages/ResponsePage.aspx?id=mhlclKKDgE6fjFqRvldS3Tu72-e1EktEmC896wPSUmFUOUcwSE9NMVBLQkVONzk1SUVZNllWMUtMWiQlQCN0PWcu"
-          >contact</a
-        >
-        the DDS2 Support and Automation team for further information.
-      </p>
-      <h3 class="boxH3">Notes</h3>
-      <h4 class="boxH4">Sidenav Links</h4>
-      <p>
-        This sandbox does not, as of this writing, use routing, and as a
-        side-effect of that, the sidenav Links aren't working quite right; you
-        have to click directly on the text of the links because link values are
-        not being supplied to the DDS component, but instead (click) events are
-        being acted upon in this app.
-        <b>The links shown in "Fun Stuff" show proper link usage.</b>
-      </p>
-      <h4 class="boxH4">Shell Inheritance</h4>
-      <p>
-        All wrapping components inherit from
-        <i>helpers/dds-component.shell.ts</i> This inheritance is pretty good,
-        but can probably be made better, because using AfterViewInit inside one
-        of the inherting components cancels out the parent's.
-      </p>
-      <h4 class="boxH4">Initialization Timing</h4>
-      <p>
-        The component shell normally initializes the DDS component within the
-        AfterViewInit life cycle stage. However if you add the
-        <i>init</i> property to any of the components' instances, it will
-        initialize AFTER that step, whenever the DDS component is found in the
-        DOM.
-      </p>
-    </span>
 
-    <span *ngIf="showPage==='Sidenav'">
-      <h2>Sidenav</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <button class="dds__button" (click)="collapseSidenav($event)">
-            Collapse Sidenav
-          </button>
-        </div>
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <button class="dds__button" (click)="expandSidenav($event)">
-            Expand Sidenav
-          </button>
-        </div>
-      </div>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <p>
-            Monterey jack edam dolcelatte. Everyone loves airedale roquefort
-            monterey jack camembert de normandie goat cheese and biscuits
-            cheeseburger. Cream cheese cheeseburger blue castello lancashire
-            croque monsieur cauliflower cheese st. agur blue cheese queso.
-            Caerphilly cheese slices boursin babybel mozzarella blue castello
-            parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
-            squirty cheese.
-          </p>
-          <p>
-            When the cheese comes out everybody's happy st. agur blue cheese
-            goat. Cheddar cream cheese boursin queso bocconcini babybel
-            jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
-            loves cheesy feet edam feta brie. Stinking bishop melted cheese
-            parmesan danish fontina blue castello cut the cheese croque monsieur
-            pecorino. Camembert de normandie everyone loves roquefort.
-          </p>
-          <p>
-            Airedale goat manchego. Cheesy grin edam caerphilly lancashire
-            pecorino stilton edam hard cheese. Stilton say cheese halloumi
-            everyone loves st. agur blue cheese lancashire emmental cheese
-            triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
-            cut the cheese cheesy grin.
-          </p>
-          <p>
-            Croque monsieur cheese on toast manchego. Rubber cheese the big
-            cheese fromage frais cheesy grin boursin fondue cheese slices
-            jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
-            fromage bavarian bergkase. Stilton cream cheese.
-          </p>
-          <p>
-            Camembert de normandie the big cheese gouda. Babybel pepper jack
-            brie everyone loves cheese on toast cheese and wine pepper jack
-            roquefort. Camembert de normandie feta boursin stilton jarlsberg
-            dolcelatte croque monsieur cheese and wine. Lancashire paneer danish
-            fontina cheddar cheesy feet hard cheese.
-          </p>
-          <p>
-            Monterey jack edam dolcelatte. Everyone loves airedale roquefort
-            monterey jack camembert de normandie goat cheese and biscuits
-            cheeseburger. Cream cheese cheeseburger blue castello lancashire
-            croque monsieur cauliflower cheese st. agur blue cheese queso.
-            Caerphilly cheese slices boursin babybel mozzarella blue castello
-            parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
-            squirty cheese.
-          </p>
-          <p>
-            When the cheese comes out everybody's happy st. agur blue cheese
-            goat. Cheddar cream cheese boursin queso bocconcini babybel
-            jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
-            loves cheesy feet edam feta brie. Stinking bishop melted cheese
-            parmesan danish fontina blue castello cut the cheese croque monsieur
-            pecorino. Camembert de normandie everyone loves roquefort.
-          </p>
-          <p>
-            Airedale goat manchego. Cheesy grin edam caerphilly lancashire
-            pecorino stilton edam hard cheese. Stilton say cheese halloumi
-            everyone loves st. agur blue cheese lancashire emmental cheese
-            triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
-            cut the cheese cheesy grin.
-          </p>
-          <p>
-            Croque monsieur cheese on toast manchego. Rubber cheese the big
-            cheese fromage frais cheesy grin boursin fondue cheese slices
-            jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
-            fromage bavarian bergkase. Stilton cream cheese.
-          </p>
-          <p>
-            Camembert de normandie the big cheese gouda. Babybel pepper jack
-            brie everyone loves cheese on toast cheese and wine pepper jack
-            roquefort. Camembert de normandie feta boursin stilton jarlsberg
-            dolcelatte croque monsieur cheese and wine. Lancashire paneer danish
-            fontina cheddar cheesy feet hard cheese.
-          </p>
-          <p>
-            Monterey jack edam dolcelatte. Everyone loves airedale roquefort
-            monterey jack camembert de normandie goat cheese and biscuits
-            cheeseburger. Cream cheese cheeseburger blue castello lancashire
-            croque monsieur cauliflower cheese st. agur blue cheese queso.
-            Caerphilly cheese slices boursin babybel mozzarella blue castello
-            parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
-            squirty cheese.
-          </p>
-          <p>
-            When the cheese comes out everybody's happy st. agur blue cheese
-            goat. Cheddar cream cheese boursin queso bocconcini babybel
-            jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
-            loves cheesy feet edam feta brie. Stinking bishop melted cheese
-            parmesan danish fontina blue castello cut the cheese croque monsieur
-            pecorino. Camembert de normandie everyone loves roquefort.
-          </p>
-          <p>
-            Airedale goat manchego. Cheesy grin edam caerphilly lancashire
-            pecorino stilton edam hard cheese. Stilton say cheese halloumi
-            everyone loves st. agur blue cheese lancashire emmental cheese
-            triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
-            cut the cheese cheesy grin.
-          </p>
-          <p>
-            Croque monsieur cheese on toast manchego. Rubber cheese the big
-            cheese fromage frais cheesy grin boursin fondue cheese slices
-            jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
-            fromage bavarian bergkase. Stilton cream cheese.
-          </p>
-          <p>
-            Camembert de normandie the big cheese gouda. Babybel pepper jack
-            brie everyone loves cheese on toast cheese and wine pepper jack
-            roquefort. Camembert de normandie feta boursin stilton jarlsberg
-            dolcelatte croque monsieur cheese and wine. Lancashire paneer danish
-            fontina cheddar cheesy feet hard cheese.
-          </p>
-          <p>
-            Monterey jack edam dolcelatte. Everyone loves airedale roquefort
-            monterey jack camembert de normandie goat cheese and biscuits
-            cheeseburger. Cream cheese cheeseburger blue castello lancashire
-            croque monsieur cauliflower cheese st. agur blue cheese queso.
-            Caerphilly cheese slices boursin babybel mozzarella blue castello
-            parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
-            squirty cheese.
-          </p>
-          <p>
-            When the cheese comes out everybody's happy st. agur blue cheese
-            goat. Cheddar cream cheese boursin queso bocconcini babybel
-            jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
-            loves cheesy feet edam feta brie. Stinking bishop melted cheese
-            parmesan danish fontina blue castello cut the cheese croque monsieur
-            pecorino. Camembert de normandie everyone loves roquefort.
-          </p>
-          <p>
-            Airedale goat manchego. Cheesy grin edam caerphilly lancashire
-            pecorino stilton edam hard cheese. Stilton say cheese halloumi
-            everyone loves st. agur blue cheese lancashire emmental cheese
-            triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
-            cut the cheese cheesy grin.
-          </p>
-          <p>
-            Croque monsieur cheese on toast manchego. Rubber cheese the big
-            cheese fromage frais cheesy grin boursin fondue cheese slices
-            jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
-            fromage bavarian bergkase. Stilton cream cheese.
-          </p>
-          <p>
-            Camembert de normandie the big cheese gouda. Babybel pepper jack
-            brie everyone loves cheese on toast cheese and wine pepper jack
-            roquefort. Camembert de normandie feta boursin stilton jarlsberg
-            dolcelatte croque monsieur cheese and wine. Lancashire paneer danish
-            fontina cheddar cheesy feet hard cheese.
-          </p>
-          <p>
-            Monterey jack edam dolcelatte. Everyone loves airedale roquefort
-            monterey jack camembert de normandie goat cheese and biscuits
-            cheeseburger. Cream cheese cheeseburger blue castello lancashire
-            croque monsieur cauliflower cheese st. agur blue cheese queso.
-            Caerphilly cheese slices boursin babybel mozzarella blue castello
-            parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
-            squirty cheese.
-          </p>
-          <p>
-            When the cheese comes out everybody's happy st. agur blue cheese
-            goat. Cheddar cream cheese boursin queso bocconcini babybel
-            jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
-            loves cheesy feet edam feta brie. Stinking bishop melted cheese
-            parmesan danish fontina blue castello cut the cheese croque monsieur
-            pecorino. Camembert de normandie everyone loves roquefort.
-          </p>
-          <p>
-            Airedale goat manchego. Cheesy grin edam caerphilly lancashire
-            pecorino stilton edam hard cheese. Stilton say cheese halloumi
-            everyone loves st. agur blue cheese lancashire emmental cheese
-            triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
-            cut the cheese cheesy grin.
-          </p>
-          <p>
-            Croque monsieur cheese on toast manchego. Rubber cheese the big
-            cheese fromage frais cheesy grin boursin fondue cheese slices
-            jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
-            fromage bavarian bergkase. Stilton cream cheese.
-          </p>
-          <p>
-            Camembert de normandie the big cheese gouda. Babybel pepper jack
-            brie everyone loves cheese on toast cheese and wine pepper jack
-            roquefort. Camembert de normandie feta boursin stilton jarlsberg
-            dolcelatte croque monsieur cheese and wine. Lancashire paneer danish
-            fontina cheddar cheesy feet hard cheese.
-          </p>
-          <p>
-            Monterey jack edam dolcelatte. Everyone loves airedale roquefort
-            monterey jack camembert de normandie goat cheese and biscuits
-            cheeseburger. Cream cheese cheeseburger blue castello lancashire
-            croque monsieur cauliflower cheese st. agur blue cheese queso.
-            Caerphilly cheese slices boursin babybel mozzarella blue castello
-            parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
-            squirty cheese.
-          </p>
-          <p>
-            When the cheese comes out everybody's happy st. agur blue cheese
-            goat. Cheddar cream cheese boursin queso bocconcini babybel
-            jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
-            loves cheesy feet edam feta brie. Stinking bishop melted cheese
-            parmesan danish fontina blue castello cut the cheese croque monsieur
-            pecorino. Camembert de normandie everyone loves roquefort.
-          </p>
-          <p>
-            Airedale goat manchego. Cheesy grin edam caerphilly lancashire
-            pecorino stilton edam hard cheese. Stilton say cheese halloumi
-            everyone loves st. agur blue cheese lancashire emmental cheese
-            triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
-            cut the cheese cheesy grin.
-          </p>
-          <p>
-            Croque monsieur cheese on toast manchego. Rubber cheese the big
-            cheese fromage frais cheesy grin boursin fondue cheese slices
-            jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
-            fromage bavarian bergkase. Stilton cream cheese.
-          </p>
-          <p>
-            Camembert de normandie the big cheese gouda. Babybel pepper jack
-            brie everyone loves cheese on toast cheese and wine pepper jack
-            roquefort. Camembert de normandie feta boursin stilton jarlsberg
-            dolcelatte croque monsieur cheese and wine. Lancashire paneer danish
-            fontina cheddar cheesy feet hard cheese.
-          </p>
-          <p>
-            Monterey jack edam dolcelatte. Everyone loves airedale roquefort
-            monterey jack camembert de normandie goat cheese and biscuits
-            cheeseburger. Cream cheese cheeseburger blue castello lancashire
-            croque monsieur cauliflower cheese st. agur blue cheese queso.
-            Caerphilly cheese slices boursin babybel mozzarella blue castello
-            parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
-            squirty cheese.
-          </p>
-          <p>
-            When the cheese comes out everybody's happy st. agur blue cheese
-            goat. Cheddar cream cheese boursin queso bocconcini babybel
-            jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
-            loves cheesy feet edam feta brie. Stinking bishop melted cheese
-            parmesan danish fontina blue castello cut the cheese croque monsieur
-            pecorino. Camembert de normandie everyone loves roquefort.
-          </p>
-          <p>
-            Airedale goat manchego. Cheesy grin edam caerphilly lancashire
-            pecorino stilton edam hard cheese. Stilton say cheese halloumi
-            everyone loves st. agur blue cheese lancashire emmental cheese
-            triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
-            cut the cheese cheesy grin.
-          </p>
-          <p>
-            Croque monsieur cheese on toast manchego. Rubber cheese the big
-            cheese fromage frais cheesy grin boursin fondue cheese slices
-            jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
-            fromage bavarian bergkase. Stilton cream cheese.
-          </p>
-          <p>
-            Camembert de normandie the big cheese gouda. Babybel pepper jack
-            brie everyone loves cheese on toast cheese and wine pepper jack
-            roquefort. Camembert de normandie feta boursin stilton jarlsberg
-            dolcelatte croque monsieur cheese and wine. Lancashire paneer danish
-            fontina cheddar cheesy feet hard cheese.
-          </p>
-          <p>
-            Monterey jack edam dolcelatte. Everyone loves airedale roquefort
-            monterey jack camembert de normandie goat cheese and biscuits
-            cheeseburger. Cream cheese cheeseburger blue castello lancashire
-            croque monsieur cauliflower cheese st. agur blue cheese queso.
-            Caerphilly cheese slices boursin babybel mozzarella blue castello
-            parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
-            squirty cheese.
-          </p>
-          <p>
-            When the cheese comes out everybody's happy st. agur blue cheese
-            goat. Cheddar cream cheese boursin queso bocconcini babybel
-            jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
-            loves cheesy feet edam feta brie. Stinking bishop melted cheese
-            parmesan danish fontina blue castello cut the cheese croque monsieur
-            pecorino. Camembert de normandie everyone loves roquefort.
-          </p>
-          <p>
-            Airedale goat manchego. Cheesy grin edam caerphilly lancashire
-            pecorino stilton edam hard cheese. Stilton say cheese halloumi
-            everyone loves st. agur blue cheese lancashire emmental cheese
-            triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
-            cut the cheese cheesy grin.
-          </p>
-          <p>
-            Croque monsieur cheese on toast manchego. Rubber cheese the big
-            cheese fromage frais cheesy grin boursin fondue cheese slices
-            jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
-            fromage bavarian bergkase. Stilton cream cheese.
-          </p>
-          <p>
-            Camembert de normandie the big cheese gouda. Babybel pepper jack
-            brie everyone loves cheese on toast cheese and wine pepper jack
-            roquefort. Camembert de normandie feta boursin stilton jarlsberg
-            dolcelatte croque monsieur cheese and wine. Lancashire paneer danish
-            fontina cheddar cheesy feet hard cheese.
-          </p>
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='Radio'">
-      <h2>Radio Buttons</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <fieldset required="true" class="dds__fieldset dds__fieldset--lg">
-            <legend>Select service</legend>
-            <div class="dds__radio-button">
-              <input
-                class="dds__radio-button__input"
-                type="radio"
-                name="services"
-                id="radio-button-input-1"
-                value="Apex"
-              />
-              <label class="dds__radio-button__label" for="radio-button-input-1"
-                >Apex</label
-              >
-            </div>
-            <div class="dds__radio-button">
-              <input
-                class="dds__radio-button__input"
-                type="radio"
-                name="services"
-                id="radio-button-input-2"
-                value="Multi Cloud"
-              />
-              <label class="dds__radio-button__label" for="radio-button-input-2"
-                >Multi Cloud</label
-              >
-            </div>
-            <div class="dds__radio-button">
-              <input
-                class="dds__radio-button__input"
-                type="radio"
-                name="services"
-                id="radio-button-input-3"
-                value="Cloud Solutions"
-              />
-              <label class="dds__radio-button__label" for="radio-button-input-3"
-                >Cloud Solutions</label
-              >
-            </div>
-            <div class="dds__radio-button">
-              <input
-                class="dds__radio-button__input"
-                type="radio"
-                name="services"
-                id="radio-button-input-4"
-                value="Energy"
-              />
-              <label class="dds__radio-button__label" for="radio-button-input-4"
-                >Energy</label
-              >
-            </div>
-          </fieldset>
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='Checkbox'">
-      <h2>Checkbox</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <p>
-            Don't forget in Angular to add the FormsModule to your app module,
-            in order to use 2-way binding
-          </p>
-          <div class="dds__checkbox">
-            <label class="dds__checkbox__label" for="checkbox-input-0">
-              <input
-                type="checkbox"
-                tabindex="0"
-                id="checkbox-input-0"
-                name="example-checkbox"
-                class="dds__checkbox__input"
-                [(ngModel)]="checkboxOn"
-              />
-              <span>Dell UltraSharp</span>
-            </label>
+      <span *ngIf="showPage==='Sidenav'">
+        <h2>Sidenav</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <button class="dds__button" (click)="collapseSidenav($event)">
+              Collapse Sidenav
+            </button>
           </div>
-          {{checkboxOn}}
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='TextArea'">
-      <h2>TextArea</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <dds-form class="bumble">
-            <dds-textarea isRequired="true" maxLength="51">
-              <div label-text>
-                Extra mocha froth aromatic macchiato irish coffee
-              </div>
-              <div default-text>{{textareaText}}</div>
-              <div helper-text>
-                DIY whatever synth tbh disrupt
-              </div>
-              <div error-text>
-                Dummy text? More like dummy thicc text, amirite?
-              </div>
-              <div screen-reader-text>
-                I'm your older brother, Mike, and I was stepped over! Never let
-                anyone know what you are thinking. You talk about vengeance. Is
-                vengeance going to bring your son back to you? Or my boy to me?
-                I am sorry. What happened to your father was business. I have
-                much respect for your father. But your father, his thinking is
-                old-fashioned. You must understand why I had to do that. Now
-                let's work through where we go from here.
-              </div>
-            </dds-textarea>
-          </dds-form>
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='Modal'">
-      <h2>Modal</h2>
-      <div class="dds__row">
-        <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          This Angular wrapper has an option for <i>backdrop</i> that is outside
-          of the DDS Design standard.
-        </div>
-      </div>
-      <div class="dds__row">
-        <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <button
-            role="button"
-            class="dds__button dds__button--primary"
-            (click)="openModal($event)"
-          >
-            External Open
-          </button>
-        </div>
-        <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <dds-modal elementId="fromageId" backdrop="true">
-            <div modal-title>Saveur de fromage</div>
-            <div modal-body>
-              Queso when the cheese comes out everybody's happy jarlsberg.
-              Roquefort cheesecake cheddar cheese and wine cheeseburger
-              caerphilly queso cheesy feet. Lancashire taleggio melted cheese
-              who moved my cheese blue castello pecorino.
-            </div>
-            <div modal-footer>
-              <button
-                class="dds__button dds__button--secondary"
-                data-dismiss="dds__modal"
-              >
-                Non
-              </button>
-              <button class="dds__button dds__button--primary">
-                Oui
-              </button>
-            </div>
-            <span modal-trigger>
-              <button role="button" class="dds__button dds__button--primary">
-                Internal Open
-              </button>
-              &nbsp;
-            </span>
-          </dds-modal>
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='Select'">
-      <h2>Select</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <dds-select
-            label="Select Movie"
-            [(selectOptions)]="selectValue1"
-            [defaultValue]="selectValue1[1]"
-            (optionSelected)="selectOptionSelected($event)"
-          >
-          </dds-select>
-        </div>
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <dds-select
-            label="Select Book"
-            [(selectOptions)]="selectValue2"
-            [defaultValue]="selectValue2[2]"
-            (optionSelected)="selectOptionSelected($event)"
-          >
-          </dds-select>
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='Tooltip'">
-      <h2>Tooltip</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-12 dds__mb-3">
-          Show me the tooltip
-          <dds-tooltip icon="alert-error" placement="bottom">
-            I had a dream that I was a muffler last night. I woke up exhausted!
-          </dds-tooltip>
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='Accordion'">
-      <h2>Accordion</h2>
-      <div class="dds__row">
-        <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <p>
-            <b>Disclaimer</b>: This unfinished Angular wrapper is not properly
-            constructed (it is technically generating three separate accordions,
-            here, not one accordion with three items), but shows a proper method
-            of initializing a DDS2 vanilla component within Angular.
-          </p>
-          <h2>Component</h2>
-          <dds-accordion
-            *ngFor="let item of [1,2,3]; index as i; first as isFirst"
-            openState="{{i % 2}}"
-          >
-            <div accordion-title>
-              Accordion #{{i}} -- first:{{isFirst}} -- defaultOpen:{{i % 2}}
-            </div>
-            <div accordion-body>
-              Queso when the cheese comes out everybody's happy jarlsberg.
-              Roquefort cheesecake cheddar cheese and wine cheeseburger
-              caerphilly queso cheesy feet. Lancashire taleggio melted cheese
-              who moved my cheese blue castello pecorino cheese strings babybel.
-              Taleggio squirty cheese cheesy feet cow cheese and biscuits queso
-              melted cheese stinking bishop. Cow goat.
-            </div>
-          </dds-accordion>
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='Drawer'">
-      <h2>Drawer</h2>
-      <div class="dds__row">
-        <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          This Angular wrapper has an option for close <i>icon</i> that is
-          outside of the DDS Design standard.
-        </div>
-      </div>
-      <div class="dds__row">
-        <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <button
-            role="button"
-            class="dds__button dds__button--primary"
-            (click)="openDrawer($event)"
-          >
-            External Open
-          </button>
-        </div>
-        <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <dds-drawer icon="close-x">
-            <div drawer-trigger>
-              <button class="dds__button dds__button--primary">
-                Internal Open
-              </button>
-            </div>
-            <h3>Default Drawer</h3>
-            <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-              quis tempor enim, ut tincidunt turpis. Nulla libero eros,
-              sollicitudin ac enim a, rhoncus tempus nunc. Donec suscipit lectus
-              in mattis pretium. Aliquam massa nulla, porta id ante non,
-              vestibulum scelerisque nibh. Nullam aliquam diam sed volutpat
-              laoreet. Sed faucibus velit sed interdum cursus. Curabitur turpis
-              lorem, sodales ultricies massa vitae, accumsan semper sapien.
-              Maecenas sollicitudin ipsum placerat leo egestas mattis.
-              Pellentesque volutpat in ante eget gravida. Vestibulum ante ipsum
-              primis in faucibus orci luctus et ultrices posuere cubilia curae;
-              Pellentesque ac imperdiet elit. Nunc facilisis orci non volutpat
-              semper. Vestibulum ante ipsum primis in faucibus orci luctus et
-              ultrices posuere cubilia curae; Etiam eu sagittis diam, at aliquet
-              urna. Vestibulum euismod id nisl ac consectetur. Sed turpis nulla,
-              pellentesque nec sem at, dignissim iaculis urna.
-            </p>
-            <p>
-              Morbi ut varius nibh. Donec finibus purus id nunc fermentum, ac
-              convallis massa lobortis. Mauris sed purus mattis, rutrum dolor
-              et, tincidunt est. Aenean pharetra ac elit in accumsan. Morbi a
-              tempus turpis. Nullam vel nibh nulla. Mauris maximus a nulla sit
-              amet tristique. Vestibulum placerat justo non cursus porta.
-              Phasellus at iaculis nulla, ut vulputate orci. Quisque ut diam
-              eget lectus malesuada commodo in a velit. Nam ac risus mi. Aenean
-              nec placerat enim. Fusce vel orci nunc. Nullam rhoncus dapibus
-              lacinia. Phasellus egestas ut turpis eu aliquam. Vestibulum ut
-              libero in lacus aliquet mollis vel ullamcorper neque.
-            </p>
-            <p>
-              Pellentesque habitant morbi tristique senectus et netus et
-              malesuada fames ac turpis egestas. Aliquam purus elit, faucibus
-              mattis suscipit vitae, fermentum posuere nisl. Nam rhoncus nulla
-              eget malesuada feugiat. Pellentesque ultrices, diam non hendrerit
-              convallis, augue risus posuere tortor, a tincidunt arcu eros ac
-              elit. Morbi eget leo non dui cursus consectetur. Aenean vel felis
-              orci. Morbi sodales diam sit amet neque egestas, nec sodales enim
-              pellentesque. Vestibulum eu odio porttitor, ornare est et,
-              facilisis justo. Integer ultricies nec tortor sed volutpat. Cras
-              eu sapien a purus mollis auctor eu id neque. Morbi blandit sem at
-              arcu ornare ultrices imperdiet ac augue. Mauris rhoncus malesuada
-              urna quis vestibulum.
-            </p>
-            <p>
-              Vestibulum ultricies risus id justo rhoncus lacinia. Phasellus
-              lacinia justo hendrerit ultricies ornare. Morbi vel porttitor
-              libero. In gravida enim sed dictum molestie. Quisque porttitor
-              arcu nec rhoncus varius. Mauris ex dolor, tincidunt sed lorem sed,
-              dictum lobortis neque. Vestibulum quis varius augue. Phasellus
-              consectetur imperdiet dictum. Donec et ex quis turpis venenatis
-              pellentesque sed eu nisl. Maecenas non egestas augue. Mauris
-              tempor ornare vehicula. Aenean posuere ipsum vulputate ultrices
-              mollis. Vestibulum arcu mauris, congue sed fermentum eu, placerat
-              non sem. Maecenas enim nibh, aliquet convallis venenatis nec,
-              venenatis ac est. Fusce feugiat cursus eleifend. Etiam tempus
-              maximus mauris, nec lobortis velit elementum eu.
-            </p>
-            <p>
-              Mauris dignissim porta felis, sit amet molestie nisi sodales
-              aliquam. Duis sem quam, porttitor in leo non, maximus sodales
-              justo. Mauris id condimentum purus. Duis a velit porttitor,
-              volutpat nulla in, blandit ante. Etiam tincidunt vulputate
-              facilisis. Aliquam lorem quam, aliquet et eros eu, luctus placerat
-              nibh. Suspendisse a auctor tortor, et elementum nunc. Pellentesque
-              habitant morbi tristique senectus et netus et malesuada fames ac
-              turpis egestas. Fusce eu est rutrum, molestie urna nec, feugiat
-              nibh. Donec vulputate turpis eu elit rutrum, eget suscipit diam
-              imperdiet. Vestibulum pulvinar ac dolor sit amet tempor. Quisque
-              ante nulla, dictum at libero a, volutpat ornare eros.
-            </p>
-            <p>
-              Sed commodo dapibus urna. Curabitur consequat, diam luctus egestas
-              egestas, metus dui ultrices metus, eu suscipit sapien quam et
-              tellus. Proin ut ipsum non nunc venenatis maximus id non dolor.
-              Morbi volutpat metus lacus. Donec euismod eros libero. Aenean
-              consequat metus et orci mattis, fringilla posuere velit accumsan.
-              Praesent interdum congue libero, sit amet vehicula ipsum congue
-              sed. Pellentesque viverra velit lacus, eu lacinia tortor faucibus
-              id. Praesent commodo ex a neque laoreet, convallis condimentum
-              ligula feugiat.
-            </p>
-            <p>
-              Proin eget mauris non enim fermentum porttitor quis et metus.
-              Donec sagittis nulla dolor, eu posuere velit commodo vel. Nam quis
-              mi ac ligula aliquet pharetra hendrerit lacinia elit. Quisque
-              ullamcorper lorem lectus, vel tincidunt magna ornare eget. Quisque
-              in ullamcorper risus, quis elementum odio. Vivamus lobortis ex
-              quam, consectetur tincidunt lectus cursus eget. Maecenas vitae leo
-              cursus, consequat nisl sit amet, accumsan justo. Etiam ut ex
-              auctor, vestibulum urna id, rhoncus urna. Vestibulum a augue
-              aliquam, tempor libero nec, viverra tortor.
-            </p>
-            <p>
-              Morbi sit amet scelerisque elit. In semper sem at rutrum laoreet.
-              Aenean non felis pretium, sollicitudin ligula nec, dapibus ante.
-              In ut scelerisque ante. Interdum et malesuada fames ac ante ipsum
-              primis in faucibus. Duis ultrices placerat sem, nec varius justo
-              imperdiet ac. Ut fringilla ligula eget odio pulvinar eleifend.
-              Vivamus quis enim vitae urna eleifend dignissim. Curabitur
-              vulputate condimentum facilisis.
-            </p>
-            <p>
-              Etiam tempor mi at erat eleifend, a finibus magna pretium. Etiam
-              nec molestie neque. Suspendisse in risus augue. Nam congue est
-              quis semper pulvinar. Curabitur feugiat mattis ultrices. Fusce eu
-              nibh pulvinar, semper augue non, sodales magna. Aliquam consequat
-              aliquet eleifend.
-            </p>
-            <p>
-              Fusce ullamcorper sapien ut dignissim lobortis. Nunc ut placerat
-              nulla. Nullam dapibus nunc quis metus rutrum pretium. Praesent non
-              faucibus nunc. Donec in nunc ac mi sodales convallis. Donec
-              tempus, risus rutrum pharetra dapibus, elit felis ultricies neque,
-              non tempus arcu eros a lorem. In ut convallis lacus. Suspendisse
-              potenti. Nunc maximus maximus viverra. Fusce mollis ut mi nec
-              ultricies. Class aptent taciti sociosqu ad litora torquent per
-              conubia nostra, per inceptos himenaeos. Ut elementum nisl et neque
-              mollis, id auctor ipsum efficitur. Curabitur tincidunt, nisl non
-              laoreet fringilla, nisi ex finibus ipsum, sit amet condimentum
-              nulla leo consectetur massa. Morbi leo nulla, tincidunt id urna
-              ut, hendrerit varius risus. In a maximus tortor. Donec eget lorem
-              at nulla semper convallis.
-            </p>
-            <button class="dds__button dds__button--primary">
-              Primary
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <button class="dds__button" (click)="expandSidenav($event)">
+              Expand Sidenav
             </button>
-            <button class="dds__button dds__button--secondary">
-              Secondary
+          </div>
+        </div>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <p>
+              Monterey jack edam dolcelatte. Everyone loves airedale roquefort
+              monterey jack camembert de normandie goat cheese and biscuits
+              cheeseburger. Cream cheese cheeseburger blue castello lancashire
+              croque monsieur cauliflower cheese st. agur blue cheese queso.
+              Caerphilly cheese slices boursin babybel mozzarella blue castello
+              parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
+              squirty cheese.
+            </p>
+            <p>
+              When the cheese comes out everybody's happy st. agur blue cheese
+              goat. Cheddar cream cheese boursin queso bocconcini babybel
+              jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
+              loves cheesy feet edam feta brie. Stinking bishop melted cheese
+              parmesan danish fontina blue castello cut the cheese croque
+              monsieur pecorino. Camembert de normandie everyone loves
+              roquefort.
+            </p>
+            <p>
+              Airedale goat manchego. Cheesy grin edam caerphilly lancashire
+              pecorino stilton edam hard cheese. Stilton say cheese halloumi
+              everyone loves st. agur blue cheese lancashire emmental cheese
+              triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
+              cut the cheese cheesy grin.
+            </p>
+            <p>
+              Croque monsieur cheese on toast manchego. Rubber cheese the big
+              cheese fromage frais cheesy grin boursin fondue cheese slices
+              jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
+              fromage bavarian bergkase. Stilton cream cheese.
+            </p>
+            <p>
+              Camembert de normandie the big cheese gouda. Babybel pepper jack
+              brie everyone loves cheese on toast cheese and wine pepper jack
+              roquefort. Camembert de normandie feta boursin stilton jarlsberg
+              dolcelatte croque monsieur cheese and wine. Lancashire paneer
+              danish fontina cheddar cheesy feet hard cheese.
+            </p>
+            <p>
+              Monterey jack edam dolcelatte. Everyone loves airedale roquefort
+              monterey jack camembert de normandie goat cheese and biscuits
+              cheeseburger. Cream cheese cheeseburger blue castello lancashire
+              croque monsieur cauliflower cheese st. agur blue cheese queso.
+              Caerphilly cheese slices boursin babybel mozzarella blue castello
+              parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
+              squirty cheese.
+            </p>
+            <p>
+              When the cheese comes out everybody's happy st. agur blue cheese
+              goat. Cheddar cream cheese boursin queso bocconcini babybel
+              jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
+              loves cheesy feet edam feta brie. Stinking bishop melted cheese
+              parmesan danish fontina blue castello cut the cheese croque
+              monsieur pecorino. Camembert de normandie everyone loves
+              roquefort.
+            </p>
+            <p>
+              Airedale goat manchego. Cheesy grin edam caerphilly lancashire
+              pecorino stilton edam hard cheese. Stilton say cheese halloumi
+              everyone loves st. agur blue cheese lancashire emmental cheese
+              triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
+              cut the cheese cheesy grin.
+            </p>
+            <p>
+              Croque monsieur cheese on toast manchego. Rubber cheese the big
+              cheese fromage frais cheesy grin boursin fondue cheese slices
+              jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
+              fromage bavarian bergkase. Stilton cream cheese.
+            </p>
+            <p>
+              Camembert de normandie the big cheese gouda. Babybel pepper jack
+              brie everyone loves cheese on toast cheese and wine pepper jack
+              roquefort. Camembert de normandie feta boursin stilton jarlsberg
+              dolcelatte croque monsieur cheese and wine. Lancashire paneer
+              danish fontina cheddar cheesy feet hard cheese.
+            </p>
+            <p>
+              Monterey jack edam dolcelatte. Everyone loves airedale roquefort
+              monterey jack camembert de normandie goat cheese and biscuits
+              cheeseburger. Cream cheese cheeseburger blue castello lancashire
+              croque monsieur cauliflower cheese st. agur blue cheese queso.
+              Caerphilly cheese slices boursin babybel mozzarella blue castello
+              parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
+              squirty cheese.
+            </p>
+            <p>
+              When the cheese comes out everybody's happy st. agur blue cheese
+              goat. Cheddar cream cheese boursin queso bocconcini babybel
+              jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
+              loves cheesy feet edam feta brie. Stinking bishop melted cheese
+              parmesan danish fontina blue castello cut the cheese croque
+              monsieur pecorino. Camembert de normandie everyone loves
+              roquefort.
+            </p>
+            <p>
+              Airedale goat manchego. Cheesy grin edam caerphilly lancashire
+              pecorino stilton edam hard cheese. Stilton say cheese halloumi
+              everyone loves st. agur blue cheese lancashire emmental cheese
+              triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
+              cut the cheese cheesy grin.
+            </p>
+            <p>
+              Croque monsieur cheese on toast manchego. Rubber cheese the big
+              cheese fromage frais cheesy grin boursin fondue cheese slices
+              jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
+              fromage bavarian bergkase. Stilton cream cheese.
+            </p>
+            <p>
+              Camembert de normandie the big cheese gouda. Babybel pepper jack
+              brie everyone loves cheese on toast cheese and wine pepper jack
+              roquefort. Camembert de normandie feta boursin stilton jarlsberg
+              dolcelatte croque monsieur cheese and wine. Lancashire paneer
+              danish fontina cheddar cheesy feet hard cheese.
+            </p>
+            <p>
+              Monterey jack edam dolcelatte. Everyone loves airedale roquefort
+              monterey jack camembert de normandie goat cheese and biscuits
+              cheeseburger. Cream cheese cheeseburger blue castello lancashire
+              croque monsieur cauliflower cheese st. agur blue cheese queso.
+              Caerphilly cheese slices boursin babybel mozzarella blue castello
+              parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
+              squirty cheese.
+            </p>
+            <p>
+              When the cheese comes out everybody's happy st. agur blue cheese
+              goat. Cheddar cream cheese boursin queso bocconcini babybel
+              jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
+              loves cheesy feet edam feta brie. Stinking bishop melted cheese
+              parmesan danish fontina blue castello cut the cheese croque
+              monsieur pecorino. Camembert de normandie everyone loves
+              roquefort.
+            </p>
+            <p>
+              Airedale goat manchego. Cheesy grin edam caerphilly lancashire
+              pecorino stilton edam hard cheese. Stilton say cheese halloumi
+              everyone loves st. agur blue cheese lancashire emmental cheese
+              triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
+              cut the cheese cheesy grin.
+            </p>
+            <p>
+              Croque monsieur cheese on toast manchego. Rubber cheese the big
+              cheese fromage frais cheesy grin boursin fondue cheese slices
+              jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
+              fromage bavarian bergkase. Stilton cream cheese.
+            </p>
+            <p>
+              Camembert de normandie the big cheese gouda. Babybel pepper jack
+              brie everyone loves cheese on toast cheese and wine pepper jack
+              roquefort. Camembert de normandie feta boursin stilton jarlsberg
+              dolcelatte croque monsieur cheese and wine. Lancashire paneer
+              danish fontina cheddar cheesy feet hard cheese.
+            </p>
+            <p>
+              Monterey jack edam dolcelatte. Everyone loves airedale roquefort
+              monterey jack camembert de normandie goat cheese and biscuits
+              cheeseburger. Cream cheese cheeseburger blue castello lancashire
+              croque monsieur cauliflower cheese st. agur blue cheese queso.
+              Caerphilly cheese slices boursin babybel mozzarella blue castello
+              parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
+              squirty cheese.
+            </p>
+            <p>
+              When the cheese comes out everybody's happy st. agur blue cheese
+              goat. Cheddar cream cheese boursin queso bocconcini babybel
+              jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
+              loves cheesy feet edam feta brie. Stinking bishop melted cheese
+              parmesan danish fontina blue castello cut the cheese croque
+              monsieur pecorino. Camembert de normandie everyone loves
+              roquefort.
+            </p>
+            <p>
+              Airedale goat manchego. Cheesy grin edam caerphilly lancashire
+              pecorino stilton edam hard cheese. Stilton say cheese halloumi
+              everyone loves st. agur blue cheese lancashire emmental cheese
+              triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
+              cut the cheese cheesy grin.
+            </p>
+            <p>
+              Croque monsieur cheese on toast manchego. Rubber cheese the big
+              cheese fromage frais cheesy grin boursin fondue cheese slices
+              jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
+              fromage bavarian bergkase. Stilton cream cheese.
+            </p>
+            <p>
+              Camembert de normandie the big cheese gouda. Babybel pepper jack
+              brie everyone loves cheese on toast cheese and wine pepper jack
+              roquefort. Camembert de normandie feta boursin stilton jarlsberg
+              dolcelatte croque monsieur cheese and wine. Lancashire paneer
+              danish fontina cheddar cheesy feet hard cheese.
+            </p>
+            <p>
+              Monterey jack edam dolcelatte. Everyone loves airedale roquefort
+              monterey jack camembert de normandie goat cheese and biscuits
+              cheeseburger. Cream cheese cheeseburger blue castello lancashire
+              croque monsieur cauliflower cheese st. agur blue cheese queso.
+              Caerphilly cheese slices boursin babybel mozzarella blue castello
+              parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
+              squirty cheese.
+            </p>
+            <p>
+              When the cheese comes out everybody's happy st. agur blue cheese
+              goat. Cheddar cream cheese boursin queso bocconcini babybel
+              jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
+              loves cheesy feet edam feta brie. Stinking bishop melted cheese
+              parmesan danish fontina blue castello cut the cheese croque
+              monsieur pecorino. Camembert de normandie everyone loves
+              roquefort.
+            </p>
+            <p>
+              Airedale goat manchego. Cheesy grin edam caerphilly lancashire
+              pecorino stilton edam hard cheese. Stilton say cheese halloumi
+              everyone loves st. agur blue cheese lancashire emmental cheese
+              triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
+              cut the cheese cheesy grin.
+            </p>
+            <p>
+              Croque monsieur cheese on toast manchego. Rubber cheese the big
+              cheese fromage frais cheesy grin boursin fondue cheese slices
+              jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
+              fromage bavarian bergkase. Stilton cream cheese.
+            </p>
+            <p>
+              Camembert de normandie the big cheese gouda. Babybel pepper jack
+              brie everyone loves cheese on toast cheese and wine pepper jack
+              roquefort. Camembert de normandie feta boursin stilton jarlsberg
+              dolcelatte croque monsieur cheese and wine. Lancashire paneer
+              danish fontina cheddar cheesy feet hard cheese.
+            </p>
+            <p>
+              Monterey jack edam dolcelatte. Everyone loves airedale roquefort
+              monterey jack camembert de normandie goat cheese and biscuits
+              cheeseburger. Cream cheese cheeseburger blue castello lancashire
+              croque monsieur cauliflower cheese st. agur blue cheese queso.
+              Caerphilly cheese slices boursin babybel mozzarella blue castello
+              parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
+              squirty cheese.
+            </p>
+            <p>
+              When the cheese comes out everybody's happy st. agur blue cheese
+              goat. Cheddar cream cheese boursin queso bocconcini babybel
+              jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
+              loves cheesy feet edam feta brie. Stinking bishop melted cheese
+              parmesan danish fontina blue castello cut the cheese croque
+              monsieur pecorino. Camembert de normandie everyone loves
+              roquefort.
+            </p>
+            <p>
+              Airedale goat manchego. Cheesy grin edam caerphilly lancashire
+              pecorino stilton edam hard cheese. Stilton say cheese halloumi
+              everyone loves st. agur blue cheese lancashire emmental cheese
+              triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
+              cut the cheese cheesy grin.
+            </p>
+            <p>
+              Croque monsieur cheese on toast manchego. Rubber cheese the big
+              cheese fromage frais cheesy grin boursin fondue cheese slices
+              jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
+              fromage bavarian bergkase. Stilton cream cheese.
+            </p>
+            <p>
+              Camembert de normandie the big cheese gouda. Babybel pepper jack
+              brie everyone loves cheese on toast cheese and wine pepper jack
+              roquefort. Camembert de normandie feta boursin stilton jarlsberg
+              dolcelatte croque monsieur cheese and wine. Lancashire paneer
+              danish fontina cheddar cheesy feet hard cheese.
+            </p>
+            <p>
+              Monterey jack edam dolcelatte. Everyone loves airedale roquefort
+              monterey jack camembert de normandie goat cheese and biscuits
+              cheeseburger. Cream cheese cheeseburger blue castello lancashire
+              croque monsieur cauliflower cheese st. agur blue cheese queso.
+              Caerphilly cheese slices boursin babybel mozzarella blue castello
+              parmesan jarlsberg. Cheesecake cheese triangles stinking bishop
+              squirty cheese.
+            </p>
+            <p>
+              When the cheese comes out everybody's happy st. agur blue cheese
+              goat. Cheddar cream cheese boursin queso bocconcini babybel
+              jarlsberg pecorino. Smelly cheese roquefort cheese slices everyone
+              loves cheesy feet edam feta brie. Stinking bishop melted cheese
+              parmesan danish fontina blue castello cut the cheese croque
+              monsieur pecorino. Camembert de normandie everyone loves
+              roquefort.
+            </p>
+            <p>
+              Airedale goat manchego. Cheesy grin edam caerphilly lancashire
+              pecorino stilton edam hard cheese. Stilton say cheese halloumi
+              everyone loves st. agur blue cheese lancashire emmental cheese
+              triangles. Dolcelatte macaroni cheese cheese and biscuits ricotta
+              cut the cheese cheesy grin.
+            </p>
+            <p>
+              Croque monsieur cheese on toast manchego. Rubber cheese the big
+              cheese fromage frais cheesy grin boursin fondue cheese slices
+              jarlsberg. Parmesan paneer fondue everyone loves lancashire cow
+              fromage bavarian bergkase. Stilton cream cheese.
+            </p>
+            <p>
+              Camembert de normandie the big cheese gouda. Babybel pepper jack
+              brie everyone loves cheese on toast cheese and wine pepper jack
+              roquefort. Camembert de normandie feta boursin stilton jarlsberg
+              dolcelatte croque monsieur cheese and wine. Lancashire paneer
+              danish fontina cheddar cheesy feet hard cheese.
+            </p>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='Radio'">
+        <h2>Radio Buttons</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <fieldset required="true" class="dds__fieldset dds__fieldset--lg">
+              <legend>Select service</legend>
+              <div class="dds__radio-button">
+                <input
+                  class="dds__radio-button__input"
+                  type="radio"
+                  name="services"
+                  id="radio-button-input-1"
+                  value="Apex"
+                />
+                <label
+                  class="dds__radio-button__label"
+                  for="radio-button-input-1"
+                  >Apex</label
+                >
+              </div>
+              <div class="dds__radio-button">
+                <input
+                  class="dds__radio-button__input"
+                  type="radio"
+                  name="services"
+                  id="radio-button-input-2"
+                  value="Multi Cloud"
+                />
+                <label
+                  class="dds__radio-button__label"
+                  for="radio-button-input-2"
+                  >Multi Cloud</label
+                >
+              </div>
+              <div class="dds__radio-button">
+                <input
+                  class="dds__radio-button__input"
+                  type="radio"
+                  name="services"
+                  id="radio-button-input-3"
+                  value="Cloud Solutions"
+                />
+                <label
+                  class="dds__radio-button__label"
+                  for="radio-button-input-3"
+                  >Cloud Solutions</label
+                >
+              </div>
+              <div class="dds__radio-button">
+                <input
+                  class="dds__radio-button__input"
+                  type="radio"
+                  name="services"
+                  id="radio-button-input-4"
+                  value="Energy"
+                />
+                <label
+                  class="dds__radio-button__label"
+                  for="radio-button-input-4"
+                  >Energy</label
+                >
+              </div>
+            </fieldset>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='Checkbox'">
+        <h2>Checkbox</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <p>
+              Don't forget in Angular to add the FormsModule to your app module,
+              in order to use 2-way binding
+            </p>
+            <div class="dds__checkbox">
+              <label class="dds__checkbox__label" for="checkbox-input-0">
+                <input
+                  type="checkbox"
+                  tabindex="0"
+                  id="checkbox-input-0"
+                  name="example-checkbox"
+                  class="dds__checkbox__input"
+                  [(ngModel)]="checkboxOn"
+                />
+                <span>Dell UltraSharp</span>
+              </label>
+            </div>
+            {{checkboxOn}}
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='TextArea'">
+        <h2>TextArea</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <dds-form class="bumble">
+              <dds-textarea isRequired="true" maxLength="51">
+                <div label-text>
+                  Extra mocha froth aromatic macchiato irish coffee
+                </div>
+                <div default-text>{{textareaText}}</div>
+                <div helper-text>
+                  DIY whatever synth tbh disrupt
+                </div>
+                <div error-text>
+                  Dummy text? More like dummy thicc text, amirite?
+                </div>
+                <div screen-reader-text>
+                  I'm your older brother, Mike, and I was stepped over! Never
+                  let anyone know what you are thinking. You talk about
+                  vengeance. Is vengeance going to bring your son back to you?
+                  Or my boy to me? I am sorry. What happened to your father was
+                  business. I have much respect for your father. But your
+                  father, his thinking is old-fashioned. You must understand why
+                  I had to do that. Now let's work through where we go from
+                  here.
+                </div>
+              </dds-textarea>
+            </dds-form>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='Modal'">
+        <h2>Modal</h2>
+        <div class="dds__row">
+          <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            This Angular wrapper has an option for <i>backdrop</i> that is
+            outside of the DDS Design standard.
+          </div>
+        </div>
+        <div class="dds__row">
+          <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <button
+              role="button"
+              class="dds__button dds__button--primary"
+              (click)="openModal($event)"
+            >
+              External Open
             </button>
-          </dds-drawer>
+          </div>
+          <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <dds-modal elementId="fromageId" backdrop="true">
+              <div modal-title>Saveur de fromage</div>
+              <div modal-body>
+                Queso when the cheese comes out everybody's happy jarlsberg.
+                Roquefort cheesecake cheddar cheese and wine cheeseburger
+                caerphilly queso cheesy feet. Lancashire taleggio melted cheese
+                who moved my cheese blue castello pecorino.
+              </div>
+              <div modal-footer>
+                <button
+                  class="dds__button dds__button--secondary"
+                  data-dismiss="dds__modal"
+                >
+                  Non
+                </button>
+                <button class="dds__button dds__button--primary">
+                  Oui
+                </button>
+              </div>
+              <span modal-trigger>
+                <button role="button" class="dds__button dds__button--primary">
+                  Internal Open
+                </button>
+                &nbsp;
+              </span>
+            </dds-modal>
+          </div>
         </div>
-      </div>
-    </span>
+      </span>
 
-    <span *ngIf="showPage==='ActionMenu'">
-      <h2>Action Menu</h2>
-      <div class="dds__row">
-        <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <dds-actionmenu>
-            <div action-trigger>
-              <button type="button" class="dds__button dds__button--secondary">
-                Action Menu
-              </button>
-            </div>
-            <dds-actionmenu-menu elementId="amMenu1" name="Actions">
-              <dds-actionmenu-item
-                elementId="amAction1"
-                icon="copy-alt"
-                (click)="actionMenuAction('copy click')"
-              >
-                Copy
-              </dds-actionmenu-item>
-            </dds-actionmenu-menu>
-
-            <dds-actionmenu-menu elementId="amCheck" separator="true">
-              View Strategy
-            </dds-actionmenu-menu>
-            <dds-actionmenu-item
-              elementId="viewRows"
-              checkbox="true"
-              icon="view-row"
-              value="rows"
-              (onChecked)="actionMenuAction($event)"
+      <span *ngIf="showPage==='Select'">
+        <h2>Select</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <dds-select
+              label="Select Movie"
+              [(selectOptions)]="selectValue1"
+              [defaultValue]="selectValue1[1]"
+              (optionSelected)="selectOptionSelected($event)"
             >
-              View Rows
-            </dds-actionmenu-item>
-            <dds-actionmenu-item
-              elementId="viewCols"
-              checkbox="true"
-              checked="true"
-              icon="view-column"
-              value="columns"
-              (onChecked)="actionMenuAction($event)"
+            </dds-select>
+          </div>
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <dds-select
+              label="Select Book"
+              [(selectOptions)]="selectValue2"
+              [defaultValue]="selectValue2[2]"
+              (optionSelected)="selectOptionSelected($event)"
             >
-              View Columns
-            </dds-actionmenu-item>
-          </dds-actionmenu>
+            </dds-select>
+          </div>
         </div>
-      </div>
-    </span>
+      </span>
 
-    <span *ngIf="showPage==='Button'">
-      <h2>Button</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <dds-button
-            elementId="anyOldButton"
-            ariaLabel="Screen Reader Message"
-          >
-            Any Old Button
-          </dds-button>
-          <hr />
-          <p>
-            Below is an unfinished experiment to get Button and ActionMenu to
-            work together. Please disregard.
-          </p>
-          <dds-button
-            elementId="testButton"
-            action="amlinked"
-            ariaLabel="Screen Reader Message"
-          >
-            {{splitButtonValue}}
-          </dds-button>
-          <dds-actionmenu
-            elementId="amlinked"
-            button="testButton"
-            alignment="end"
-          >
-            <div action-trigger>
-              <button type="button" class="dds__button dds__button--secondary">
-                DoesntMatter
+      <span *ngIf="showPage==='Tooltip'">
+        <h2>Tooltip</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-12 dds__mb-3">
+            Show me the tooltip
+            <dds-tooltip icon="alert-error" placement="bottom">
+              I had a dream that I was a muffler last night. I woke up
+              exhausted!
+            </dds-tooltip>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='Accordion'">
+        <h2>Accordion</h2>
+        <div class="dds__row">
+          <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <p>
+              <b>Disclaimer</b>: This unfinished Angular wrapper is not properly
+              constructed (it is technically generating three separate
+              accordions, here, not one accordion with three items), but shows a
+              proper method of initializing a DDS2 vanilla component within
+              Angular.
+            </p>
+            <h2>Component</h2>
+            <dds-accordion
+              *ngFor="let item of [1,2,3]; index as i; first as isFirst"
+              openState="{{i % 2}}"
+            >
+              <div accordion-title>
+                Accordion #{{i}} -- first:{{isFirst}} -- defaultOpen:{{i % 2}}
+              </div>
+              <div accordion-body>
+                Queso when the cheese comes out everybody's happy jarlsberg.
+                Roquefort cheesecake cheddar cheese and wine cheeseburger
+                caerphilly queso cheesy feet. Lancashire taleggio melted cheese
+                who moved my cheese blue castello pecorino cheese strings
+                babybel. Taleggio squirty cheese cheesy feet cow cheese and
+                biscuits queso melted cheese stinking bishop. Cow goat.
+              </div>
+            </dds-accordion>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='Drawer'">
+        <h2>Drawer</h2>
+        <div class="dds__row">
+          <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            This Angular wrapper has an option for close <i>icon</i> that is
+            outside of the DDS Design standard.
+          </div>
+        </div>
+        <div class="dds__row">
+          <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <button
+              role="button"
+              class="dds__button dds__button--primary"
+              (click)="openDrawer($event)"
+            >
+              External Open
+            </button>
+          </div>
+          <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <dds-drawer icon="close-x">
+              <div drawer-trigger>
+                <button class="dds__button dds__button--primary">
+                  Internal Open
+                </button>
+              </div>
+              <h3>Default Drawer</h3>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+                quis tempor enim, ut tincidunt turpis. Nulla libero eros,
+                sollicitudin ac enim a, rhoncus tempus nunc. Donec suscipit
+                lectus in mattis pretium. Aliquam massa nulla, porta id ante
+                non, vestibulum scelerisque nibh. Nullam aliquam diam sed
+                volutpat laoreet. Sed faucibus velit sed interdum cursus.
+                Curabitur turpis lorem, sodales ultricies massa vitae, accumsan
+                semper sapien. Maecenas sollicitudin ipsum placerat leo egestas
+                mattis. Pellentesque volutpat in ante eget gravida. Vestibulum
+                ante ipsum primis in faucibus orci luctus et ultrices posuere
+                cubilia curae; Pellentesque ac imperdiet elit. Nunc facilisis
+                orci non volutpat semper. Vestibulum ante ipsum primis in
+                faucibus orci luctus et ultrices posuere cubilia curae; Etiam eu
+                sagittis diam, at aliquet urna. Vestibulum euismod id nisl ac
+                consectetur. Sed turpis nulla, pellentesque nec sem at,
+                dignissim iaculis urna.
+              </p>
+              <p>
+                Morbi ut varius nibh. Donec finibus purus id nunc fermentum, ac
+                convallis massa lobortis. Mauris sed purus mattis, rutrum dolor
+                et, tincidunt est. Aenean pharetra ac elit in accumsan. Morbi a
+                tempus turpis. Nullam vel nibh nulla. Mauris maximus a nulla sit
+                amet tristique. Vestibulum placerat justo non cursus porta.
+                Phasellus at iaculis nulla, ut vulputate orci. Quisque ut diam
+                eget lectus malesuada commodo in a velit. Nam ac risus mi.
+                Aenean nec placerat enim. Fusce vel orci nunc. Nullam rhoncus
+                dapibus lacinia. Phasellus egestas ut turpis eu aliquam.
+                Vestibulum ut libero in lacus aliquet mollis vel ullamcorper
+                neque.
+              </p>
+              <p>
+                Pellentesque habitant morbi tristique senectus et netus et
+                malesuada fames ac turpis egestas. Aliquam purus elit, faucibus
+                mattis suscipit vitae, fermentum posuere nisl. Nam rhoncus nulla
+                eget malesuada feugiat. Pellentesque ultrices, diam non
+                hendrerit convallis, augue risus posuere tortor, a tincidunt
+                arcu eros ac elit. Morbi eget leo non dui cursus consectetur.
+                Aenean vel felis orci. Morbi sodales diam sit amet neque
+                egestas, nec sodales enim pellentesque. Vestibulum eu odio
+                porttitor, ornare est et, facilisis justo. Integer ultricies nec
+                tortor sed volutpat. Cras eu sapien a purus mollis auctor eu id
+                neque. Morbi blandit sem at arcu ornare ultrices imperdiet ac
+                augue. Mauris rhoncus malesuada urna quis vestibulum.
+              </p>
+              <p>
+                Vestibulum ultricies risus id justo rhoncus lacinia. Phasellus
+                lacinia justo hendrerit ultricies ornare. Morbi vel porttitor
+                libero. In gravida enim sed dictum molestie. Quisque porttitor
+                arcu nec rhoncus varius. Mauris ex dolor, tincidunt sed lorem
+                sed, dictum lobortis neque. Vestibulum quis varius augue.
+                Phasellus consectetur imperdiet dictum. Donec et ex quis turpis
+                venenatis pellentesque sed eu nisl. Maecenas non egestas augue.
+                Mauris tempor ornare vehicula. Aenean posuere ipsum vulputate
+                ultrices mollis. Vestibulum arcu mauris, congue sed fermentum
+                eu, placerat non sem. Maecenas enim nibh, aliquet convallis
+                venenatis nec, venenatis ac est. Fusce feugiat cursus eleifend.
+                Etiam tempus maximus mauris, nec lobortis velit elementum eu.
+              </p>
+              <p>
+                Mauris dignissim porta felis, sit amet molestie nisi sodales
+                aliquam. Duis sem quam, porttitor in leo non, maximus sodales
+                justo. Mauris id condimentum purus. Duis a velit porttitor,
+                volutpat nulla in, blandit ante. Etiam tincidunt vulputate
+                facilisis. Aliquam lorem quam, aliquet et eros eu, luctus
+                placerat nibh. Suspendisse a auctor tortor, et elementum nunc.
+                Pellentesque habitant morbi tristique senectus et netus et
+                malesuada fames ac turpis egestas. Fusce eu est rutrum, molestie
+                urna nec, feugiat nibh. Donec vulputate turpis eu elit rutrum,
+                eget suscipit diam imperdiet. Vestibulum pulvinar ac dolor sit
+                amet tempor. Quisque ante nulla, dictum at libero a, volutpat
+                ornare eros.
+              </p>
+              <p>
+                Sed commodo dapibus urna. Curabitur consequat, diam luctus
+                egestas egestas, metus dui ultrices metus, eu suscipit sapien
+                quam et tellus. Proin ut ipsum non nunc venenatis maximus id non
+                dolor. Morbi volutpat metus lacus. Donec euismod eros libero.
+                Aenean consequat metus et orci mattis, fringilla posuere velit
+                accumsan. Praesent interdum congue libero, sit amet vehicula
+                ipsum congue sed. Pellentesque viverra velit lacus, eu lacinia
+                tortor faucibus id. Praesent commodo ex a neque laoreet,
+                convallis condimentum ligula feugiat.
+              </p>
+              <p>
+                Proin eget mauris non enim fermentum porttitor quis et metus.
+                Donec sagittis nulla dolor, eu posuere velit commodo vel. Nam
+                quis mi ac ligula aliquet pharetra hendrerit lacinia elit.
+                Quisque ullamcorper lorem lectus, vel tincidunt magna ornare
+                eget. Quisque in ullamcorper risus, quis elementum odio. Vivamus
+                lobortis ex quam, consectetur tincidunt lectus cursus eget.
+                Maecenas vitae leo cursus, consequat nisl sit amet, accumsan
+                justo. Etiam ut ex auctor, vestibulum urna id, rhoncus urna.
+                Vestibulum a augue aliquam, tempor libero nec, viverra tortor.
+              </p>
+              <p>
+                Morbi sit amet scelerisque elit. In semper sem at rutrum
+                laoreet. Aenean non felis pretium, sollicitudin ligula nec,
+                dapibus ante. In ut scelerisque ante. Interdum et malesuada
+                fames ac ante ipsum primis in faucibus. Duis ultrices placerat
+                sem, nec varius justo imperdiet ac. Ut fringilla ligula eget
+                odio pulvinar eleifend. Vivamus quis enim vitae urna eleifend
+                dignissim. Curabitur vulputate condimentum facilisis.
+              </p>
+              <p>
+                Etiam tempor mi at erat eleifend, a finibus magna pretium. Etiam
+                nec molestie neque. Suspendisse in risus augue. Nam congue est
+                quis semper pulvinar. Curabitur feugiat mattis ultrices. Fusce
+                eu nibh pulvinar, semper augue non, sodales magna. Aliquam
+                consequat aliquet eleifend.
+              </p>
+              <p>
+                Fusce ullamcorper sapien ut dignissim lobortis. Nunc ut placerat
+                nulla. Nullam dapibus nunc quis metus rutrum pretium. Praesent
+                non faucibus nunc. Donec in nunc ac mi sodales convallis. Donec
+                tempus, risus rutrum pharetra dapibus, elit felis ultricies
+                neque, non tempus arcu eros a lorem. In ut convallis lacus.
+                Suspendisse potenti. Nunc maximus maximus viverra. Fusce mollis
+                ut mi nec ultricies. Class aptent taciti sociosqu ad litora
+                torquent per conubia nostra, per inceptos himenaeos. Ut
+                elementum nisl et neque mollis, id auctor ipsum efficitur.
+                Curabitur tincidunt, nisl non laoreet fringilla, nisi ex finibus
+                ipsum, sit amet condimentum nulla leo consectetur massa. Morbi
+                leo nulla, tincidunt id urna ut, hendrerit varius risus. In a
+                maximus tortor. Donec eget lorem at nulla semper convallis.
+              </p>
+              <button class="dds__button dds__button--primary">
+                Primary
               </button>
-            </div>
-            <dds-actionmenu-menu elementId="amMenu1" name="Actions">
+              <button class="dds__button dds__button--secondary">
+                Secondary
+              </button>
+            </dds-drawer>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='ActionMenu'">
+        <h2>Action Menu</h2>
+        <div class="dds__row">
+          <div class="dds__col--2 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <dds-actionmenu>
+              <div action-trigger>
+                <button
+                  type="button"
+                  class="dds__button dds__button--secondary"
+                >
+                  Action Menu
+                </button>
+              </div>
+              <dds-actionmenu-menu elementId="amMenu1" name="Actions">
+                <dds-actionmenu-item
+                  elementId="amAction1"
+                  icon="copy-alt"
+                  (click)="actionMenuAction('copy click')"
+                >
+                  Copy
+                </dds-actionmenu-item>
+              </dds-actionmenu-menu>
+
+              <dds-actionmenu-menu elementId="amCheck" separator="true">
+                View Strategy
+              </dds-actionmenu-menu>
               <dds-actionmenu-item
-                elementId="am1Action1"
-                icon="copy-alt"
-                (click)="actionMenuAction('Charlie')"
+                elementId="viewRows"
+                checkbox="true"
+                icon="view-row"
+                value="rows"
+                (onChecked)="actionMenuAction($event)"
               >
-                Charlie
+                View Rows
               </dds-actionmenu-item>
               <dds-actionmenu-item
-                elementId="am1Action2"
-                icon="copy-alt"
-                (click)="actionMenuAction('Daniels')"
+                elementId="viewCols"
+                checkbox="true"
+                checked="true"
+                icon="view-column"
+                value="columns"
+                (onChecked)="actionMenuAction($event)"
               >
-                Daniels
+                View Columns
               </dds-actionmenu-item>
-            </dds-actionmenu-menu>
-          </dds-actionmenu>
+            </dds-actionmenu>
+          </div>
         </div>
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3"></div>
-      </div>
-    </span>
+      </span>
 
-    <span *ngIf="showPage==='Dropdown'">
-      <h2>Dropdown</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <p>
-            Please be aware that CodeSandbox is requiring the array being used
-            to populate these Dropdowns to be stringified, because CodeSandbox
-            is auto-prettifying and removing JSON string names. You should not
-            need to do this in your implementation.
-          </p>
-          <dds-dropdown
-            elementId="ddsDropdownSimple"
-            label="Simple Dropdown Example"
-            helper="Helper Text"
-            selection="single"
-            groups="{{dropdownData[0].groups}}"
-          >
-          </dds-dropdown>
+      <span *ngIf="showPage==='Button'">
+        <h2>Button</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <dds-button
+              elementId="anyOldButton"
+              ariaLabel="Screen Reader Message"
+            >
+              Any Old Button
+            </dds-button>
+            <hr />
+            <p>
+              Below is an unfinished experiment to get Button and ActionMenu to
+              work together. Please disregard.
+            </p>
+            <dds-button
+              elementId="testButton"
+              action="amlinked"
+              ariaLabel="Screen Reader Message"
+            >
+              {{splitButtonValue}}
+            </dds-button>
+            <dds-actionmenu
+              elementId="amlinked"
+              button="testButton"
+              alignment="end"
+            >
+              <div action-trigger>
+                <button
+                  type="button"
+                  class="dds__button dds__button--secondary"
+                >
+                  DoesntMatter
+                </button>
+              </div>
+              <dds-actionmenu-menu elementId="amMenu1" name="Actions">
+                <dds-actionmenu-item
+                  elementId="am1Action1"
+                  icon="copy-alt"
+                  (click)="actionMenuAction('Charlie')"
+                >
+                  Charlie
+                </dds-actionmenu-item>
+                <dds-actionmenu-item
+                  elementId="am1Action2"
+                  icon="copy-alt"
+                  (click)="actionMenuAction('Daniels')"
+                >
+                  Daniels
+                </dds-actionmenu-item>
+              </dds-actionmenu-menu>
+            </dds-actionmenu>
+          </div>
+          <div
+            class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3"
+          ></div>
         </div>
-      </div>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <dds-dropdown
-            #multipleDropdown
-            selection="multiple"
-            noOptionsLabel="Searching"
-            selectedLabel="Chosen"
-            srClearLabel="Get rid of selection"
-            useBackend="true"
-            (onKeyUp)="dropdownHandlers.keyUp(1, $event)"
-            (optionSelected)="dropdownHandlers.select(1, $event)"
-            (optionDeselected)="dropdownHandlers.deselect(1, $event)"
-            (optionsCleared)="dropdownHandlers.clear(1, $event)"
-            elementId="ddsDropdown"
-            label="Experimental Backend Searching"
-            helper="You must set useBackend to true for this to kick in"
-            groups="{{dropdownData[1].groups}}"
-          >
-          </dds-dropdown>
-        </div>
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <ng-container *ngFor="let tag of dropdownData[1].stored">
-            <dds-tag (click)="multipleDropdown.deselect(tag)">
-              {{tag.text}}
-            </dds-tag>
-          </ng-container>
-        </div>
-      </div>
-      <div class="dds__row">
-        <div
-          class="boxControl dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3"
-        >
-          <dds-button
-            elementId="dropdownUpdate"
-            ariaLabel="Update Data in dropdown"
-            (click)="dropdownHandlers.externalUpdate()"
-          >
-            Update Data
-          </dds-button>
-        </div>
-      </div>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <dds-dropdown
-            #otherDropdown
-            selection="multiple"
-            noOptionsLabel="Searching"
-            selectedLabel="Grabbed"
-            srClearLabel="Get rid of selection"
-            useBackend="true"
-            (onKeyUp)="dropdownHandlers.keyUp(2, $event)"
-            (optionSelected)="dropdownHandlers.select(2, $event)"
-            (optionDeselected)="dropdownHandlers.deselect(2, $event)"
-            (optionsCleared)="dropdownHandlers.clear(2, $event)"
-            elementId="ddsDropdownOther"
-            label="Experimental Backend Searching"
-            helper="You must set useBackend to true for this to kick in"
-            groups="{{dropdownData[2].groups}}"
-          >
-          </dds-dropdown>
-        </div>
-        <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-          <ng-container *ngFor="let tag of dropdownData[2].stored">
-            <dds-tag (click)="otherDropdown.deselect(tag)">
-              {{tag.text}}
-            </dds-tag>
-          </ng-container>
-        </div>
-      </div>
-    </span>
+      </span>
 
-    <span *ngIf="showPage==='Badge'">
-      <h2>Badge</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <p>
-            <dds-badge value="99+" units="items">
-              <i class="dds__icon dds__icon--cart"></i>
-            </dds-badge>
-          </p>
-          <p>
-            <dds-badge value="123" units="emails">
-              Inbox
-            </dds-badge>
-          </p>
-          <p>
-            <dds-badge classList="dds__badge--sm">Small</dds-badge>
-          </p>
-          <p>
-            <dds-badge classList="dds__mr-3 dds__mb-3">Large</dds-badge>
-          </p>
-          <p>
-            <dds-badge icon="accessibility">A11y</dds-badge>
-          </p>
-          <p>
-            <dds-badge classList="dds__badge--dot"></dds-badge>
-          </p>
-          <p>
-            <dds-badge classList="dds__badge--microdot"></dds-badge>
-          </p>
-          <p>
-            <dds-badge classList="dds__badge--error">Error</dds-badge>
-          </p>
+      <span *ngIf="showPage==='Dropdown'">
+        <h2>Dropdown</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <p>
+              Please be aware that CodeSandbox is requiring the array being used
+              to populate these Dropdowns to be stringified, because CodeSandbox
+              is auto-prettifying and removing JSON string names. You should not
+              need to do this in your implementation.
+            </p>
+            <dds-dropdown
+              elementId="ddsDropdownSimple"
+              label="Simple Dropdown Example"
+              helper="Helper Text"
+              selection="single"
+              groups="{{dropdownData[0].groups}}"
+            >
+            </dds-dropdown>
+          </div>
         </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='MessageBar'">
-      <h2>MessageBar</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <dds-messagebar
-            elementId="ddsMessageBar"
-            title="Notice:"
-            dismissible="true"
-            layout="global"
-            icon="airplane"
-            variant="error"
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <dds-dropdown
+              #multipleDropdown
+              selection="multiple"
+              noOptionsLabel="Searching"
+              selectedLabel="Chosen"
+              srClearLabel="Get rid of selection"
+              useBackend="true"
+              (onKeyUp)="dropdownHandlers.keyUp(1, $event)"
+              (optionSelected)="dropdownHandlers.select(1, $event)"
+              (optionDeselected)="dropdownHandlers.deselect(1, $event)"
+              (optionsCleared)="dropdownHandlers.clear(1, $event)"
+              elementId="ddsDropdown"
+              label="Experimental Backend Searching"
+              helper="You must set useBackend to true for this to kick in"
+              groups="{{dropdownData[1].groups}}"
+            >
+            </dds-dropdown>
+          </div>
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <ng-container *ngFor="let tag of dropdownData[1].stored">
+              <dds-tag (click)="multipleDropdown.deselect(tag)">
+                {{tag.text}}
+              </dds-tag>
+            </ng-container>
+          </div>
+        </div>
+        <div class="dds__row">
+          <div
+            class="boxControl dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3"
           >
-            The <b>icon</b> parameter can be set to <b>false</b>.<br />
-            <a href="javascript:void(0);">
-              Some Sample Link
-            </a>
-          </dds-messagebar>
+            <dds-button
+              elementId="dropdownUpdate"
+              ariaLabel="Update Data in dropdown"
+              (click)="dropdownHandlers.externalUpdate()"
+            >
+              Update Data
+            </dds-button>
+          </div>
         </div>
-      </div>
-    </span>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <dds-dropdown
+              #otherDropdown
+              selection="multiple"
+              noOptionsLabel="Searching"
+              selectedLabel="Grabbed"
+              srClearLabel="Get rid of selection"
+              useBackend="true"
+              (onKeyUp)="dropdownHandlers.keyUp(2, $event)"
+              (optionSelected)="dropdownHandlers.select(2, $event)"
+              (optionDeselected)="dropdownHandlers.deselect(2, $event)"
+              (optionsCleared)="dropdownHandlers.clear(2, $event)"
+              elementId="ddsDropdownOther"
+              label="Experimental Backend Searching"
+              helper="You must set useBackend to true for this to kick in"
+              groups="{{dropdownData[2].groups}}"
+            >
+            </dds-dropdown>
+          </div>
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <ng-container *ngFor="let tag of dropdownData[2].stored">
+              <dds-tag (click)="otherDropdown.deselect(tag)">
+                {{tag.text}}
+              </dds-tag>
+            </ng-container>
+          </div>
+        </div>
+      </span>
 
-    <span *ngIf="showPage==='Breadcrumb'">
-      <h2>Breadcrumb</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <dds-breadcrumb
-            icon="home"
-            data="[{
+      <span *ngIf="showPage==='Badge'">
+        <h2>Badge</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <p>
+              <dds-badge value="99+" units="items">
+                <i class="dds__icon dds__icon--cart"></i>
+              </dds-badge>
+            </p>
+            <p>
+              <dds-badge value="123" units="emails">
+                Inbox
+              </dds-badge>
+            </p>
+            <p>
+              <dds-badge classList="dds__badge--sm">Small</dds-badge>
+            </p>
+            <p>
+              <dds-badge classList="dds__mr-3 dds__mb-3">Large</dds-badge>
+            </p>
+            <p>
+              <dds-badge icon="accessibility">A11y</dds-badge>
+            </p>
+            <p>
+              <dds-badge classList="dds__badge--dot"></dds-badge>
+            </p>
+            <p>
+              <dds-badge classList="dds__badge--microdot"></dds-badge>
+            </p>
+            <p>
+              <dds-badge classList="dds__badge--error">Error</dds-badge>
+            </p>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='MessageBar'">
+        <h2>MessageBar</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <dds-messagebar
+              elementId="ddsMessageBar"
+              title="Notice:"
+              dismissible="true"
+              layout="global"
+              icon="airplane"
+              variant="error"
+            >
+              The <b>icon</b> parameter can be set to <b>false</b>.<br />
+              <a href="javascript:void(0);">
+                Some Sample Link
+              </a>
+            </dds-messagebar>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='Breadcrumb'">
+        <h2>Breadcrumb</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <dds-breadcrumb
+              icon="home"
+              data="[{
               'link': '#home',
               'text': 'Home'
             },{
@@ -1057,270 +1088,272 @@
               'link': '#government',
               'text': 'Government'
             }]"
-          ></dds-breadcrumb>
+            ></dds-breadcrumb>
+          </div>
         </div>
-      </div>
-    </span>
+      </span>
 
-    <span *ngIf="showPage==='Tag'">
-      <h2>Tag</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <dds-tag icon="airplane" classList="dds__tag--green">
-            Dismissible Tag
-          </dds-tag>
+      <span *ngIf="showPage==='Tag'">
+        <h2>Tag</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <dds-tag icon="airplane" classList="dds__tag--green">
+              Dismissible Tag
+            </dds-tag>
+          </div>
         </div>
-      </div>
-    </span>
+      </span>
 
-    <span *ngIf="showPage==='Tabs'">
-      <h2>Tabs</h2>
-      <div class="dds__row">
-        <div
-          class="boxControl dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3"
-        >
-          <dds-button
-            elementId="selectTab3"
-            ariaLabel="Select Tab Externally"
-            (click)="tabsSelect(2)"
+      <span *ngIf="showPage==='Tabs'">
+        <h2>Tabs</h2>
+        <div class="dds__row">
+          <div
+            class="boxControl dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3"
           >
-            Select Tab 3
-          </dds-button>
-        </div>
-      </div>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <dds-tabs
-            id="ddsTabsContainer"
-            elementId="ddsTabs"
-            labels="Doctor Who, Simpsons, Holy Grail"
-            selected="2"
-            contained="false"
-            class="dds__tabs--mobile-stacked"
-          >
-            <div
-              icon="airplane"
-              image="https://picsum.photos/seed/picsum/60/50"
-            >
-              Annihilate? No. No violence. I won't stand for it. Not now, not
-              ever, do you understand me?! I'm the Doctor, the Oncoming Storm -
-              and you basically meant beat them in a football match, didn't you?
-            </div>
-            <div image="https://picsum.photos/seed/picsum/60/50">
-              <p>
-                Inflammable means flammable? What a country. But, Aquaman, you
-                cannot marry a woman without gills. You're from two different
-                worlds… Oh, I've wasted my life.
-              </p>
-              <p>
-                I didn't get rich by signing checks. Fat Tony is a cancer on
-                this fair city! He is the cancer and I am the…uh…what cures
-                cancer? Bart, with $10,000 we'd be millionaires! We could buy
-                all kinds of useful things like…love!
-              </p>
-            </div>
-            <div
-              icon="alarm-bell"
-              image="https://picsum.photos/seed/picsum/60/50"
-            >
-              <p>
-                I have to push the pram a lot. Found them? In Mercia?! The
-                coconut's tropical! Why do you think that she is a witch? The
-                Knights Who Say Ni demand a sacrifice! Oh, ow! Where'd you get
-                the coconuts?
-              </p>
-
-              <p>
-                But you are dressed as one… We found them. Shut up! Will you
-                shut up?! Listen. Strange women lying in ponds distributing
-                swords is no basis for a system of government. Supreme executive
-                power derives from a mandate from the masses, not from some
-                farcical aquatic ceremony.
-              </p>
-            </div>
-          </dds-tabs>
-        </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='TextInput'">
-      <h2>TextInput</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <p>
-            All of these text fields are wrapped in a dds-form element.
-          </p>
-          <dds-form>
-            <dds-textinput
-              elementId="ddsTextInput"
-              iconStart="user"
-              label="Basic"
-              placeholder="Supply Cat Food"
-              helper="Small kitty warm kitty little balls of fur"
-              value="Mrrrow"
-              required="true"
-            >
-            </dds-textinput>
-            <hr />
-
-            <dds-textinput
-              elementId="ddsTextInput"
-              label="with Button"
-              placeholder="Supply Cat Food"
-              helper="Small kitty warm kitty little balls of fur"
-              value="Hiss"
-              button="Purrrr"
-            >
-            </dds-textinput>
-            <hr />
-
-            <dds-textinput
-              elementId="ddsTextInputPassword"
-              type="password"
-              label="Password"
-              placeholder="Claw your carpet"
-              helper="too hot lasers are tiny mice"
-              feedback="break a planter, eat own hair, hiss, chirp at birds"
-              sr-hide="Show Password"
-              sr-show="Hide Password"
-              hide="Hide"
-              show="Show"
-              minlength="2"
-              maxlength="10"
-              required="true"
-            >
-            </dds-textinput>
-            <hr />
-
-            <dds-textinput
-              elementId="ddsTextInputTel"
-              type="tel"
-              label="Phone"
-              placeholder="Order Mor Cat Food"
-              helper="then scratch her face for hiiiiiiiiii feed me now"
-              feedback="being petted morning beauty routine of licking self."
-              mask="(999) 999-9999"
-              required="true"
-            >
-            </dds-textinput>
-            <hr />
-
-            <dds-textinput
-              elementId="ddsTextInputExperiment"
-              label="Icon Button (EXPERIMENT)"
-              placeholder="hanging around eating catnip"
-              helper="Snuggles up to shoulders or knees and purrs you to sleep"
-              icons="close-x, search, airplane"
-              iconClickable="true"
-              (onIconClick)="textInputIconClick($event)"
-            >
-            </dds-textinput>
-            <hr />
-
             <dds-button
-              elementId="ddsTextInputSubmit"
-              ariaLabel="Submit the Form"
-              type="submit"
+              elementId="selectTab3"
+              ariaLabel="Select Tab Externally"
+              (click)="tabsSelect(2)"
             >
-              Submit
+              Select Tab 3
             </dds-button>
-          </dds-form>
+          </div>
         </div>
-      </div>
-    </span>
-
-    <span *ngIf="showPage==='MoreLess'">
-      <h2>MoreLess</h2>
-      <div class="dds__row">
-        <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
-          <h3 class="boxH3">Related</h3>
-          <p>
-            <dds-moreless elementId="ddsMoreLessRelated" title="Soy sauce">
-              <div is-more>
-                Hakodate nori Nissin instant cup ramen flavoured oil yuzu
-                spinach chopped onions vinegar, Sapporo seasoned egg rice soy
-                sauce wood ear mushroom pork cubes sesame oil.
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <dds-tabs
+              id="ddsTabsContainer"
+              elementId="ddsTabs"
+              labels="Doctor Who, Simpsons, Holy Grail"
+              selected="2"
+              contained="false"
+              class="dds__tabs--mobile-stacked"
+            >
+              <div
+                icon="airplane"
+                image="https://picsum.photos/seed/picsum/60/50"
+              >
+                Annihilate? No. No violence. I won't stand for it. Not now, not
+                ever, do you understand me?! I'm the Doctor, the Oncoming Storm
+                - and you basically meant beat them in a football match, didn't
+                you?
               </div>
-            </dds-moreless>
-          </p>
-          <hr />
-          <h3 class="boxH3">List</h3>
-          <p>
-            <dds-moreless
-              elementId="ddsMoreLessList"
-              title="Soy sauce"
-              type="list"
-              srMore="Japanese Names"
-            >
-              <ol is-list class="dds__more-less__target">
-                <li><a href="javascript:;">Hakata</a></li>
-                <li><a href="javascript:;">Wakayama</a></li>
-                <li><a href="javascript:;">Tokushima</a></li>
-                <li><a href="javascript:;">Hakodate</a></li>
-                <li hidden="true"><a href="javascript:;">Yokohama</a></li>
-                <li hidden="true"><a href="javascript:;">Nissin</a></li>
-              </ol>
-            </dds-moreless>
-          </p>
-          <hr />
-          <h3 class="boxH3">Bottom</h3>
-          <p>
-            <dds-moreless
-              elementId="ddsMoreLessBottom"
-              title="Leek scallions"
-              type="bottom"
-            >
-              <span is-less>
-                Bamboo slices pork cubes leek Tokushima Wakayama seasoned egg
-                chopped onions Asahikawa, wood ear mushroom soy milk pork bones
-                yuzu fish broth Tokyo Hakata, Nissin instant cup ramen salt
-                roasted pork slices Nagoya mustard greens spinach. Leek
-                scallions fish broth ground black pepper pork bones spicy bean
-                paste toasted sesame seeds
-              </span>
-              <span is-more>
-                Wakayama wood ear mushroom salt sesame oil Kumamoto spinach
-                ginger mustard greens spicy bean paste, toasted sesame seeds
-                nori Hakodate Nissin instant cup ramen corn roasted pork slices
-                pork bones. Butter ground black pepper rice lard Sapporo
-                scallions leek, pork bones Tokushima seasoned egg mustard greens
-                chopped onions, Hakata toasted sesame seeds ginger nori bamboo
-                slices.
-              </span>
-            </dds-moreless>
-          </p>
-          <hr />
-          <h3 class="boxH3">Inline</h3>
-          <p>
-            <dds-moreless
-              elementId="ddsMoreLessInline"
-              title="Tokushima sesame"
-              type="inline"
-              srMore="sushi"
-              srLess="sushi"
-            >
-              <span is-less>
-                Mustard greens yuzu Asahikawa roasted pork slices tsukemen
-                Hakata, Kagoshima kamaboko sesame oil miso leek chilli, Wakayama
-                Hakodate fish broth spicy bean paste. Tsukemen flavoured oil
-                Hakodate soy milk Nissin instant cup ramen Tokushima yuzu
-                chopped onions Sapporo vinegar spicy bean paste
-              </span>
-              <span is-more>
-                Nissin instant cup ramen pork cubes seasoned egg. roasted pork
-                slices Sapporo Tokushima vinegar pork cubes abura soba nori
-                sesame oil, Nissin instant cup ramen butter fish broth minced
-                garlic curry ginger Hakata, salt chicken stock corn miso
-                Yokohama bamboo slices toasted sesame seeds.
-              </span>
-            </dds-moreless>
-          </p>
+              <div image="https://picsum.photos/seed/picsum/60/50">
+                <p>
+                  Inflammable means flammable? What a country. But, Aquaman, you
+                  cannot marry a woman without gills. You're from two different
+                  worlds… Oh, I've wasted my life.
+                </p>
+                <p>
+                  I didn't get rich by signing checks. Fat Tony is a cancer on
+                  this fair city! He is the cancer and I am the…uh…what cures
+                  cancer? Bart, with $10,000 we'd be millionaires! We could buy
+                  all kinds of useful things like…love!
+                </p>
+              </div>
+              <div
+                icon="alarm-bell"
+                image="https://picsum.photos/seed/picsum/60/50"
+              >
+                <p>
+                  I have to push the pram a lot. Found them? In Mercia?! The
+                  coconut's tropical! Why do you think that she is a witch? The
+                  Knights Who Say Ni demand a sacrifice! Oh, ow! Where'd you get
+                  the coconuts?
+                </p>
+
+                <p>
+                  But you are dressed as one… We found them. Shut up! Will you
+                  shut up?! Listen. Strange women lying in ponds distributing
+                  swords is no basis for a system of government. Supreme
+                  executive power derives from a mandate from the masses, not
+                  from some farcical aquatic ceremony.
+                </p>
+              </div>
+            </dds-tabs>
+          </div>
         </div>
-      </div>
-    </span>
-    <!-- end of dds__container -->
-  </div>
-</main>
-<footer>
-  If viewed within Confluence, this template may not stop when it should.
-</footer>
+      </span>
+
+      <span *ngIf="showPage==='TextInput'">
+        <h2>TextInput</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <p>
+              All of these text fields are wrapped in a dds-form element.
+            </p>
+            <dds-form>
+              <dds-textinput
+                elementId="ddsTextInput"
+                iconStart="user"
+                label="Basic"
+                placeholder="Supply Cat Food"
+                helper="Small kitty warm kitty little balls of fur"
+                value="Mrrrow"
+                required="true"
+              >
+              </dds-textinput>
+              <hr />
+
+              <dds-textinput
+                elementId="ddsTextInput"
+                label="with Button"
+                placeholder="Supply Cat Food"
+                helper="Small kitty warm kitty little balls of fur"
+                value="Hiss"
+                button="Purrrr"
+              >
+              </dds-textinput>
+              <hr />
+
+              <dds-textinput
+                elementId="ddsTextInputPassword"
+                type="password"
+                label="Password"
+                placeholder="Claw your carpet"
+                helper="too hot lasers are tiny mice"
+                feedback="break a planter, eat own hair, hiss, chirp at birds"
+                sr-hide="Show Password"
+                sr-show="Hide Password"
+                hide="Hide"
+                show="Show"
+                minlength="2"
+                maxlength="10"
+                required="true"
+              >
+              </dds-textinput>
+              <hr />
+
+              <dds-textinput
+                elementId="ddsTextInputTel"
+                type="tel"
+                label="Phone"
+                placeholder="Order Mor Cat Food"
+                helper="then scratch her face for hiiiiiiiiii feed me now"
+                feedback="being petted morning beauty routine of licking self."
+                mask="(999) 999-9999"
+                required="true"
+              >
+              </dds-textinput>
+              <hr />
+
+              <dds-textinput
+                elementId="ddsTextInputExperiment"
+                label="Icon Button (EXPERIMENT)"
+                placeholder="hanging around eating catnip"
+                helper="Snuggles up to shoulders or knees and purrs you to sleep"
+                icons="close-x, search, airplane"
+                iconClickable="true"
+                (onIconClick)="textInputIconClick($event)"
+              >
+              </dds-textinput>
+              <hr />
+
+              <dds-button
+                elementId="ddsTextInputSubmit"
+                ariaLabel="Submit the Form"
+                type="submit"
+              >
+                Submit
+              </dds-button>
+            </dds-form>
+          </div>
+        </div>
+      </span>
+
+      <span *ngIf="showPage==='MoreLess'">
+        <h2>MoreLess</h2>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-12 dds__col--md-12 dds__mb-3">
+            <h3 class="boxH3">Related</h3>
+            <p>
+              <dds-moreless elementId="ddsMoreLessRelated" title="Soy sauce">
+                <div is-more>
+                  Hakodate nori Nissin instant cup ramen flavoured oil yuzu
+                  spinach chopped onions vinegar, Sapporo seasoned egg rice soy
+                  sauce wood ear mushroom pork cubes sesame oil.
+                </div>
+              </dds-moreless>
+            </p>
+            <hr />
+            <h3 class="boxH3">List</h3>
+            <p>
+              <dds-moreless
+                elementId="ddsMoreLessList"
+                title="Soy sauce"
+                type="list"
+                srMore="Japanese Names"
+              >
+                <ol is-list class="dds__more-less__target">
+                  <li><a href="javascript:;">Hakata</a></li>
+                  <li><a href="javascript:;">Wakayama</a></li>
+                  <li><a href="javascript:;">Tokushima</a></li>
+                  <li><a href="javascript:;">Hakodate</a></li>
+                  <li hidden="true"><a href="javascript:;">Yokohama</a></li>
+                  <li hidden="true"><a href="javascript:;">Nissin</a></li>
+                </ol>
+              </dds-moreless>
+            </p>
+            <hr />
+            <h3 class="boxH3">Bottom</h3>
+            <p>
+              <dds-moreless
+                elementId="ddsMoreLessBottom"
+                title="Leek scallions"
+                type="bottom"
+              >
+                <span is-less>
+                  Bamboo slices pork cubes leek Tokushima Wakayama seasoned egg
+                  chopped onions Asahikawa, wood ear mushroom soy milk pork
+                  bones yuzu fish broth Tokyo Hakata, Nissin instant cup ramen
+                  salt roasted pork slices Nagoya mustard greens spinach. Leek
+                  scallions fish broth ground black pepper pork bones spicy bean
+                  paste toasted sesame seeds
+                </span>
+                <span is-more>
+                  Wakayama wood ear mushroom salt sesame oil Kumamoto spinach
+                  ginger mustard greens spicy bean paste, toasted sesame seeds
+                  nori Hakodate Nissin instant cup ramen corn roasted pork
+                  slices pork bones. Butter ground black pepper rice lard
+                  Sapporo scallions leek, pork bones Tokushima seasoned egg
+                  mustard greens chopped onions, Hakata toasted sesame seeds
+                  ginger nori bamboo slices.
+                </span>
+              </dds-moreless>
+            </p>
+            <hr />
+            <h3 class="boxH3">Inline</h3>
+            <p>
+              <dds-moreless
+                elementId="ddsMoreLessInline"
+                title="Tokushima sesame"
+                type="inline"
+                srMore="sushi"
+                srLess="sushi"
+              >
+                <span is-less>
+                  Mustard greens yuzu Asahikawa roasted pork slices tsukemen
+                  Hakata, Kagoshima kamaboko sesame oil miso leek chilli,
+                  Wakayama Hakodate fish broth spicy bean paste. Tsukemen
+                  flavoured oil Hakodate soy milk Nissin instant cup ramen
+                  Tokushima yuzu chopped onions Sapporo vinegar spicy bean paste
+                </span>
+                <span is-more>
+                  Nissin instant cup ramen pork cubes seasoned egg. roasted pork
+                  slices Sapporo Tokushima vinegar pork cubes abura soba nori
+                  sesame oil, Nissin instant cup ramen butter fish broth minced
+                  garlic curry ginger Hakata, salt chicken stock corn miso
+                  Yokohama bamboo slices toasted sesame seeds.
+                </span>
+              </dds-moreless>
+            </p>
+          </div>
+        </div>
+      </span>
+      <!-- end of dds__container -->
+    </div>
+  </main>
+  <footer>
+    If viewed within Confluence, this template may not stop when it should.
+  </footer>
+</div>

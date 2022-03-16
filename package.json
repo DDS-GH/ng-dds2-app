@@ -1,5 +1,5 @@
 {
-  "name": "sticky-header",
+  "name": "dds2-ng-app",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -46,5 +46,5 @@
     "typescript": "~2.5.3"
   },
   "keywords": [],
-  "description": ""
+  "description": "tweaking template"
 }
