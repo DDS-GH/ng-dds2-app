@@ -78,10 +78,16 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
         e.target.classList &&
         e.target.classList.contains(`dds__dropdown__item-option`)
       ) {
-        const valueToSubmit = {
-          value: e.target.getAttribute("data-value"),
-          text: e.target.innerText
-        };
+        const dataValue = e.target.getAttribute("data-value");
+        let valueToSubmit: any;
+        if (dataValue) {
+          valueToSubmit = {
+            value: dataValue,
+            text: e.target.innerText.trim()
+          };
+        } else {
+          valueToSubmit = e.target.innerText.trim();
+        }
         if (!stringToBoolean(e.target.getAttribute(`data-selected`))) {
           this.optionDeselected.emit(valueToSubmit);
         } else {
@@ -101,7 +107,7 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
     try {
       this.groups = JSON.parse(this.groups);
     } catch (e) {
-      console.log(e.message);
+      console.error(e.message);
       this.label = `Error parsing Dropdown Data`;
       this.groups = [];
       this.ddsInitializer = ``; // prevents Dropdown initialization
@@ -123,7 +129,7 @@ export class DropdownComponent extends DdsComponent implements OnChanges {
         this.ddsComponent.deselectOption(removalValue.value.trim());
       }
     } catch (e) {
-      console.log(e, removalValue);
+      console.error(e, removalValue);
     }
   }
 }

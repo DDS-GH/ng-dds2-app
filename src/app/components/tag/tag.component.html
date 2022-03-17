@@ -1,4 +1,9 @@
-<div id="{{elementId}}" data-dds="tag" class="dds__tag {{classList}}">
+<div
+  id="{{elementId}}"
+  data-dds="tag"
+  class="dds__tag {{classList}}"
+  [attr.data-value]="value"
+>
   <button>
     <i
       *ngIf="icon"

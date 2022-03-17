@@ -662,7 +662,7 @@
             </button>
           </div>
           <div class="dds__col--2 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-            <dds-drawer icon="close-x">
+            <dds-drawer>
               <div drawer-trigger>
                 <button class="dds__button dds__button--primary">
                   Internal Open
@@ -944,10 +944,10 @@
               selectedLabel="Chosen"
               srClearLabel="Get rid of selection"
               useBackend="true"
-              (onKeyUp)="dropdownHandlers.keyUp(1, $event)"
-              (optionSelected)="dropdownHandlers.select(1, $event)"
-              (optionDeselected)="dropdownHandlers.deselect(1, $event)"
-              (optionsCleared)="dropdownHandlers.clear(1, $event)"
+              (onKeyUp)="handleDropdown.keyUp(1, $event)"
+              (optionSelected)="handleDropdown.select(1, $event)"
+              (optionDeselected)="handleDropdown.deselect(1, $event)"
+              (optionsCleared)="handleDropdown.clear(1, $event)"
               elementId="ddsDropdown"
               label="Experimental Backend Searching"
               helper="You must set useBackend to true for this to kick in"
@@ -957,7 +957,11 @@
           </div>
           <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
             <ng-container *ngFor="let tag of dropdownData[1].stored">
-              <dds-tag (click)="multipleDropdown.deselect(tag)">
+              <dds-tag
+                (onDismiss)="multipleDropdown.deselect($event, 'WHY IS THIS NOT WORKING')"
+                (click)="handleTagClick(1, $event, multipleDropdown, {value:tag.value, text: tag.text})"
+                value="{{tag.value}}"
+              >
                 {{tag.text}}
               </dds-tag>
             </ng-container>
@@ -970,7 +974,7 @@
             <dds-button
               elementId="dropdownUpdate"
               ariaLabel="Update Data in dropdown"
-              (click)="dropdownHandlers.externalUpdate()"
+              (click)="handleDropdown.externalUpdate()"
             >
               Update Data
             </dds-button>
@@ -979,16 +983,16 @@
         <div class="dds__row">
           <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
             <dds-dropdown
-              #otherDropdown
+              #secondMultiple
               selection="multiple"
               noOptionsLabel="Searching"
               selectedLabel="Grabbed"
               srClearLabel="Get rid of selection"
               useBackend="true"
-              (onKeyUp)="dropdownHandlers.keyUp(2, $event)"
-              (optionSelected)="dropdownHandlers.select(2, $event)"
-              (optionDeselected)="dropdownHandlers.deselect(2, $event)"
-              (optionsCleared)="dropdownHandlers.clear(2, $event)"
+              (onKeyUp)="handleDropdown.keyUp(2, $event)"
+              (optionSelected)="handleDropdown.select(2, $event)"
+              (optionDeselected)="handleDropdown.deselect(2, $event)"
+              (optionsCleared)="handleDropdown.clear(2, $event)"
               elementId="ddsDropdownOther"
               label="Experimental Backend Searching"
               helper="You must set useBackend to true for this to kick in"
@@ -998,7 +1002,11 @@
           </div>
           <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
             <ng-container *ngFor="let tag of dropdownData[2].stored">
-              <dds-tag (click)="otherDropdown.deselect(tag)">
+              <dds-tag
+                (onDismiss)="secondMultiple.deselect($event)"
+                (click)="handleTagClick(2, $event, secondMultiple, {value:tag.value, text: tag.text})"
+                value="{{tag.value}}"
+              >
                 {{tag.text}}
               </dds-tag>
             </ng-container>

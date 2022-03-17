@@ -1,5 +1,5 @@
 {
-  "name": "dds2-ng-app",
+  "name": "fixing-dropdowns-with-value-option",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
@@ -46,5 +46,5 @@
     "typescript": "~2.5.3"
   },
   "keywords": [],
-  "description": "tweaking template"
+  "description": ""
 }

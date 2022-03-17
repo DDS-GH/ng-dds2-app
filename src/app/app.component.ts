@@ -13,7 +13,7 @@ export class AppComponent implements OnInit {
   @ViewChild(SidenavComponent) private sidenavComponent: SidenavComponent;
   @ViewChild(DrawerComponent) private drawerComponent: DrawerComponent;
   @ViewChild(ModalComponent) private modalComponent: ModalComponent;
-  public showPage = `Home`;
+  public showPage = `Dropdown`;
   public selectValue1: Array<string> = [`Loading...`];
   public selectValue2: Array<string> = [`Loading...`];
   public textareaText: string = `You can get my logo from facebook something summery`;
@@ -104,7 +104,7 @@ export class AppComponent implements OnInit {
       options: [
         {
           name: "Alpha Item 0",
-          value: "101", // to be used after v2.5.1
+          value: "Alpha Item 00", // to be used after v2.5.1
           selected: false
         },
         {
@@ -115,7 +115,7 @@ export class AppComponent implements OnInit {
         },
         {
           name: "Alpha Item 1",
-          value: "102",
+          value: "Alpha Item 11",
           selected: false
         },
         {
@@ -126,7 +126,7 @@ export class AppComponent implements OnInit {
         },
         {
           name: "Alpha Item 2",
-          value: "103",
+          value: "Alpha Item 22",
           selected: false
         }
       ]
@@ -136,17 +136,17 @@ export class AppComponent implements OnInit {
       options: [
         {
           name: "Beta Item 0",
-          value: "201",
+          value: "Beta Item 00",
           selected: false
         },
         {
           name: "Beta Item 1",
-          value: "202",
+          value: "Beta Item 11",
           selected: false
         },
         {
           name: "Beta Item 2",
-          value: "302",
+          value: "Beta Item 22",
           selected: false
         }
       ]
@@ -228,7 +228,7 @@ export class AppComponent implements OnInit {
   }
 
   selectOptionSelected(e: any) {
-    console.log(`select component`, e);
+    console.info(`select component`, e);
   }
 
   sidenavItemClick(e: any) {
@@ -243,7 +243,7 @@ export class AppComponent implements OnInit {
     this.splitButton2Value = e;
   }
 
-  dropdownHandlers = {
+  handleDropdown = {
     clear: (index: number, e: any) => {
       this.dropdownData[index].stored = [];
     },
@@ -260,7 +260,7 @@ export class AppComponent implements OnInit {
       );
     },
     keyUp: (index: number, e: any) => {
-      this.fakeBackendSearch(index, e);
+      this.matchSelectionsWithNewData(index, e);
     },
     externalUpdate: (e: any) => {
       const newData = this.dropdownRandomItems(`New Data`, 1, false);
@@ -275,17 +275,35 @@ export class AppComponent implements OnInit {
     }
   };
 
-  fakeBackendSearch = (index, e): any => {
+  matchSelectionsWithNewData = (index, e): any => {
+    // you'll need to make this your own.
     setTimeout(() => {
       const rememberThese = [];
       const randomItems = this.dropdownRandomItems(e, index);
-      this.dropdownData[index].stored.forEach((storedOption) => {
-        if (!randomItems.selection.includes(storedOption)) {
-          rememberThese.push({
-            name: storedOption,
-            selected: true,
-            stored: true
-          });
+      this.dropdownData[index].stored.forEach((storedOption: any) => {
+        if (typeof storedOption === `string`) {
+          // if you're not using VALUES for your Dropdown options
+          if (!randomItems.selection.includes(storedOption)) {
+            rememberThese.push({
+              name: storedOption,
+              selected: true,
+              stored: true
+            });
+          }
+        } else {
+          // if you ARE using VALUES for your Dropdown options
+          if (
+            !randomItems.selection.find((ri: any) => {
+              return ri === storedOption.value;
+            })
+          ) {
+            rememberThese.push({
+              name: storedOption.name,
+              value: storedOption.value,
+              selected: true,
+              stored: true
+            });
+          }
         }
       });
       const compiledNewData = [
@@ -299,37 +317,77 @@ export class AppComponent implements OnInit {
   };
 
   dropdownRandomItems(rName, index = 0, noSelected = true) {
+    // you might need the logic in here where it matches the .stored items
     const selectedItems = [];
     const randomItems = [];
     for (let i = 0; i < Math.floor(Math.random() * 10) + 3; i++) {
       let selected = noSelected ? false : Math.floor(Math.random() * 2) === 0;
       const itemName = `${rName} Item ${i}`;
+      const itemValue = `${rName} Item ${i}${i}`;
       if (!this.dropdownData[index].stored) {
         this.dropdownData[index].stored = [];
       }
       if (this.dropdownData[index].stored.includes(itemName)) {
         selected = true;
       }
-      randomItems.push({
-        name: itemName,
-        value: i,
-        selected: selected
-      });
-      if (selected) {
-        selectedItems.push(itemName);
+      if (typeof this.dropdownData[index].stored === `string`) {
+        // if you're not using VALUES for your Dropdown options
+        if (this.dropdownData[index].stored.includes(itemName)) {
+          selected = true;
+        }
+        randomItems.push({
+          name: itemName,
+          selected: selected
+        });
+        if (selected) {
+          selectedItems.push(itemName);
+        }
+      } else {
+        // if you ARE using VALUES for your Dropdown options
+        if (
+          this.dropdownData[index].stored.find((storedObj: any) => {
+            return storedObj.value === itemValue;
+          })
+        ) {
+          selected = true;
+        }
+        randomItems.push({
+          name: itemName,
+          value: itemName + i,
+          selected: selected
+        });
+        if (selected) {
+          selectedItems.push(itemName + i);
+        }
       }
     }
-    return {
+    const rObj: any = {
       items: randomItems,
       selection: selectedItems
     };
+    return rObj;
   }
 
   tabsSelect(tabIndex: number) {
+    // @ts-ignore
     document.getElementById(`ddsTabs`).Tabs.setActiveTab(tabIndex);
   }
 
   textInputIconClick(e: any) {
-    console.log(`textInput icon ${e.type}: ${e.value}`);
+    console.info(`textInput icon ${e.type}: ${e.value}`);
+  }
+
+  handleTagClick(
+    dropdownMemoryIndex: number,
+    e: any,
+    whichDropdown: any,
+    whatValue: any
+  ) {
+    // should not have to use this handleTagClick. For some reason the onDismiss emitter is not working
+    if (!e.target.id) {
+      whichDropdown.deselect(whatValue);
+      // and then, if Dropdown had a proper event emitted for select AND deselect (not just change), one would not have to manually call the handleDropdown.deselect
+      this.handleDropdown.deselect(dropdownMemoryIndex, whatValue);
+    }
   }
 }
