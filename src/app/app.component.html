@@ -930,41 +930,9 @@
               label="Simple Dropdown Example"
               helper="Helper Text"
               selection="single"
-              groups="{{dropdownData[0].groups}}"
+              [groups]="dropdownData[0].groups"
             >
             </dds-dropdown>
-          </div>
-        </div>
-        <div class="dds__row">
-          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-            <dds-dropdown
-              #multipleDropdown
-              selection="multiple"
-              noOptionsLabel="Searching"
-              selectedLabel="Chosen"
-              srClearLabel="Get rid of selection"
-              useBackend="true"
-              (onKeyUp)="handleDropdown.keyUp(1, $event)"
-              (optionSelected)="handleDropdown.select(1, $event)"
-              (optionDeselected)="handleDropdown.deselect(1, $event)"
-              (optionsCleared)="handleDropdown.clear(1, $event)"
-              elementId="ddsDropdown"
-              label="Experimental Backend Searching"
-              helper="You must set useBackend to true for this to kick in"
-              groups="{{dropdownData[1].groups}}"
-            >
-            </dds-dropdown>
-          </div>
-          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
-            <ng-container *ngFor="let tag of dropdownData[1].stored">
-              <dds-tag
-                (onDismiss)="multipleDropdown.deselect($event, 'WHY IS THIS NOT WORKING')"
-                (click)="handleTagClick(1, $event, multipleDropdown, {value:tag.value, text: tag.text})"
-                value="{{tag.value}}"
-              >
-                {{tag.text}}
-              </dds-tag>
-            </ng-container>
           </div>
         </div>
         <div class="dds__row">
@@ -983,6 +951,38 @@
         <div class="dds__row">
           <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
             <dds-dropdown
+              #multipleDropdown
+              elementId="ddsDropdown"
+              selection="multiple"
+              noOptionsLabel="Searching"
+              selectedLabel="Chosen"
+              srClearLabel="Get rid of selection"
+              useBackend="true"
+              (onKeyUp)="handleDropdown.keyUp(1, $event)"
+              (optionSelected)="handleDropdown.select(1, $event)"
+              (optionDeselected)="handleDropdown.deselect(1, $event)"
+              (optionsCleared)="handleDropdown.clear(1, $event)"
+              label="Experimental Backend Searching"
+              helper="You must set useBackend to true for this to kick in"
+              [groups]="dropdownData[1].groups"
+            >
+            </dds-dropdown>
+          </div>
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <ng-container *ngFor="let tag of dropdownData[1].stored">
+              <dds-tag
+                (onDismiss)="multipleDropdown.deselect($event)"
+                (click)="handleTagClick(1, $event, multipleDropdown, {value:tag.value, text: tag.text})"
+                value="{{tag.value}}"
+              >
+                {{tag.text}}
+              </dds-tag>
+            </ng-container>
+          </div>
+        </div>
+        <div class="dds__row">
+          <div class="dds__col--1 dds__col--sm-6 dds__col--md-6 dds__mb-3">
+            <dds-dropdown
               #secondMultiple
               selection="multiple"
               noOptionsLabel="Searching"
@@ -996,7 +996,7 @@
               elementId="ddsDropdownOther"
               label="Experimental Backend Searching"
               helper="You must set useBackend to true for this to kick in"
-              groups="{{dropdownData[2].groups}}"
+              [groups]="dropdownData[2].groups"
             >
             </dds-dropdown>
           </div>

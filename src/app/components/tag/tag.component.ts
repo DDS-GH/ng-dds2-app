@@ -20,6 +20,7 @@ export class TagComponent extends DdsComponent implements AfterViewInit {
   @Input() classList: string = ``;
   @Input() value: string = ``;
 
+  // @ts-ignore
   ngOnInit() {
     super.ngOnInit();
     this.ddsInitializer = `Tag`;
@@ -30,9 +31,10 @@ export class TagComponent extends DdsComponent implements AfterViewInit {
     };
   }
 
+  // @ts-ignore
   ngAfterViewInit() {
     super.ngAfterViewInit();
-    this.ddsElement.addEventListener(`ddsTagDismissEvent`, (e) => {
+    this.ddsElement.addEventListener(`ddsTagDismissEvent`, (e: any) => {
       const thisText: string = this.ddsElement
         .querySelector(`button`)
         .innerText.trim();

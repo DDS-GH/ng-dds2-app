@@ -13,6 +13,7 @@ export class AppComponent implements OnInit {
   @ViewChild(SidenavComponent) private sidenavComponent: SidenavComponent;
   @ViewChild(DrawerComponent) private drawerComponent: DrawerComponent;
   @ViewChild(ModalComponent) private modalComponent: ModalComponent;
+  @ViewChild("multipleDropdown") multipleDropdown: ElementRef<HTMLElement>;
   public showPage = `Home`;
   public selectValue1: Array<string> = [`Loading...`];
   public selectValue2: Array<string> = [`Loading...`];
@@ -166,6 +167,7 @@ export class AppComponent implements OnInit {
       groups: this.dropdownBase
     }
   ];
+  private clearedRelistener: any;
 
   ngOnInit() {
     console.clear();
@@ -263,15 +265,31 @@ export class AppComponent implements OnInit {
       this.matchSelectionsWithNewData(index, e);
     },
     externalUpdate: (e: any) => {
-      const newData = this.dropdownRandomItems(`New Data`, 1, false);
+      this.multipleDropdown[`ddsComponent`].clearSelection();
+      const newData = this.dropdownRandomItems(`New Data`, 1, false, 99, 101);
       this.dropdownData[1].stored = newData.selection;
-      this.dropdownData[1].groups = [
+      this.multipleDropdown[`ddsComponent`].dispose();
+      this.dropdownData[1].groups = JSON.stringify([
         {
           name: `New Data`,
           options: newData.items
         }
-      ];
-      this.dropdownData[1].groups = JSON.stringify(this.dropdownData[1].groups);
+      ]);
+      setTimeout(() => {
+        // @ts-ignore
+        this.multipleDropdown.initializeNow();
+        if (!this.clearedRelistener) {
+          this.clearedRelistener = this.multipleDropdown[
+            `ddsElement`
+          ].addEventListener(`ddsDropdownSelectionChangeEvent`, (e: any) => {
+            if (
+              this.multipleDropdown[`ddsComponent`].getSelection().length === 0
+            ) {
+              this.handleDropdown.clear(1, null);
+            }
+          });
+        }
+      });
     }
   };
 
@@ -316,23 +334,28 @@ export class AppComponent implements OnInit {
     }, 500);
   };
 
-  dropdownRandomItems(rName, index = 0, noSelected = true) {
+  dropdownRandomItems(rName, index = 0, noSelected = true, min = 5, max = 10) {
     // you might need the logic in here where it matches the .stored items
     const selectedItems = [];
     const randomItems = [];
-    for (let i = 0; i < Math.floor(Math.random() * 10) + 3; i++) {
-      let selected = noSelected ? false : Math.floor(Math.random() * 2) === 0;
+    let usingValuesOnOptions: boolean = false;
+    if (!this.dropdownData[index].stored) {
+      this.dropdownData[index].stored = [];
+    }
+    if (typeof this.dropdownData[index].stored !== `string`) {
+      usingValuesOnOptions = true;
+    }
+    for (let i = 0; i < Math.floor(Math.random() * max) + min; i++) {
+      let selected = noSelected
+        ? false
+        : selectedItems.length < 5
+        ? Math.floor(Math.random() * 2) === 0
+        : false;
       const itemName = `${rName} Item ${i}`;
       const itemValue = `${rName} Item ${i}${i}`;
-      if (!this.dropdownData[index].stored) {
-        this.dropdownData[index].stored = [];
-      }
-      if (this.dropdownData[index].stored.includes(itemName)) {
-        selected = true;
-      }
-      if (typeof this.dropdownData[index].stored === `string`) {
-        // if you're not using VALUES for your Dropdown options
+      if (!usingValuesOnOptions) {
         if (this.dropdownData[index].stored.includes(itemName)) {
+          // If you already memorized this before, keep it
           selected = true;
         }
         randomItems.push({
@@ -346,6 +369,7 @@ export class AppComponent implements OnInit {
         // if you ARE using VALUES for your Dropdown options
         if (
           this.dropdownData[index].stored.find((storedObj: any) => {
+            // If you already memorized this before, keep it
             return storedObj.value === itemValue;
           })
         ) {
@@ -353,11 +377,14 @@ export class AppComponent implements OnInit {
         }
         randomItems.push({
           name: itemName,
-          value: itemName + i,
+          value: itemValue,
           selected: selected
         });
         if (selected) {
-          selectedItems.push(itemName + i);
+          selectedItems.push({
+            text: itemName,
+            value: itemValue
+          });
         }
       }
     }
