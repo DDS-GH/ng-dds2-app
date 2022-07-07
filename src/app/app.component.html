@@ -36,6 +36,14 @@
     <div class="dds__container">
       <span *ngIf="showPage==='Home'">
         <h2>README</h2>
+        <dds-messagebar variant="error" dismissible="false">
+          This Sandbox has been deprecated. Please see
+          <a
+            href="https://confluence.dell.com/display/DDSYS/DDS2+Angular+Sandbox"
+            >https://confluence.dell.com/display/DDSYS/DDS2+Angular+Sandbox</a
+          >
+        </dds-messagebar>
+
         <h3 class="boxH3">Disclaimer</h3>
         <p>
           This sandbox is version-controlled, and has been created as a result
